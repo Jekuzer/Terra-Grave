@@ -22,7 +22,7 @@
 - type: entity
   parent: BaseCartridgeHeavyRifle
   id: CartridgeMinigun
-  name: cartridge (.10 rifle)
+  name: cartridge (5mm rifle)
   components:
   - type: CartridgeAmmo
     proto: BulletMinigun
