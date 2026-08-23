@@ -2,7 +2,7 @@
   parent: BaseBullet
   id: PelletShotgunSlug
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 slug)
+  name: pellet (.12 slug)
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -10,36 +10,36 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
+        Piercing: 35
         Structural: 30
 
 - type: entity
   parent: BaseBullet
   id: PelletShotgunBeanbag
   categories: [ HideSpawnMenu ]
-  name: beanbag (.50)
+  name: beanbag (.12)
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
-    - state: bullet #just reapplying to here so it can be shaded
+    - state: bullet 
   - type: Projectile
     damage:
       types:
         Blunt: 10
   - type: StaminaDamageOnCollide
-    damage: 40 # 3 hits to stun
+    damage: 40 
 
 - type: entity
   parent: BaseBullet
   id: PelletShotgun
   categories: [ HideSpawnMenu ]
-  name: pellet (.50)
+  name: pellet (.12)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Piercing: 15
         Structural: 8
 
 - type: entity
@@ -56,13 +56,13 @@
   parent: BaseBulletIncendiary
   id: PelletShotgunIncendiary
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 incendiary)
+  name: pellet (.12 incendiary)
   components:
   - type: Projectile
     damage:
       types:
         Piercing: 7
-        Heat: 3
+        Heat: 7
   - type: IgnitionSource
     ignited: true
 
@@ -80,7 +80,7 @@
   parent: BaseBulletPractice
   id: PelletShotgunPractice
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 practice)
+  name: pellet (.12 practice)
   components:
   - type: Projectile
     damage:
@@ -101,7 +101,7 @@
   parent: BaseBullet
   id: PelletShotgunImprovised
   categories: [ HideSpawnMenu ]
-  name: improvised pellet
+  name: improvised pellet (.12)
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -112,7 +112,7 @@
     damage:
       types:
         Piercing: 3
-        Slash: 3
+        Slash: 4
 
 - type: entity
   parent: PelletShotgunImprovised
@@ -128,7 +128,7 @@
   parent: [ SolutionAmmo, SolutionToolVeryTiny, BaseBulletPractice ]
   id: PelletShotgunTranquilizer
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 tranquilizer)
+  name: pellet (.12 tranquilizer)
   components:
   - type: Projectile
     damage:
@@ -141,7 +141,7 @@
 - type: entity
   id: PelletShotgunFlare
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 flare)
+  name: pellet (.12 flare)
   components:
   - type: Physics
     bodyType: Dynamic
@@ -189,12 +189,12 @@
   parent: BaseBulletUranium
   id: PelletShotgunUranium
   categories: [ HideSpawnMenu ]
-  name: pellet (.50 uranium)
+  name: pellet (.12 uranium)
   components:
   - type: Projectile
     damage:
       types:
-        Radiation: 5
+        Radiation: 7
         Piercing: 5
 
 - type: entity
@@ -211,7 +211,7 @@
   parent: BaseBullet
   id: PelletGrapeshot #tally fucking ho
   categories: [ HideSpawnMenu ]
-  name: grapeshot pellet
+  name: grapeshot pellet (.12)
   components:
   - type: Sprite
     noRot: false
@@ -222,7 +222,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 25
+        Piercing: 20
 
 - type: entity
   parent: PelletGrapeshot
@@ -238,7 +238,7 @@
   parent: BaseBullet
   id: PelletGlass
   categories: [ HideSpawnMenu ]
-  name: glass shard
+  name: glass shard (.12)
   components:
   - type: Sprite
     noRot: false
