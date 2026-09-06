@@ -1,0 +1,55 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: TGClothingHeadHatBasicHelmetMetal
+  name: металлический шлем КМ-1
+  abstract: false
+  description: Самая распространённая модель имперского шлема, краска и опознавательные знаки сняты, лучший и не дорогой вариант для каждого вольного человека
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Head/BasicHelmetMilit.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Head/BasicHelmetMilit.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.95
+        Piercing: 0.9
+        Heat: 0.85
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: HideLayerClothing 
+    slots:
+    - Hair
+  - type: StaticPrice
+    price: 200
+
+- type: entity
+  parent: ClothingHeadBase
+  id: TGClothingHeadHatHelmetMetalImperial
+  name: металлический шлем КМ-1
+  abstract: false
+  description: Самая распространённая модель имперского шлема, на ней нанесены опознавательные знаки остатков имперского правительства
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Head/BasicHelmetImperial.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Head/BasicHelmetImperial.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.95
+        Piercing: 0.9
+        Heat: 0.85
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: HideLayerClothing 
+    slots:
+    - Hair
+  - type: StaticPrice
+    price: 250

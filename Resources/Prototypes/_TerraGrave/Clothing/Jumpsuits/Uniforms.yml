@@ -1,0 +1,12 @@
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitImperial1
+  name: боевая униформа империи
+  description: Повседневная униформа остатков имперского правительства, в комплекте имеется базовая белая футболка и боевые широкие штаны, форма и в правду удобная и стильная для своего предназначения
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/ImperialJumpsuit1.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/ImperialJumpsuit1.rsi
+  - type: StaticPrice
+    price: 45

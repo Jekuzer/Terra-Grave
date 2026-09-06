@@ -1,0 +1,47 @@
+- type: entity
+  parent: [ ClothingOuterBase, AllowSuitStorageClothing ]
+  id: TGClothingOuterVestArmorBasic
+  name: боевой жилет
+  description: Достаточно популярный бронежилет, не имеет никаких опознавательных знаков, вряд ли вызовет проблемы и путаницу, чиста броня - чиста жизнь
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/Vest/BasicVestD.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/Vest/BasicVestD.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.75
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.8
+  - type: StaticPrice
+    price: 200
+
+- type: entity
+  parent: [ ClothingOuterBase, AllowSuitStorageClothing ]
+  id: TGClothingOuterVestArmorImperial
+  name: боевой жилет
+  description: Достаточно популярный бронежилет, украшен узорами и имеет опознавательные знаки остатков имперского правительства
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/Vest/BasicVestImperial.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/Vest/BasicVestImperial.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.75
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.8
+  - type: StaticPrice
+    price: 200

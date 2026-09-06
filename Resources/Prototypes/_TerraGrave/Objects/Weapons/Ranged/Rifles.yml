@@ -1,0 +1,38 @@
+- type: entity
+  name: охотничья винтовка
+  parent: [BaseWeaponSniper, BaseGunWieldable, SolutionDart, BaseMajorContraband]
+  id: TGWeaponHuntingRifle
+  description: 
+  components:
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Weapons/Ranged/rifles/HuntingRifle.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Weapons/Ranged/rifles/HuntingRifle.rsi
+    layers:
+    - state: base
+    - state: base1
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+      visible: false
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: base
+    inHandsFillBaseName: -fill-
+    inHandsMaxFillLevels: 1
+    equippedFillBaseName: -fill-
+    equippedMaxFillLevels: 1
+  - type: GunRequiresWield
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+  - type: Gun
+    minAngle: 7
+    maxAngle: 18
+    angleIncrease: 3.5
+    angleDecay: 2
+  - type: StaticPrice
+    price: 300
