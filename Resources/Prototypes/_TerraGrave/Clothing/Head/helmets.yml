@@ -1,6 +1,6 @@
 - type: entity
   parent: ClothingHeadBase
-  id: TGClothingHeadHatBasicHelmetMetal
+  id: TerraGClothingHeadHatBasicHelmetMetal
   name: металлический шлем КМ-1
   abstract: false
   description: Самая распространённая модель имперского шлема, краска и опознавательные знаки сняты, лучший и не дорогой вариант для каждого вольного человека
@@ -24,11 +24,11 @@
     slots:
     - Hair
   - type: StaticPrice
-    price: 200
+    price: 70
 
 - type: entity
   parent: ClothingHeadBase
-  id: TGClothingHeadHatHelmetMetalImperial
+  id: TerraGClothingHeadHatHelmetMetalImperial
   name: металлический шлем КМ-1
   abstract: false
   description: Самая распространённая модель имперского шлема, на ней нанесены опознавательные знаки остатков имперского правительства
@@ -52,4 +52,88 @@
     slots:
     - Hair
   - type: StaticPrice
-    price: 250
+    price: 75
+
+- type: entity
+  parent: ClothingHeadBase
+  id: TerraGClothingHeadHatHelmetMetalBrodieBlack
+  name: черный броди
+  abstract: false
+  description: Произведённый после войны шлем похожий по конструкции на броди, никудышно, но хоть что то, окрашен в чёрный цвет
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Head/BrodieBasic.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Head/BrodieBasic.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.95
+  - type: HideLayerClothing 
+    slots:
+    - Hair
+  - type: StaticPrice
+    price: 40
+
+- type: entity
+  parent: ClothingHeadBase
+  id: TerraGClothingHeadHatHelmetMetalBrodie
+  name: металлический шлем броди
+  abstract: false
+  description: Произведённый после войны шлем похожий по конструкции на броди, никудышно, но хоть что то
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Head/BrodieMilit.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Head/BrodieMilit.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.95
+  - type: HideLayerClothing 
+    slots:
+    - Hair
+  - type: StaticPrice
+    price: 40
+
+- type: entity
+  parent: ClothingHeadBase
+  id: TerraGClothingHeadHatHelmetMetalBrodieImperial
+  name: имперский шлем броди
+  abstract: false
+  description: Произведённый после войны шлем похожий по конструкции на броди, никудышно, но хоть что то, окрашен в цвета империи
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Head/BrodieImperial.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Head/BrodieImperial.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.95
+  - type: HideLayerClothing 
+    slots:
+    - Hair
+  - type: StaticPrice
+    price: 45
