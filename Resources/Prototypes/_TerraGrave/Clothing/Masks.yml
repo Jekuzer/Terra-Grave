@@ -147,3 +147,28 @@
         Heat: 0.9
   - type: StaticPrice
     price: 30
+
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskUnderHelmet1
+  name: серый подшлемник
+  description: плотный подшлемник хорошего качества
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/UnderHelmet.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/UnderHelmet.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Mask
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: StaticPrice
+    price: 80
