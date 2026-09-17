@@ -1,6 +1,6 @@
 - type: entity
   parent: [ ClothingOuterBase, AllowSuitStorageClothing ]
-  id: TGClothingOuterVestArmorBasic
+  id: TerraGClothingOuterVestArmorBasic
   name: боевой жилет
   description: Достаточно популярный бронежилет, не имеет никаких опознавательных знаков, вряд ли вызовет проблемы и путаницу, чиста броня - чиста жизнь
   components:
@@ -24,7 +24,7 @@
 
 - type: entity
   parent: [ ClothingOuterBase, AllowSuitStorageClothing ]
-  id: TGClothingOuterVestArmorImperial
+  id: TerraGClothingOuterVestArmorImperial
   name: боевой жилет
   description: Достаточно популярный бронежилет, украшен узорами и имеет опознавательные знаки остатков имперского правительства
   components:
@@ -45,3 +45,55 @@
     damageCoefficient: 0.8
   - type: StaticPrice
     price: 200
+
+- type: entity
+  parent: [ ClothingOuterBase, AllowSuitStorageClothing ]
+  id: TerraGClothingOuterVestArmorLeatherFallos
+  name: кожаная броня путешественника
+  description: Кожаная куртка и штаны... пахнет радиоактивными осадками
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/Vest/LeatherArmor.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/Vest/LeatherArmor.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: ExplosionResistance
+    damageCoefficient: 0.95
+  - type: StaticPrice
+    price: 130
+
+- type: entity
+  parent: [ ClothingOuterBase, AllowSuitStorageClothing ]
+  id: TerraGClothingOuterVestArmorTrashArmor
+  name: мусорная броня
+  description: Броня собранная из кусков разного мусора, железо, покрышки, 
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/BadlabndsArmor.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/BadlabndsArmor.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.85
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.80
+  - type: StaticPrice
+    price: 50
+
