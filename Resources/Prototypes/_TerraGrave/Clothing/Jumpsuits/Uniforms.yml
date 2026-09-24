@@ -1,0 +1,81 @@
+# фракционная
+  # имперцы
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitImperial1
+  name: боевая униформа империи
+  description: Повседневная униформа остатков имперского правительства, в комплекте имеется базовая белая футболка и боевые широкие штаны
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/ImperialJumpsuit1.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/ImperialJumpsuit1.rsi
+  - type: StaticPrice
+    price: 45
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitImperial2
+  name: боевая униформа империи
+  description: Повседневная униформа остатков имперского правительства, в комплекте имеется китель и боевые широкие штаны
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/ImperialJumpsuit2.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/ImperialJumpsuit2.rsi
+  - type: StaticPrice
+    price: 45
+
+    #фсд
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitFSD1
+  name: боевая униформа федералистов
+  description: Повседневная униформа про-федеральных сил, в комплекте имеется китель и боевые штаны
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/FSDJumpsuit1.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/FSDJumpsuit1.rsi
+  - type: StaticPrice
+    price: 45
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitFSD2
+  name: боевая униформа федералистов
+  description: Повседневная униформа про-федеральных сил, в комплекте имеется белая футболка и боевые штаны
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/FSDJumpsuit2.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/FSDJumpsuit2.rsi
+  - type: StaticPrice
+    price: 45
+
+  # обычная
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitGreenCloth
+  name: зелёная одежда
+  description: Повседневная одежда простого человека, жилет и штаны, ничего необычного
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/GreenOdezhda.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/GreenOdezhda.rsi
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitMechanic
+  name: форма промышленника
+  description: Рабочая одежда промышленного работника, может использоваться что на заводах, что на шахтах, простыми словами универсальна и удобная в любой отрасли промышленности
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/MechanicJumpsuit.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/MechanicJumpsuit.rsi
+  - type: StaticPrice
+    price: 40

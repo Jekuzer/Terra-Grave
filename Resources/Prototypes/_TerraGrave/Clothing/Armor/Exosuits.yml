@@ -1,0 +1,58 @@
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: TerraGClothingOuterExosuitBasic
+  name: простой экзоскелет
+  description: Разработанный для распределения нагрузки экзоскелет, без батареи очень сильно замедляет, но с ней позволяет распределить вес снаряжения и ускорить себя
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/Vest/Exosuit.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Outerclothing/Vest/Exosuit.rsi
+    equipDelay: 2
+    unequipDelay: 3.5
+  - type: FireProtection
+    reduction: 0.95
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+        Radiation: 0.95
+  - type: ClothingSpeedModifier
+    walkModifier: 0.35
+    sprintModifier: 0.35
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    requiredSlot: outerClothing
+    slot: back
+    blockUnequipWhenAttached: true
+    replaceCurrentClothing: false
+    clothingPrototype: TerraGClothingPowerSystemsBack
+  - type: StaticPrice
+    price: 800
+
+- type: entity
+  parent: [Clothing, ContentsExplosionResistanceBase]
+  id: TerraGClothingPowerSystemsBack
+  name: батарея экзокостюма
+  description: Долговечная батарея для экзоскелета, позволяет запитать костюм для его эффективной работы
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Backpacks/Batareyka.rsi
+    state: icon
+  - type: Clothing
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+    sprite: _TerraGrave/Objects/Clothing/Backpacks/Batareyka.rsi
+    slots:
+    - back
+  - type: ClothingSpeedModifier
+    walkModifier: 4.5 
+    sprintModifier: 4
+  - type: TemperatureProtection
+    coefficient: 0.9

@@ -1,0 +1,250 @@
+# банданы
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskLightGrayBandana
+  name: серая бандана
+  description: Небрежный кусок ткани серого цвета
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/BlueBandana.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/BlueBandana.rsi
+  - type: Mask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskGrayBandana
+  name: тёмно-серая бандана
+  description: Небрежный кусок ткани тёмно-серого цвета
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/GrayBandana.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/GrayBandana.rsi
+  - type: Mask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskGreenBandana
+  name: бледно-зелёная бандана
+  description: Небрежный кусок ткани бледно-зелёного цвета
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/GreenBandana.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/GreenBandana.rsi
+  - type: Mask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskImperialColorBandana
+  name: пост-имперская бандана
+  description: Небрежный кусок ткани цветов остатков империи
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/ImperialBandana.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/ImperialBandana.rsi
+  - type: Mask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskOrangeBandana
+  name: оранжевая бандана
+  description: Небрежный кусок ткани оранжевого цвета
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/OrangeBandana.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/OrangeBandana.rsi
+  - type: Mask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskWhiteBandana
+  name: светло-серая бандана
+  description: Небрежный кусок ткани светло-серого цвета
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/WhiteBandana.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/Bandanas/WhiteBandana.rsi
+  - type: Mask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+# противогазики
+
+- type: entity
+  parent: ClothingMaskGas
+  id: TerraGClothingMaskGasG1
+  name: противогаз Г-1
+  description: Самый оптимальный противогаз гражданского назначения, имеет возможность подключать газовые баллоны, защищает лицо от возможных термических и химических ожогов
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/GasMaskG1.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/GasMaskG1.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.9
+  - type: StaticPrice
+    price: 70
+
+- type: entity
+  parent: ClothingMaskGas
+  id: TerraGClothingMaskGasmaskOldMiner
+  name: старый шахтёрский противогаз
+  description: Старый пошарпанный шахтёрский противогаз, одевается на всю площадь головы, защищает кожу от ожогов и кислот
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/OldMinerGasMask.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/OldMinerGasMask.rsi
+    equipDelay: 1.5
+    unequipDelay: 1.5
+  - type: HideLayerClothing 
+    slots:
+    - Hair
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.85
+        Caustic: 0.95
+  - type: StaticPrice
+    price: 35
+
+- type: entity
+  parent: ClothingMaskGas
+  id: TerraGClothingMaskGasmaskMiner
+  name: шахтёрский противогаз
+  description: Шахтёрский противогаз, одевается на всю площадь головы, защищает кожу от ожогов и кислот
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/MinerGasMask.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/MinerGasMask.rsi
+    equipDelay: 1.5
+    unequipDelay: 1.5
+  - type: HideLayerClothing 
+    slots:
+    - Hair
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.85
+        Radiation: 0.95
+        Caustic: 0.9
+  - type: FireProtection
+    reduction: 0.9
+  - type: StaticPrice
+    price: 45
+
+- type: entity
+  parent: ClothingMaskGas
+  id: TerraGClothingMaskGasmaskOld
+  name: старый противогаз 
+  description: древняя модель пехотного противогаза, нормально защищает от всего по немногу, отлично подходит для своего назначения, однако шланг немного мешает свободному передвижению
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/OldGasMask.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/OldGasMask.rsi
+    equipDelay: 1.25
+    unequipDelay: 1.25
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.95
+        Caustic: 0.95
+        Radiation: 0.95
+  - type: ClothingSpeedModifier
+    walkModifier: 0.98
+    sprintModifier: 0.98
+  - type: StaticPrice
+    price: 40
+
+# бронемаски
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskMetalRaider
+  name: кованная маска
+  description: Коряво скованная и насквозь ржавая в некоторых местах металлическая маска, может обеспечить некоторую защиту лица от повреждений
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/MetalMask.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/MetalMask.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Mask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.9
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  parent: ClothingMaskPullableBase
+  id: TerraGClothingMaskUnderHelmet1
+  name: серый подшлемник
+  description: плотный подшлемник хорошего качества
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Mask/UnderHelmet.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Mask/UnderHelmet.rsi
+    equipDelay: 1
+    unequipDelay: 1
+  - type: Mask
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: StaticPrice
+    price: 80

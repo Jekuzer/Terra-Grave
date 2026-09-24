@@ -1,0 +1,86 @@
+- type: entity
+  parent: BaseWeaponRifle
+  id: TerraGWeaponMagazRifleBase
+  abstract: true
+  components:
+  - type: Item
+    size: Large
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Wieldable
+    wieldedSpeedModifier: 0.85
+  - type: GunWieldBonus
+    minAngle: -21
+    maxAngle: -38
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+
+- type: entity
+  name: боевой карабин
+  parent: TerraGWeaponMagazRifleBase
+  id: TerraGWeaponBattleCarbine
+  description: Старая балистическая винтовка, явно довоенного производства, основывается на передовых технологиях конца XX века, однако с течением времени актуальность так и не теряется
+  components:
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Weapons/Ranged/rifles/ServiceRifle.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Weapons/Ranged/rifles/ServiceRifle.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Gun
+    minAngle: 25
+    maxAngle: 53
+    angleIncrease: 4
+    angleDecay: 12
+    fireRate: 4.5
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    - SemiAuto
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineLightRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineLightRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeLightRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 260
