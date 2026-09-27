@@ -223,9 +223,6 @@
       params:
         volume: -4
   # Goobstation edit end
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
   - type: CosmicTransmutable # DeltaV
     transmutesTo: ClothingOuterHardsuitCosmicCult
     requiredGlyphType: CosmicGlyphWarding
