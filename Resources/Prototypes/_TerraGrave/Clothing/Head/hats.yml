@@ -1,0 +1,27 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: TerraGClothingHeadHatImperialCap
+  name: имперская кепка
+  description: Самая обычная кепка имперских сил
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Head/ImperialCap.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Head/ImperialCap.rsi
+  #- type: HideLayerClothing
+  #  slots:
+  #  - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: TerraGClothingHeadHatFSDCap
+  name: неофедералистская кепка
+  description: Самая обычная кепка неофедералистских сил
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Head/FSDCap.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Head/FSDCap.rsi
+  #- type: HideLayerClothing
+  #  slots:
+  #  - Hair
