@@ -79,3 +79,68 @@
     sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/MechanicJumpsuit.rsi
   - type: StaticPrice
     price: 40
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitGorodBattle
+  name: форма армии грот-сити
+  description: Костюм пытающийся быть похожим на древние боевые комплекты, вероятно использовался страйкболистами и реконструкторами событий XXI века
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/GorodJumpsuit.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/GorodJumpsuit.rsi
+  - type: StaticPrice
+    price: 45
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitPalto
+  name: пальто без рукав
+  description: обычная одежда, штаны, футболка И ПАЛЬТО БЕЗ РУКАВ, КЛАССНО ДА??? У ЭТОГО ПАРНЯ НЕТ РУКАВОВ
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/JacketPalto.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/JacketPalto.rsi
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitOffice
+  name: деловой костюм
+  description: Офисный костюм, белая рубашка, красный галстук, синие джинсы
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/Office.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/Office.rsi
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitShorts1
+  name: шорты и футболка
+  description: Старые и потрёпанные шорты и футболка
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/Shorts1.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/Shorts1.rsi
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: TerraGClothingUniformJumpsuitXuynya
+  name: вычурный костюм
+  description: Кожанные штаны, потрёпанная футболка и капюшон с синим мехом, выглядит... необычно
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/Xuynya.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Clothing/Jumpsuits/Uniforms/Xuynya.rsi
+  - type: StaticPrice
+    price: 30
