@@ -1,0 +1,24 @@
+- type: entity
+  name: помповый трубчатый дробовик
+  parent: [BaseWeaponShotgun, BaseGunWieldable]
+  id: TerraGWeaponShotgunPipePump
+  description: Дешёвый трубчатый помповый дробовик, очень простой по конструкции, исользует дробь 12 калибра
+  components: 
+  - type: Item
+    sprite: _TerraGrave/Objects/Weapons/Ranged/Shotguns/PumpPipeShothun.rsi
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Weapons/Ranged/Shotguns/PumpPipeShothun.rsi 
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Weapons/Ranged/Shotguns/PumpPipeShothun.rsi
+  - type: GunRequiresWield 
+  - type: Gun
+    fireRate: 1.5
+  - type: GunSpreadModifier
+    spread: 1.4
+  - type: BallisticAmmoProvider
+    capacity: 4
+    autoCycle: false
+  - type: Tag
+    tags:
+    - WeaponShotgunKammerer
+
