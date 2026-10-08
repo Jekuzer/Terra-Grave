@@ -1,0 +1,89 @@
+- type: entity
+  name: Глок-23 Г6
+  parent: BaseWeaponPistol
+  id: TerraGWeaponPistolGlock
+  description: Массово выпускаемый до захвата власти Империей легендарный Глок, множество десятилетий он начинял тела свинцом, и продолжает делать это так же как и в древние времена, особенности шестого поколения - 40% деталей сделаны из титанового сплава, надёжный как и всегда! потребляет патроны 9x19
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Weapons/Ranged/Pistols/Glock.rsi
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Weapons/Ranged/Pistols/Glock.rsi
+  - type: Gun
+    minAngle: 2
+    maxAngle: 17
+    angleIncrease: 4
+    angleDecay: 4
+    fireRate: 4
+    availableModes:
+    - SemiAuto
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistol
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistol
+            - MagazinePistolHighCapacity
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgePistol
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 140
+
+- type: entity
+  name: пистолет .45
+  parent: BaseWeaponPistol
+  id: TerraGWeaponPistol45
+  description: Оптимизированный всеми доармагеддонными технологиями пистолет для стрельбы патронами .45 
+  components:
+  - type: Sprite
+    sprite: _TerraGrave/Objects/Weapons/Ranged/Pistols/45pistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _TerraGrave/Objects/Weapons/Ranged/Pistols/45pistol.rsi
+  - type: Gun
+    minAngle: 2
+    maxAngle: 11
+    angleIncrease: 3
+    angleDecay: 4
+    fireRate: 2.5
+    availableModes:
+    - SemiAuto
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineMagnum
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineMagnum
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeMagnum
+  - type: Multishot 
+    spreadMultiplier: 30
+  - type: StaticPrice
+    price: 165
