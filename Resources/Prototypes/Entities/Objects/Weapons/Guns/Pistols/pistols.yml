@@ -87,6 +87,7 @@
   - type: EmitSoundOnDrop
     sound:
       collection: PistolsDrop
+      # убрал к чертям удары на пкм
   - type: EmitSoundOnLand
     sound:
       collection: PistolsDrop
