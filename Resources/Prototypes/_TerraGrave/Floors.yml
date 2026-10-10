@@ -1,0 +1,119 @@
+- type: tile
+  id: TerraGFloorDirttt
+  name: tiles-dirt
+  sprite: /Textures/_TerraGrave/Tiles/Pochva/dirrrt.png
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_TerraGrave/Tiles/Pochva/single_edge_SE.png
+    NorthEast: /Textures/_TerraGrave/Tiles/Pochva/single_edge_NE.png
+    NorthWest: /Textures/_TerraGrave/Tiles/Pochva/single_edge_NW.png
+    SouthWest: /Textures/_TerraGrave/Tiles/Pochva/single_edge_SW.png
+    South: /Textures/_TerraGrave/Tiles/Pochva/double_edge_S.png
+    East: /Textures/_TerraGrave/Tiles/Pochva/double_edge_E.png
+    North: /Textures/_TerraGrave/Tiles/Pochva/double_edge_N.png
+    West: /Textures/_TerraGrave/Tiles/Pochva/double_edge_W.png
+  baseTurf: FloorBedrock
+  isSubfloor: true
+  itemDrop: N14DirtBlock
+  deconstructTools: [ Prying ]
+  canShovel: true
+  footstepSounds:
+    collection: N14FootstepDirt
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: TerraGFloorDirttt2
+  name: tiles-dirt
+  sprite: /Textures/_TerraGrave/Tiles/Pochva2/dirrrt.png
+  edgeSpritePriority: 2
+  edgeSprites:
+    SouthEast: /Textures/_TerraGrave/Tiles/Pochva2/single_edge_SE.png
+    NorthEast: /Textures/_TerraGrave/Tiles/Pochva2/single_edge_NE.png
+    NorthWest: /Textures/_TerraGrave/Tiles/Pochva2/single_edge_NW.png
+    SouthWest: /Textures/_TerraGrave/Tiles/Pochva2/single_edge_SW.png
+    South: /Textures/_TerraGrave/Tiles/Pochva2/double_edge_S.png
+    East: /Textures/_TerraGrave/Tiles/Pochva2/double_edge_E.png
+    North: /Textures/_TerraGrave/Tiles/Pochva2/double_edge_N.png
+    West: /Textures/_TerraGrave/Tiles/Pochva2/double_edge_W.png
+  baseTurf: FloorBedrock
+  isSubfloor: true
+  itemDrop: N14DirtBlock
+  deconstructTools: [ Prying ]
+  canShovel: true
+  footstepSounds:
+    collection: N14FootstepDirt
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: TerraGFloorBeton1
+  name: tiles-beton
+  sprite: /Textures/_TerraGrave/Tiles/beton1/iconbeton.png
+  edgeSpritePriority: 3
+  edgeSprites:
+    SouthEast: /Textures/_TerraGrave/Tiles/beton1/single_edge_SE.png
+    NorthEast: /Textures/_TerraGrave/Tiles/beton1/single_edge_NE.png
+    NorthWest: /Textures/_TerraGrave/Tiles/beton1/single_edge_NW.png
+    SouthWest: /Textures/_TerraGrave/Tiles/beton1/single_edge_SW.png
+    South: /Textures/_TerraGrave/Tiles/beton1/double_edge_S.png
+    East: /Textures/_TerraGrave/Tiles/beton1/double_edge_E.png
+    North: /Textures/_TerraGrave/Tiles/beton1/double_edge_N.png
+    West: /Textures/_TerraGrave/Tiles/beton1/double_edge_W.png
+  baseTurf: FloorBedrock
+  isSubfloor: true
+  itemDrop: N14DirtBlock
+  deconstructTools: [ Prying ]
+  canShovel: true
+  footstepSounds:
+    collection: N14FootstepConcrete
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: TerraGFloorBeton2
+  name: tiles-beton
+  sprite: /Textures/_TerraGrave/Tiles/beton2/iconbeton.png
+  edgeSpritePriority: 2
+  edgeSprites:
+    SouthEast: /Textures/_TerraGrave/Tiles/beton2/single_edge_SE.png
+    NorthEast: /Textures/_TerraGrave/Tiles/beton2/single_edge_SE.png
+    NorthWest: /Textures/_TerraGrave/Tiles/beton2/single_edge_SE.png
+    SouthWest: /Textures/_TerraGrave/Tiles/beton2/single_edge_SE.png
+    South: /Textures/_TerraGrave/Tiles/beton2/double_edge_S.png
+    East: /Textures/_TerraGrave/Tiles/beton2/double_edge_S.png
+    North: /Textures/_TerraGrave/Tiles/beton2/double_edge_S.png
+    West: /Textures/_TerraGrave/Tiles/beton2/double_edge_S.png
+  baseTurf: FloorBedrock
+  isSubfloor: true
+  itemDrop: N14DirtBlock
+  deconstructTools: [ Prying ]
+  canShovel: true
+  footstepSounds:
+    collection: N14FootstepConcrete
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: TerraGFloorBeton3
+  name: tiles-beton
+  sprite: /Textures/_TerraGrave/Tiles/beton3/iconbeton.png
+  edgeSpritePriority: 2
+  edgeSprites:
+    SouthEast: /Textures/_TerraGrave/Tiles/beton3/single_edge_NE.png
+    NorthEast: /Textures/_TerraGrave/Tiles/beton3/single_edge_NE.png
+    NorthWest: /Textures/_TerraGrave/Tiles/beton3/single_edge_NE.png
+    SouthWest: /Textures/_TerraGrave/Tiles/beton3/single_edge_NE.png
+    South: /Textures/_TerraGrave/Tiles/beton3/double_edge_S.png
+    East: /Textures/_TerraGrave/Tiles/beton3/double_edge_S.png
+    North: /Textures/_TerraGrave/Tiles/beton3/double_edge_S.png
+    West: /Textures/_TerraGrave/Tiles/beton3/double_edge_S.png
+  baseTurf: FloorBedrock
+  isSubfloor: true
+  itemDrop: N14DirtBlock
+  deconstructTools: [ Prying ]
+  canShovel: true
+  footstepSounds:
+    collection: N14FootstepConcrete
+  heatCapacity: 10000
+  weather: true
