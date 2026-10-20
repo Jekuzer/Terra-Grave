@@ -20,9 +20,8 @@
     layers:
     - state: fireball
       shader: unshaded
-  - type: ExplosionEffect # Goob
   - type: Explosive
-    explosionType: Transparent # Goob
+    explosionType: Default
     maxIntensity: 40
     intensitySlope: 6
     totalIntensity: 200
@@ -70,7 +69,6 @@
   - type: RepeatingTrigger
     delay: 0.5 # line of fire as well as if it hits something
   - type: ExplodeOnTrigger
-  - type: ExplosionEffect # Goob
   - type: Explosive
     explosionType: FireBomb
     totalIntensity: 5 # low intensity, the point is to burn attackers not to break open walls, dragons can just eat them
@@ -93,7 +91,6 @@
     reflective: Magic
   - type: TimedDespawn
     lifetime: 30
-  - type: ExplosionEffect # Goob
   - type: Explosive
     explosionType: Default
     maxIntensity: 100

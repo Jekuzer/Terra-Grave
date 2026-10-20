@@ -1360,7 +1360,6 @@
   description: Small scale high-speed nuclear reaction
   components:
   - type: XAETriggerExplosives
-  - type: ExplosionEffect # Goob
   - type: Explosive
     deleteAfterExplosion: false
     explosionType: Radioactive
@@ -1377,10 +1376,9 @@
   description: Explosion
   components:
   - type: XAETriggerExplosives
-  - type: ExplosionEffect # Goob
   - type: Explosive
     deleteAfterExplosion: false
-    explosionType: Transparent # Goob
+    explosionType: Default
     totalIntensity: 500
     intensitySlope: 2.5
     maxIntensity: 50

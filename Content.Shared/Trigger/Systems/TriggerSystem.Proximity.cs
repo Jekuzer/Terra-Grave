@@ -120,11 +120,6 @@ public sealed partial class TriggerSystem
                 // The trigger's on cooldown.
                 continue;
 
-            if (curTime < trigger.NextAttempt) // Goob
-                continue;
-
-            var allCancelled = false; // Goob
-
             // Check for anything colliding and moving fast enough.
             foreach (var (collidingUid, colliding) in trigger.Colliding)
             {
@@ -138,21 +133,13 @@ public sealed partial class TriggerSystem
                 var attemptEv = new AttemptTriggerEvent(collidingUid);
                 RaiseLocalEvent(uid, ref attemptEv);
                 if (attemptEv.Cancelled)
-                {
-                    allCancelled = true;
                     continue;
-                }
-
-                allCancelled = false;
                 // Goobstation end
 
                 // Trigger!
                 Activate((uid, trigger), collidingUid);
                 break;
             }
-
-            if (allCancelled) // Goob
-                trigger.NextAttempt = curTime + CancelledProximityRetry;
         }
     }
 }

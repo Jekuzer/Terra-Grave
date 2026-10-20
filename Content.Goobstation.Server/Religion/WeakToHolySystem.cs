@@ -65,42 +65,35 @@ public sealed partial class WeakToHolySystem : EntitySystem
 
     #region Holy Damage Dealing
 
-    private static readonly DamageModifierSet HolyImmunity = new()
-    {
-        Coefficients = new Dictionary<ProtoId<DamageTypePrototype>, float>
-        {
-            { "Holy", 0f },
-        },
-    };
-
     private void OnHolyDamageModify(Entity<DamageableComponent> ent, ref DamageModifyEvent args)
     {
-        if (!args.Damage.DamageDict.TryGetValue("Holy", out var holy) || holy <= 0)
-            return;
-
-        if (!TryComp<BodyComponent>(ent, out var body)
-            || !_body.TryGetRootPart(ent, out var rootPart, body: body)
-            || !HasDamageableWoundable(rootPart.Value))
-            return;
-
         var unholyEvent = new DamageUnholyEvent(args.Target, args.Origin);
         RaiseLocalEvent(args.Target, ref unholyEvent);
 
+        var holyCoefficient = 0f; // Default resistance
+
         if (unholyEvent.ShouldTakeHoly)
+            holyCoefficient = 1f; //Allow holy damage
+
+        DamageModifierSet modifierSet = new()
+        {
+            Coefficients = new Dictionary<ProtoId<DamageTypePrototype>, float>
+            {
+                { "Holy", holyCoefficient },
+            },
+        };
+
+        if (!TryComp<BodyComponent>(ent, out var body))
             return;
 
-        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, HolyImmunity);
-    }
+        if (!_body.TryGetRootPart(ent, out var rootPart, body: body))
+            return;
 
-    private bool HasDamageableWoundable(EntityUid rootPart)
-    {
-        foreach (var woundable in _wound.GetAllWoundableChildren(rootPart))
+        foreach (var woundable in _wound.GetAllWoundableChildren(rootPart.Value))
         {
             if (HasComp<DamageableComponent>(woundable))
-                return true;
+                args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifierSet);
         }
-
-        return false;
     }
 
     private void OnUnholyItemDamage(Entity<WeakToHolyComponent> uid, ref DamageUnholyEvent args)

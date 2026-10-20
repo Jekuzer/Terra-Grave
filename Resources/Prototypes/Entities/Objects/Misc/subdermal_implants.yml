@@ -284,9 +284,8 @@
   - type: GibOnTrigger
     targetUser: true
     deleteItems: true
-  - type: ExplosionEffect # Goob
   - type: Explosive
-    explosionType: TransparentMicroBomb # Goob
+    explosionType: MicroBomb
     totalIntensity: 120
     intensitySlope: 5
     maxIntensity: 30

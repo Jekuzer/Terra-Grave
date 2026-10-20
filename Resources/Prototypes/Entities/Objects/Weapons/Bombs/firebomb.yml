@@ -29,7 +29,6 @@
   - type: RandomTimerTrigger
     min: 0
     max: 15
-  - type: ExplosionEffect # Goob
   - type: Explosive # Weak explosion in a very small radius. Ignites surrounding entities.
     explosionType: FireBomb
     totalIntensity: 25

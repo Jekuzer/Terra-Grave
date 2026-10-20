@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Client._Funkystation.Outline; // Goob
 using Content.Client.CombatMode;
 using Content.Client.Gameplay;
 using Content.Client.Graphics;
@@ -50,7 +49,6 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
-    [Dependency] private InteractionOutlineColorSystem _outlineColor = default!; // Goob
 
     // how often to recheck possible targets (prevents calling expensive
     // check logic each update)
@@ -115,8 +113,8 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
 
         Subs.CVar(_cfgMan, CCVars.DragDropDeadZone, SetDeadZone, true);
 
-        _dropTargetInRangeShader = ProtoMan.Index(ShaderDropTargetInRange).InstanceUnique(); // Goob
-        _dropTargetOutOfRangeShader = ProtoMan.Index(ShaderDropTargetOutOfRange).InstanceUnique(); // Goob
+        _dropTargetInRangeShader = ProtoMan.Index(ShaderDropTargetInRange).Instance();
+        _dropTargetOutOfRangeShader = ProtoMan.Index(ShaderDropTargetOutOfRange).Instance();
         // needs to fire on mouseup and mousedown so we can detect a drag / drop
         CommandBinds.Builder
             .BindBefore(EngineKeyFunctions.Use, new PointerInputCmdHandler(OnUse, false, true), new[] { typeof(SharedInteractionSystem) })
@@ -459,9 +457,7 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
             }
 
             // highlight depending on whether its in or out of range
-            var shader = valid.Value ? _dropTargetInRangeShader! : _dropTargetOutOfRangeShader!; // Goob
-            shader.SetParameter("outline_color", _outlineColor.GetOutlineColor(valid.Value)); // Goob
-            SetDragDropPostShader((entity, inRangeSprite), shader); // Goob
+            SetDragDropPostShader((entity, inRangeSprite), valid.Value ? _dropTargetInRangeShader! : _dropTargetOutOfRangeShader!);
             inRangeSprite.RenderOrder = EntityManager.CurrentTick.Value;
             _nextHighlightedSprites.Add(inRangeSprite);
         }

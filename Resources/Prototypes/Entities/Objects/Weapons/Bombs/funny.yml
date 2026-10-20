@@ -35,9 +35,8 @@
     - type: ExplodeOnTrigger
       keysIn:
       - timer
-    - type: ExplosionEffect # Goob
     - type: Explosive
-      explosionType: Transparent # Goob
+      explosionType: Default
       maxIntensity: 50
       intensitySlope: 25
       totalIntensity: 100
@@ -90,9 +89,8 @@
       shader: unshaded
   - type: TriggerOnSlip
   - type: ExplodeOnTrigger
-  - type: ExplosionEffect # Goob
   - type: Explosive
-    explosionType: Transparent # Goob
+    explosionType: Default
     maxIntensity: 3.4
     intensitySlope: 3
     totalIntensity: 20

@@ -8,7 +8,6 @@
   suffix: grinder/juicer
   components:
   - type: ReagentGrinder
-  - type: ESForcedFacingUi # Goob
   - type: ActivatableUI
     key: enum.ReagentGrinderUiKey.Key
   - type: UserInterface

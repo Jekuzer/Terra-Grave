@@ -166,9 +166,6 @@ public sealed partial class DamageableSystem
         if (damage.Empty)
             return damageDone;
 
-        if (IsNoOpHeal(ent.Comp, damage)) // Goob
-            return damageDone;
-
         var before = new BeforeDamageChangedEvent(damage, origin, canBeCancelled, targetPart);
         RaiseLocalEvent(ent, ref before);
 
@@ -320,7 +317,7 @@ public sealed partial class DamageableSystem
                 uncappedDamage: damageDoneHypotheticalUncapped); // Woundmed
 
             if (isWoundable) // Woundmed
-                TryUpdateParentBodyDamage(ent, interruptsDoAfters, origin, ignoreBlockers);
+                UpdateParentBodyDamage(ent, interruptsDoAfters, origin, ignoreBlockers);
         }
 
         return damageDone;

@@ -93,9 +93,8 @@
     solution: battery
   - type: DrawableSolution
     solution: battery
-  - type: ExplosionEffect # Goob
   - type: Explosive
-    explosionType: Transparent # Goob
+    explosionType: Default
     intensitySlope: 1.5
     maxIntensity: 200
   - type: PhysicalComposition #Goobstation - Recycle update

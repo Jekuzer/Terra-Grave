@@ -37,7 +37,6 @@
         - BulletImpassable
   - type: Damageable
     damageContainer: Inorganic
-  - type: ExplosionEffect # Goob
   - type: Explosive
     explosionType: Default
     intensitySlope: 2
@@ -69,7 +68,6 @@
         mask:
         - Impassable
         - BulletImpassable
-  - type: ExplosionEffect # Goob
   - type: Explosive
     totalIntensity: 25
   - type: Destructible
@@ -105,7 +103,6 @@
         mask:
         - Impassable
         - BulletImpassable
-  - type: ExplosionEffect # Goob
   - type: Explosive
     totalIntensity: 50
   - type: Destructible
@@ -146,7 +143,6 @@
         mask:
         - Impassable
         - BulletImpassable
-  - type: ExplosionEffect # Goob
   - type: Explosive
     totalIntensity: 100
   - type: Destructible
@@ -175,7 +171,6 @@
   components:
   - type: Sprite
     state: big
-  - type: ExplosionEffect # Goob
   - type: Explosive
     totalIntensity: 150
   - type: Destructible
@@ -213,7 +208,6 @@
         reagents:
         - ReagentId: Blood
           Quantity: 1000
-  - type: ExplosionEffect # Goob
   - type: Explosive
     totalIntensity: 25
   - type: Destructible
@@ -248,7 +242,6 @@
   components:
   - type: Sprite
     state: cow_pixel
-  - type: ExplosionEffect # Goob
   - type: Explosive
     totalIntensity: 25
   - type: SolutionContainerManager
@@ -291,7 +284,6 @@
   components:
   - type: Sprite
     state: clown_pixel
-  - type: ExplosionEffect # Goob
   - type: Explosive
     totalIntensity: 25
   - type: SolutionContainerManager
@@ -336,7 +328,6 @@
   components:
   - type: Sprite
     state: potato
-  - type: ExplosionEffect # Goob
   - type: Explosive
     totalIntensity: 25
   - type: SolutionContainerManager

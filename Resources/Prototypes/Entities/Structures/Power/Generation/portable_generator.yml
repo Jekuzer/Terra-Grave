@@ -46,7 +46,6 @@
       interfaces:
         enum.GeneratorComponentUiKey.Key:
           type: PortableGeneratorBoundUserInterface
-    - type: ESForcedFacingUi # Goob
     - type: ActivatableUI
       key: enum.GeneratorComponentUiKey.Key
     - type: Electrified
@@ -255,7 +254,6 @@
   id: PortableGeneratorJrPacman
   suffix: Welding Fuel, 8 kW
   components:
-    - type: ESVerbAnchorable # Goob
     - type: AmbientSound
       range: 4
       volume: -8
@@ -333,9 +331,8 @@
       gasType: CarbonDioxide
       # Full tank is 25 moles of gas
       moleRatio: 0.5
-    - type: ExplosionEffect # Goob
     - type: Explosive
-      explosionType: Transparent # Goob
+      explosionType: Default
       tileBreakScale: 0
     - type: Destructible
       thresholds:

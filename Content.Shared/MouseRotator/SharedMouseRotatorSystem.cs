@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._ES.Interaction.ForcedFacing; // Goob
 using Content.Shared.Interaction;
 
 namespace Content.Shared.MouseRotator;
@@ -30,7 +29,7 @@ public abstract class SharedMouseRotatorSystem : EntitySystem
         var query = EntityQueryEnumerator<MouseRotatorComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var rotator, out var xform))
         {
-            if (rotator.GoalRotation == null || HasComp<ESForcedFacingComponent>(uid)) // Goob
+            if (rotator.GoalRotation == null)
                 continue;
 
             if (_rotate.TryRotateTo(

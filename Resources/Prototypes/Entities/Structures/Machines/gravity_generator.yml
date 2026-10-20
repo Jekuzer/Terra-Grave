@@ -65,7 +65,6 @@
       unpowered: "off"
       off: "off"
       on: "on"
-  - type: ESForcedFacingUi # Goob
   - type: ActivatableUI
     key: enum.PowerChargeUiKey.Key
   - type: ActivatableUIRequiresPower

@@ -16,9 +16,7 @@ public enum SplitDamageBehavior
     /// </summary>
     Split,
     /// <summary>
-    /// The damage will be split upon all parts,
-    /// taking <see cref="GoobCVars.ExplosionVitalMultiplier"/>
-    /// and <see cref="GoobCVars.ExplosionNonVitalMultiplier"/> into account.
+    /// The damage will be split upon all of the vital parts, for explosions obviously.
     /// </summary>
     SplitExplosion,
     /// <summary>

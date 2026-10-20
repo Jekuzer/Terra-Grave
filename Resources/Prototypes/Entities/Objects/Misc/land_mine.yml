@@ -110,9 +110,8 @@
   id: LandMineExplosiveUnarmed
   components:
   - type: ExplodeOnTrigger
-  - type: ExplosionEffect # Goob
   - type: Explosive
-    explosionType: Transparent # Goob
+    explosionType: Default
     maxIntensity: 10
     intensitySlope: 3
     totalIntensity: 120 # about a ~4 tile radius

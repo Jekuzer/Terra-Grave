@@ -171,7 +171,6 @@ public abstract partial class InventorySystem
             {
                 BreakOnMove = !clothing.EquipWhileMoving,
                 NeedHand = true,
-                FaceTarget = false, // Goob
             };
 
             _doAfter.TryStartDoAfter(args);
@@ -443,7 +442,6 @@ public abstract partial class InventorySystem
             {
                 BreakOnMove = !clothing.EquipWhileMoving,
                 NeedHand = true,
-                FaceTarget = false, // Goob
             };
 
             _doAfter.TryStartDoAfter(args);

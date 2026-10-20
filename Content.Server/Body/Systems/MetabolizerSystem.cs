@@ -44,7 +44,6 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
     private EntityQuery<OrganComponent> _organQuery;
     private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
     private static readonly ProtoId<MetabolismGroupPrototype> Gas = "Gas";
-    private readonly List<ReagentQuantity> _metabolizeList = new(); // Goob
 
     public override void Initialize()
     {
@@ -142,9 +141,7 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
         }
 
         // Copy the solution do not edit the original solution list
-        var list = _metabolizeList; // Goob
-        list.Clear(); // Goob
-        list.AddRange(solution.Contents); // Goob
+        var list = solution.Contents.ToList();
 
         // Collecting blood reagent for filtering
         var ev = new MetabolismExclusionEvent();

@@ -68,9 +68,8 @@
         enum.WiresVisualLayers.MaintenancePanel:
           True: { visible: false }
           False: { visible: true }
-  - type: ExplosionEffect # Goob
   - type: Explosive
-    explosionType: Transparent # Goob
+    explosionType: Default
     maxIntensity: 20
     intensitySlope: 30
     totalIntensity: 30
@@ -109,7 +108,6 @@
     enabled: false
   - type: Machine
     board: AnomalyVesselExperimentalCircuitboard
-  - type: ExplosionEffect # Goob
   - type: Explosive
     explosionType: Default
     maxIntensity: 50

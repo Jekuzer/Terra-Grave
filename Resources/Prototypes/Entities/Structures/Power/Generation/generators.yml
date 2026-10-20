@@ -67,9 +67,8 @@
         sound:
           collection: MetalBreak
       - !type:ExplodeBehavior
-  - type: ExplosionEffect # Goob
   - type: Explosive
-    explosionType: Transparent # Goob
+    explosionType: Default
     # Same as AME, but numbers still picked from a hat.
     maxIntensity: 100
     intensitySlope: 2

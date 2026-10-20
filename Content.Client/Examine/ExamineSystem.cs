@@ -26,7 +26,7 @@ using Direction = Robust.Shared.Maths.Direction;
 namespace Content.Client.Examine
 {
     [UsedImplicitly]
-    public sealed partial class ExamineSystem : ExamineSystemShared // Goob
+    public sealed class ExamineSystem : ExamineSystemShared
     {
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -281,7 +281,7 @@ namespace Content.Client.Examine
                     continue;
 
                 var richLabel = new RichTextLabel() { Margin = new Thickness(4, 4, 0, 4)};
-                richLabel.SetMessage(message, ExamineTooltipTags); // Goob
+                richLabel.SetMessage(message);
                 vBox.AddChild(richLabel);
                 break;
             }

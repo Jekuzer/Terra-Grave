@@ -28,9 +28,9 @@ public sealed class PopupUIController : UIController, IOnStateEntered<GameplaySt
         base.Initialize();
         var cache = IoCManager.Resolve<IResourceCache>();
 
-        _smallFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/_ES/Grand9KPixelRegular.ttf"), 10); // Goob
-        _mediumFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/_ES/Grand9KPixelRegular.ttf"), 12); // Goob
-        _largeFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/_ES/Grand9KPixelRegular.ttf"), 14); // Goob
+        _smallFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Italic.ttf"), 10);
+        _mediumFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Italic.ttf"), 12);
+        _largeFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-BoldItalic.ttf"), 14);
     }
 
     public void OnStateEntered(GameplayState state)
@@ -59,7 +59,6 @@ public sealed class PopupUIController : UIController, IOnStateEntered<GameplaySt
         var updatedPosition = position - new Vector2(0f, MathF.Min(8f, 12f * (popup.TotalTime * popup.TotalTime + popup.TotalTime)));
         var font = _smallFont;
         var color = Color.White.WithAlpha(alpha);
-        var outline = new TextOutline(2f, Color.Black.WithAlpha(alpha)); // Goob
 
         switch (popup.Type)
         {
@@ -85,7 +84,7 @@ public sealed class PopupUIController : UIController, IOnStateEntered<GameplaySt
         }
 
         var dimensions = handle.GetDimensions(font, popup.Text, scale);
-        handle.DrawString(font, updatedPosition - dimensions / 2f + popup.RandomOffset, popup.Text, scale, color.WithAlpha(alpha), outline); // Goob
+        handle.DrawString(font, updatedPosition - dimensions / 2f, popup.Text, scale, color.WithAlpha(alpha));
     }
 
     /// <summary>

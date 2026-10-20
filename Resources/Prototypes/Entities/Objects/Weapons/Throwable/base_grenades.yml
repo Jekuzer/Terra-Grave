@@ -3,7 +3,6 @@
   abstract: true
   id: GrenadeBase
   components:
-  - type: ExplosionEffect # Goob
   - type: Sprite
     sprite: Objects/Weapons/Grenades/grenade.rsi
     layers:

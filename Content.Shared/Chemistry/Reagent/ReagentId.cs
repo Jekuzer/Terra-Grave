@@ -62,25 +62,8 @@ public partial struct ReagentId : IEquatable<ReagentId>
         if (other.Data == null)
             return false;
 
-        // Goob start
-        if (ReferenceEquals(Data, other.Data))
-            return true;
-
-        if (Data.Count != other.Data.Count)
+        if (Data.Except(other.Data).Any() || other.Data.Except(Data).Any() || Data.Count != other.Data.Count)
             return false;
-
-        foreach (var data in Data)
-        {
-            if (!other.Data.Contains(data))
-                return false;
-        }
-
-        foreach (var data in other.Data)
-        {
-            if (!Data.Contains(data))
-                return false;
-        }
-        // Goob end
 
         return true;
     }

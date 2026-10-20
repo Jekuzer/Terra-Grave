@@ -82,7 +82,6 @@
   physicalDesc: reagent-physical-desc-fizzy
   flavor: energydrink
   color: "#ffffbf"
-  puddleColor: "#ffffbf60" # Goob
   metabolisms:
     Drink:
       effects:

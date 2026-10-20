@@ -65,9 +65,8 @@
       whitelistFailPopup: ame-controller-component-fuel-slot-fail-whitelist
       lockedFailPopup: ame-controller-component-fuel-slot-fail-locked
       insertSuccessPopup: ame-controller-component-fuel-slot-success-insert
-  - type: ExplosionEffect # Goob
   - type: Explosive
-    explosionType: Transparent # Goob
+    explosionType: Default
     intensitySlope: 5
     maxIntensity: 60
   - type: ActivatableUI

@@ -56,7 +56,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: ExplosionEffect # Goob
   - type: Explosive
     explosionType: DemolitionCharge
     totalIntensity: 60

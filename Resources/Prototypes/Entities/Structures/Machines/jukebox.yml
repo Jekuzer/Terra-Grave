@@ -24,7 +24,6 @@
   - type: ApcPowerReceiver
     powerLoad: 100
   - type: ExtensionCableReceiver
-  - type: ESForcedFacingUi # Goob
   - type: ActivatableUI
     key: enum.JukeboxUiKey.Key
   - type: ActivatableUIRequiresPower

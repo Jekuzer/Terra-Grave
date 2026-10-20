@@ -27,7 +27,6 @@
         - TabletopMachineLayer
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
-  - type: ESForcedFacingUi # Goob
   - type: ActivatableUI
     key: enum.ReagentDispenserUiKey.Key
   - type: ActivatableUIRequiresPower
