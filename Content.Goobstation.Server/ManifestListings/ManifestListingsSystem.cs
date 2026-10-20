@@ -12,9 +12,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.ManifestListings;
 
-public sealed partial class ManifestListingsSystem : EntitySystem
+public sealed class ManifestListingsSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

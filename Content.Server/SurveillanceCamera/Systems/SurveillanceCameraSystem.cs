@@ -222,7 +222,7 @@ public sealed class SurveillanceCameraSystem : SharedSurveillanceCameraSystem
         {
             if (deviceNet.ReceiveFrequencyId != null)
             {
-                camera.AvailableNetworks.Add(deviceNet.ReceiveFrequencyId.Value);
+                camera.AvailableNetworks.Add(deviceNet.ReceiveFrequencyId);
             }
             else if (!camera.NetworkSet)
             {
@@ -354,10 +354,10 @@ public sealed class SurveillanceCameraSystem : SharedSurveillanceCameraSystem
 
     public void RemoveActiveViewer(EntityUid camera, EntityUid player, EntityUid? monitor = null, SurveillanceCameraComponent? component = null, ActorComponent? actor = null)
     {
-        if (!Resolve(camera, ref component, false)) // Goob - Fix (deleted camera)
+        if (!Resolve(camera, ref component))
             return;
 
-        if (Resolve(player, ref actor, false)) // Goob - Fix (disconnected viewers)
+        if (Resolve(player, ref actor))
             _viewSubscriberSystem.RemoveViewSubscriber(camera, actor.PlayerSession);
 
         component.ActiveViewers.Remove(player);
@@ -372,7 +372,7 @@ public sealed class SurveillanceCameraSystem : SharedSurveillanceCameraSystem
 
     public void RemoveActiveViewers(EntityUid camera, HashSet<EntityUid> players, EntityUid? monitor = null, SurveillanceCameraComponent? component = null)
     {
-        if (!Resolve(camera, ref component, false)) // Goob - Fix (deleted camera)
+        if (!Resolve(camera, ref component))
         {
             return;
         }

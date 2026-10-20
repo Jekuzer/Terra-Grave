@@ -62,9 +62,6 @@ public sealed partial class GatherableSystem : EntitySystem
             _audio.PlayPvs(soundComp.Sound, Transform(gatheredUid).Coordinates);
         }
 
-        var gatheredEv = new Content.Goobstation.Common.Gatherable.GatheredEvent(gatherer); // Goob
-        RaiseLocalEvent(gatheredUid, ref gatheredEv); // Goob
-
         // Complete the gathering process
         _destructible.DestroyEntity(gatheredUid);
 

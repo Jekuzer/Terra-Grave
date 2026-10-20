@@ -92641,6 +92641,7 @@ entities:
     - type: Transform
       pos: -10.5,-12.5
       parent: 2
+    - type: Timer
   - uid: 14593
     components:
     - type: MetaData

@@ -44,9 +44,6 @@ namespace Content.Server.Chemistry.EntitySystems
         {
             if (!TryComp(entity.Owner, out SolutionContainerManagerComponent? contents)) return;
 
-            if (!entity.Comp.ReactedEntities.Add(args.OtherEntity)) // Goob check
-                return;
-
             foreach (var (_, soln) in _solutionContainerSystem.EnumerateSolutions((entity.Owner, contents)))
             {
                 var solution = soln.Comp.Solution;

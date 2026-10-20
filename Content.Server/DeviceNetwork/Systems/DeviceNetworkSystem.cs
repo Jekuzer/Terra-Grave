@@ -5,7 +5,6 @@ using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Buffers;
-using System.Linq; // Goob - Fix (list cleanup)
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
@@ -140,20 +139,20 @@ namespace Content.Server.DeviceNetwork.Systems
         /// </summary>
         private void OnNetworkShutdown(EntityUid uid, DeviceNetworkComponent component, ComponentShutdown args)
         {
-            foreach (var list in component.DeviceLists.ToArray()) // Goob - Fix (modified during enumeration)
+            foreach (var list in component.DeviceLists)
             {
                 // Goobstation - Fix device network sync with deleted objects
                 if (Deleted(list))
-                    continue;
+                    return;
 
                 _deviceLists.OnDeviceShutdown(list, (uid, component));
             }
 
-            foreach (var list in component.Configurators.ToArray()) // Goob - Fix (modified during enumeration)
+            foreach (var list in component.Configurators)
             {
                 // Goobstation - Fix device network sync with deleted objects
                 if (Deleted(list))
-                    continue;
+                    return;
 
                 _configurator.OnDeviceShutdown(list, (uid, component));
             }

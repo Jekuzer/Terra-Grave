@@ -1,11 +1,11 @@
-using Content.Goobstation.Shared.LightDetection.Components;
+﻿using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Shared.Alert;
 
 namespace Content.Goobstation.Shared.LightDetection.Systems;
 
-public abstract partial class SharedLightDetectionDamageSystem : EntitySystem
+public abstract class SharedLightDetectionDamageSystem : EntitySystem
 {
-    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {

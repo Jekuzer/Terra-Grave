@@ -3,16 +3,15 @@
 using Content.Goobstation.Common.CCVar; //Goobstation - Crawling
 using Content.Goobstation.Common.Projectiles;
 using Content.Shared._DV.Abilities;
-using Content.Shared.Damage.Components;
 using Content.Shared.Projectiles;
-using Content.Shared.Standing;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Standing;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Configuration; //Goobstation - Crawling
-using Robust.Shared.Physics.Events;
 
-namespace Content.Shared.Damage.Systems;
+namespace Content.Shared.Damage.Components;
 
 public sealed class RequireProjectileTargetSystem : EntitySystem
 {

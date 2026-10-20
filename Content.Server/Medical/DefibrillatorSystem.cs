@@ -11,8 +11,7 @@ using Content.Shared.PowerCell;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Chat; // Einstein Engines - Languages
 using Content.Shared.Chat;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;

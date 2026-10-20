@@ -32,7 +32,7 @@ using Content.Shared.Humanoid;
 namespace Content.Server.Materials;
 
 /// <inheritdoc/>
-public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSystem // Goob
+public sealed class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
@@ -195,7 +195,6 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
             _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
             if (component.ReclaimSolutions)
                 SpawnChemicalsFromComposition(uid, item, completion, false, component, xform);
-            GoobRaiseRecyclerGibbed(uid, item); // Goob
             _body.GibBody(item, true);
             _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
         }

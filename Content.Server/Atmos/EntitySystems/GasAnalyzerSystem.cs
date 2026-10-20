@@ -142,9 +142,6 @@ public sealed class GasAnalyzerSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return false;
 
-        if (component.Target is { } scanned && TerminatingOrDeleted(scanned)) // Goob - Fix (deleted scan target)
-            component.Target = null;
-
         // check if the user has walked away from what they scanned
         if (component.Target.HasValue)
         {

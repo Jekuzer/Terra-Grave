@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.AlmanacBlade;
 using Content.Goobstation.Shared.Emoting;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.EntitySystems;
@@ -15,8 +14,7 @@ namespace Content.Goobstation.Server.Emoting;
 
 public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 {
-    [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private AlmanacBladeSystem _almanac = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     private bool _flipDodgeEnabled = default!;
 
     public override void Initialize()
@@ -36,9 +34,6 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     {
         ent.Comp.Emote = prot;
         Dirty(ent);
-
-        if (prot == "Flip")
-            _almanac.RecordFlip();
 
         if ((prot == "Flip") && _flipDodgeEnabled)
             ApplyFlipEffects(ent);

@@ -19,7 +19,7 @@ public sealed partial class PaperVisualsComponent : Component
     ///     the PatchMargin in a <code>StyleBoxTexture</code>
     /// </summary>
     [DataField("backgroundPatchMargin")]
-    public Thickness BackgroundPatchMargin = default;
+    public Box2 BackgroundPatchMargin = default;
 
     /// <summary>
     ///     Modulate the background image by this color. Can be used to add colorful
@@ -56,7 +56,7 @@ public sealed partial class PaperVisualsComponent : Component
     ///     Any additional margin to add around the header
     /// </summary>
     [DataField("headerMargin")]
-    public Thickness HeaderMargin = default;
+    public Box2 HeaderMargin = default;
 
     /// <summary>
     /// A path to an image which will be used as a footer on the paper
@@ -74,7 +74,7 @@ public sealed partial class PaperVisualsComponent : Component
     /// Any additional margin to add around the footer
     /// </summary>
     [DataField]
-    public Thickness FooterMargin = default;
+    public Box2 FooterMargin = default;
 
     /// <summary>
     ///     Path to an image to use as the background to the "content" of the paper
@@ -95,7 +95,7 @@ public sealed partial class PaperVisualsComponent : Component
     ///     An additional margin around the content (including header)
     /// </summary>
     [DataField("contentMargin")]
-    public Thickness ContentMargin = default;
+    public Box2 ContentMargin = default;
 
     /// <summary>
     ///     The number of lines that the content image represents. The

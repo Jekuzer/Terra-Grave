@@ -8,9 +8,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
-public sealed partial class ButtonTag : IMarkupTagHandler
+public sealed class ButtonTag : IMarkupTagHandler
 {
-    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     public string Name => "button";
 

@@ -8,10 +8,10 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Server.Sprinting;
 
-public sealed partial class SprintingSystem : SharedSprintingSystem
+public sealed class SprintingSystem : SharedSprintingSystem
 {
 
-    [Dependency] private StunSystem _stunSystem = default!;
+    [Dependency] private readonly StunSystem _stunSystem = default!;
 
     public override void Initialize()
     {

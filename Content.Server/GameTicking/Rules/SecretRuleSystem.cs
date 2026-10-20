@@ -154,9 +154,6 @@ public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
         if (selected == null)
             return false;
 
-        if (GameTicker.IsPresetDisabled(selected))
-            return false;
-
         foreach (var ruleId in selected.Rules)
         {
             if (!_prototypeManager.TryIndex(ruleId, out EntityPrototype? rule)

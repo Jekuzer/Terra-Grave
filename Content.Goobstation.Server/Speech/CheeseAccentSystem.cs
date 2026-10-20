@@ -5,9 +5,9 @@ using Content.Shared.Speech;
 
 namespace Content.Goobstation.Server.Speech;
 
-public sealed partial class CheeseAccentSystem : EntitySystem
+public sealed class CheeseAccentSystem : EntitySystem
 {
-    [Dependency] private ReplacementAccentSystem _replacement = default!;
+    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {

@@ -45,7 +45,7 @@ public abstract partial class AutomationSlot
     [ViewVariables]
     public EntityUid Owner;
 
-    [Dependency] public IEntityManager EntMan = default!;
+    [Dependency] public readonly IEntityManager EntMan = default!;
     protected AutomationFilterSystem _filter;
     protected EntityWhitelistSystem _whitelist;
     protected SharedDeviceLinkSystem _device;

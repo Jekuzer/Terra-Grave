@@ -22,14 +22,15 @@ namespace Content.Goobstation.Client.CriminalRecords;
 [GenerateTypedNameReferences]
 public sealed partial class WantedMenu : FancyWindow
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
-    [Dependency] private IEntitySystemManager _entitySystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
     private readonly IPlayerManager _player;
     private readonly AccessReaderSystem _accessReader;
     private readonly IRobustRandom _random;
     private readonly SpriteSystem _spriteSystem;
 
-    private static readonly ProtoId<LocalizedDatasetPrototype> ReasonPlaceholders = "CriminalRecordsWantedReasonPlaceholders";
+    [ValidatePrototypeId<LocalizedDatasetPrototype>]
+    private const string ReasonPlaceholders = "CriminalRecordsWantedReasonPlaceholders";
 
     public Action<SecurityStatus>? OnStatusSelected;
     public Action<SecurityStatus, string>? OnDialogConfirmed;

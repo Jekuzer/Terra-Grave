@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
@@ -44,34 +42,35 @@ public sealed partial class BlockingSystem
 
     private void OnUserDamageModified(EntityUid uid, BlockingUserComponent component, DamageModifyEvent args)
     {
-        if (component.BlockingItem is not { } item || !TryComp<BlockingComponent>(item, out var blocking))
-            return;
-
-        if (args.Damage.GetTotal() <= 0)
-            return;
-
-        // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
-        if (!TryComp<DamageableComponent>(item, out var dmgComp))
-            return;
-
-        if (!_toggle.IsActivated(item)) // Goobstation
-            return;
-
-        var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
-        blockFraction = Math.Clamp(blockFraction, 0, 1);
-        _damageable.TryChangeDamage((item, dmgComp), blockFraction * args.OriginalDamage);
-
-        var modify = new DamageModifierSet();
-        foreach (var key in dmgComp.Damage.DamageDict.Keys)
+        if (TryComp<BlockingComponent>(component.BlockingItem, out var blocking))
         {
-            modify.Coefficients.TryAdd(key, 1 - blockFraction);
-        }
+            if (args.Damage.GetTotal() <= 0)
+                return;
 
-        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
+            // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
+            if (!TryComp<DamageableComponent>(component.BlockingItem, out var dmgComp))
+                return;
 
-        if (blocking.IsBlocking && !args.Damage.Equals(args.OriginalDamage))
-        {
-            _audio.PlayPvs(blocking.BlockSound, uid);
+            if (!_toggle.IsActivated(component.BlockingItem.Value)) // Goobstation
+                return;
+
+            var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
+            blockFraction = Math.Clamp(blockFraction, 0, 1);
+            _damageable.TryChangeDamage(component.BlockingItem,
+                blockFraction * args.OriginalDamage);
+
+            var modify = new DamageModifierSet();
+            foreach (var key in dmgComp.Damage.DamageDict.Keys)
+            {
+                modify.Coefficients.TryAdd(key, 1 - blockFraction);
+            }
+
+            args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
+
+            if (blocking.IsBlocking && !args.Damage.Equals(args.OriginalDamage))
+            {
+                _audio.PlayPvs(blocking.BlockSound, uid);
+            }
         }
     }
 

@@ -13,9 +13,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Blob.NPC.BlobPod;
 
-public abstract partial class SharedBlobPodSystem : EntitySystem
+public abstract class SharedBlobPodSystem : EntitySystem
 {
-    [Dependency] private MobStateSystem _mobs = default!;
+    [Dependency] private readonly MobStateSystem _mobs = default!;
 
 
     private EntityQuery<HumanoidAppearanceComponent> _query;

@@ -9,10 +9,10 @@ using Content.Server.Disposal.Unit;
 
 namespace Content.Goobstation.Server.Disposals;
 
-public sealed partial class DisposalSignalSystem : EntitySystem
+public sealed class DisposalSignalSystem : EntitySystem
 {
-    [Dependency] private DisposalUnitSystem _disposal = default!;
-    [Dependency] private PowerReceiverSystem _power = default!;
+    [Dependency] private readonly DisposalUnitSystem _disposal = default!;
+    [Dependency] private readonly PowerReceiverSystem _power = default!;
 
     public static readonly ProtoId<SinkPortPrototype> FlushPort = "DisposalFlush";
     public static readonly ProtoId<SinkPortPrototype> EjectPort = "DisposalEject";

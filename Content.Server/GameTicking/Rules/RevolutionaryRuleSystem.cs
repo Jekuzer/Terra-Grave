@@ -121,9 +121,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
                     var entity = ms.Item1.Owner;
 
                     // assign eotrs
-                    if (HasComp<RevolutionEnemyComponent>(entity)
-                        || HasComp<RevolutionaryComponent>(entity)
-                        || HasComp<HeadRevolutionaryComponent>(entity))
+                    if (HasComp<RevolutionEnemyComponent>(entity))
                         continue;
                     var revenemy = EnsureComp<RevolutionEnemyComponent>(entity);
                     _antag.SendBriefing(entity, Loc.GetString("rev-eotr-gain"), Color.Red, revenemy.RevStartSound);
@@ -209,8 +207,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         var convEv = new BeforeConversionEvent(ev.Target);
         RaiseLocalEvent(ev.Target, ref convEv, true);
 
-        if (convEv.Blocked || // Goob
-            HasComp<RevolutionaryComponent>(ev.Target) ||
+        if (HasComp<RevolutionaryComponent>(ev.Target) ||
             HasComp<MindShieldComponent>(ev.Target) ||
             !HasComp<HumanoidAppearanceComponent>(ev.Target) &&
             !alwaysConvertible ||

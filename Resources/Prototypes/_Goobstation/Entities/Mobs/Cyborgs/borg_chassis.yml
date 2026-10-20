@@ -150,6 +150,7 @@
     laws: SECborgLawset
   - type: ActionGrant
     actions:
+    - ActionViewLaws
     - ActionSECBorgSelfDestruct
   - type: ContainerFill
     containers:

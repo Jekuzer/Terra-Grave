@@ -8,13 +8,13 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Silicon.SecurityCyborg;
 
-public sealed partial class SecurityCyborgSystem : EntitySystem
+public sealed class SecurityCyborgSystem : EntitySystem
 {
-    [Dependency] private SharedContainerSystem _container = default!;
-    [Dependency] private ThrowingSystem _throwing = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedExplosionSystem _explosion = default!;
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedExplosionSystem _explosion = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {

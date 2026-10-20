@@ -32,8 +32,6 @@ public sealed class InteractHandEvent : HandledEntityEventArgs, ITargetedInterac
     /// </summary>
     public EntityUid Target { get; }
 
-    public bool InteractionParticle = true; // Goob
-
     public InteractHandEvent(EntityUid user, EntityUid target)
     {
         User = user;

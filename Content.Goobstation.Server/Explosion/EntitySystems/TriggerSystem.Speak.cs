@@ -11,10 +11,10 @@ using Robust.Server.Containers;
 
 namespace Content.Goobstation.Server.Explosion.EntitySystems;
 
-public sealed partial class TriggerOnSpeakSystem : EntitySystem
+public sealed class TriggerOnSpeakSystem : EntitySystem
 {
-    [Dependency] private TriggerSystem _triggerSystem = default!;
-    [Dependency] private ContainerSystem _containerSystem = default!;
+    [Dependency] private readonly TriggerSystem _triggerSystem = default!;
+    [Dependency] private readonly ContainerSystem _containerSystem = default!;
 
     public override void Initialize()
     {

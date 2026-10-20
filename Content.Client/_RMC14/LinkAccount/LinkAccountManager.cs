@@ -15,7 +15,6 @@ public sealed class LinkAccountManager : IPostInjectInit
     public bool Linked { get; private set; }
     public Color? GhostColor { get; private set; }
     public SharedRMCGhostCosmetics? GhostCosmetics { get; private set; } // Goob - ghost cosmetics
-    public string? OocIcon { get; private set; } // Goob - ooc icon selection
     public SharedRMCLobbyMessage? LobbyMessage { get; private set; }
     public SharedRMCRoundEndShoutouts? RoundEndShoutout { get; private set; }
 
@@ -33,7 +32,6 @@ public sealed class LinkAccountManager : IPostInjectInit
         Linked = ev.Patron?.Linked ?? false;
         GhostColor = ev.Patron?.GhostColor;
         GhostCosmetics = ev.Patron?.GhostCosmetics; // Goob - ghost cosmetics
-        OocIcon = ev.Patron?.OocIcon; // Goob - ooc icon selection
         LobbyMessage = ev.Patron?.LobbyMessage;
         RoundEndShoutout = ev.Patron?.RoundEndShoutout;
         Updated?.Invoke();
@@ -56,7 +54,6 @@ public sealed class LinkAccountManager : IPostInjectInit
                (tier.GhostColor ||
                 tier.GhostCosmetics || // Goob - ghost cosmetics
                 tier.GhostParticles || // Goob - ghost cosmetics
-                tier.OocIcons || // Goob - ooc icon selection
                 tier.LobbyMessage ||
                 tier.RoundEndShoutout);
     }

@@ -7,9 +7,9 @@ namespace Content.Goobstation.Server.Slasher.Objectives;
 /// <summary>
 /// Handles Slasher-specific objectives.
 /// </summary>
-public sealed partial class SlasherObjectiveSystem : EntitySystem
+public sealed class SlasherObjectiveSystem : EntitySystem
 {
-    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private readonly NumberObjectiveSystem _number = default!;
 
     public override void Initialize()
     {

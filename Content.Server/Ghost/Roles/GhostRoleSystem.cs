@@ -645,7 +645,7 @@ public sealed class GhostRoleSystem : EntitySystem
 
         foreach (var (id, (uid, role)) in _ghostRoles)
         {
-            if (metaQuery.CompOrNull(uid)?.EntityPaused != false)
+            if (metaQuery.GetComponent(uid).EntityPaused)
                 continue;
 
 

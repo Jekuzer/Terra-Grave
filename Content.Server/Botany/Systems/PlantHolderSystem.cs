@@ -35,7 +35,7 @@ using Content.Shared.Labels.Components;
 
 namespace Content.Server.Botany.Systems;
 
-public sealed partial class PlantHolderSystem : EntitySystem // Goob
+public sealed class PlantHolderSystem : EntitySystem
 {
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly BotanySystem _botany = default!;
@@ -729,7 +729,6 @@ public sealed partial class PlantHolderSystem : EntitySystem // Goob
             }
 
             _botany.Harvest(component.Seed, user, component.YieldMod);
-            GoobRaiseHarvested(plantholder, user); // Goob
             AfterHarvest(plantholder, component);
             return true;
         }

@@ -11,12 +11,12 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Server.PairedExtendable.Systems;
 
-public sealed partial class MantisBladesSystem : EntitySystem
+public sealed class MantisBladesSystem : EntitySystem
 {
-    [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private PairedExtendableSystem _pairedExtendable = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PairedExtendableSystem _pairedExtendable = default!;
     public override void Initialize()
     {
         base.Initialize();

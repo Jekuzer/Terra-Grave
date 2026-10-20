@@ -7,10 +7,10 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobObserverSystem : EntitySystem
+public abstract class SharedBlobObserverSystem : EntitySystem
 {
-    [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

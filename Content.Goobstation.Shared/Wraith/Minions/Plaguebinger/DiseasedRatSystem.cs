@@ -7,9 +7,9 @@ namespace Content.Goobstation.Shared.Wraith.Minions.Plaguebringer;
 /// <summary>
 /// This handles the system for the diseased rat evolving into its bigger stages.
 /// </summary>
-public abstract partial class SharedDiseasedRatSystem : EntitySystem
+public abstract class SharedDiseasedRatSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

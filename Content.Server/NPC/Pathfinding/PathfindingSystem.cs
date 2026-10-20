@@ -93,7 +93,6 @@ namespace Content.Server.NPC.Pathfinding
             _xformQuery = GetEntityQuery<TransformComponent>();
 
             _playerManager.PlayerStatusChanged += OnPlayerChange;
-            InitializeGoob(); // Goobstation
             InitializeGrid();
             SubscribeNetworkEvent<RequestPathfindingDebugMessage>(OnBreadcrumbs);
         }
@@ -109,9 +108,6 @@ namespace Content.Server.NPC.Pathfinding
         public override void Update(float frameTime)
         {
             base.Update(frameTime);
-            if (_disabled) // Goobstation
-                return;
-
             var options = new ParallelOptions()
             {
                 MaxDegreeOfParallelism = _parallel.ParallelProcessCount,

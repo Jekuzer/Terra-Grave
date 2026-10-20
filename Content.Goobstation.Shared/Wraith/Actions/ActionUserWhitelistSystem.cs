@@ -4,10 +4,10 @@ using Content.Shared.Whitelist;
 
 namespace Content.Goobstation.Shared.Wraith.Actions;
 
-public sealed partial class ActionUserWhitelistSystem : EntitySystem
+public sealed class ActionUserWhitelistSystem : EntitySystem
 {
-    [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     
     public override void Initialize()
     {

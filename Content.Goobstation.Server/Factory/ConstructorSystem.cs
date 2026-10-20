@@ -8,10 +8,10 @@ using Robust.Shared.Maths;
 
 namespace Content.Goobstation.Server.Factory;
 
-public sealed partial class ConstructorSystem : SharedConstructorSystem
+public sealed class ConstructorSystem : SharedConstructorSystem
 {
-    [Dependency] private ConstructionSystem _construction = default!;
-    [Dependency] private StartableMachineSystem _machine = default!;
+    [Dependency] private readonly ConstructionSystem _construction = default!;
+    [Dependency] private readonly StartableMachineSystem _machine = default!;
 
     private EntityQuery<ActiveDoAfterComponent> _activeQuery;
 

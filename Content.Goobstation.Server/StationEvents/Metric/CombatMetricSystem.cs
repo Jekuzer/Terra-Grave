@@ -16,7 +16,6 @@ using Content.Shared.Roles;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 using Prometheus;
-using Content.Shared.Damage.Components;
 
 namespace Content.Goobstation.Server.StationEvents.Metric;
 
@@ -34,12 +33,12 @@ namespace Content.Goobstation.Server.StationEvents.Metric;
 ///   Death: 20 per dead body,
 ///   Medical: 10 for crit + 0.05 * damage (so 5 for 100 damage),
 /// </summary>
-public sealed partial class CombatMetricSystem : ChaosMetricSystem<CombatMetricComponent>
+public sealed class CombatMetricSystem : ChaosMetricSystem<CombatMetricComponent>
 {
-    [Dependency] private SharedRoleSystem _roles = default!;
-    [Dependency] private StationSystem _stationSystem = default!;
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
     public readonly string NanotrasenFactionId = "NanoTrasen";
 
     private static readonly Gauge HostileEntitiesTotal = Metrics.CreateGauge(

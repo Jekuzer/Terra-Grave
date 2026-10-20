@@ -12,12 +12,12 @@ using Robust.Shared.Network;
 
 namespace Content.Goobstation.Server.Actions;
 
-public sealed partial class TimeTransferPanelEui : BaseEui
+public sealed class TimeTransferPanelEui : BaseEui
 {
-    [Dependency] private IAdminManager _adminMan = default!;
-    [Dependency] private ILogManager _log = default!;
-    [Dependency] private IPlayerLocator _playerLocator = default!;
-    [Dependency] private IServerDbManager _databaseMan = default!;
+    [Dependency] private readonly IAdminManager _adminMan = default!;
+    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
+    [Dependency] private readonly IServerDbManager _databaseMan = default!;
 
     private readonly ISawmill _sawmill;
 

@@ -7,9 +7,9 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Server.Antag.MaintsSpawn;
 
-public sealed partial class MaintsSpawnRule : StationEventSystem<MaintsSpawnRuleComponent>
+public sealed class MaintsSpawnRule : StationEventSystem<MaintsSpawnRuleComponent>
 {
-    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

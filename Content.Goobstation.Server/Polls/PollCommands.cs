@@ -7,9 +7,9 @@ using Robust.Shared.Console;
 namespace Content.Goobstation.Server.Polls;
 
 [AdminCommand(AdminFlags.Polls)]
-public sealed partial class CreatePollCommand : LocalizedEntityCommands
+public sealed class CreatePollCommand : LocalizedEntityCommands
 {
-    [Dependency] private PollManager _pollManager = default!;
+    [Dependency] private readonly PollManager _pollManager = default!;
 
     public override string Command => "createpoll";
     public override string Description => "Creates a new poll that players can vote on.";
@@ -77,9 +77,9 @@ public sealed partial class CreatePollCommand : LocalizedEntityCommands
 }
 
 [AdminCommand(AdminFlags.Polls)]
-public sealed partial class ClosePollCommand : LocalizedEntityCommands
+public sealed class ClosePollCommand : LocalizedEntityCommands
 {
-    [Dependency] private PollManager _pollManager = default!;
+    [Dependency] private readonly PollManager _pollManager = default!;
 
     public override string Command => "closepoll";
     public override string Description => "Closes an active poll.";
@@ -119,9 +119,9 @@ public sealed partial class ClosePollCommand : LocalizedEntityCommands
 }
 
 [AnyCommand]
-public sealed partial class ListPollsCommand : LocalizedEntityCommands
+public sealed class ListPollsCommand : LocalizedEntityCommands
 {
-    [Dependency] private PollManager _pollManager = default!;
+    [Dependency] private readonly PollManager _pollManager = default!;
 
     public override string Command => "listpolls";
     public override string Description => "Lists all active polls.";
@@ -151,9 +151,9 @@ public sealed partial class ListPollsCommand : LocalizedEntityCommands
 }
 
 [AnyCommand]
-public sealed partial class PollInfoCommand : LocalizedEntityCommands
+public sealed class PollInfoCommand : LocalizedEntityCommands
 {
-    [Dependency] private PollManager _pollManager = default!;
+    [Dependency] private readonly PollManager _pollManager = default!;
 
     public override string Command => "pollinfo";
     public override string Description => "Shows detailed information about a specific poll.";

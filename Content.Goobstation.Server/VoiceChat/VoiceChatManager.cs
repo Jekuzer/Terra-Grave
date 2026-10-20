@@ -16,19 +16,17 @@ using Robust.Shared.Network;
 
 namespace Content.Goobstation.Server.VoiceChat;
 
-public readonly record struct VoiceWebState(string Name, bool InGame, bool CanSpeak, bool Muted, bool PushToTalk, bool Broadcasting, bool VoiceChanger, string? Radio, bool Lobby = false, bool SelfMuted = false);
+public readonly record struct VoiceWebState(string Name, bool InGame, bool CanSpeak, bool Muted, bool PushToTalk, bool Broadcasting, bool VoiceChanger, string? Radio);
 
-public sealed partial class VoiceChatManager
+public sealed class VoiceChatManager
 {
-    [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IServerNetManager _net = default!;
-    [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private IStatusHost _statusHost = default!;
-    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IServerNetManager _net = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IStatusHost _statusHost = default!;
+    [Dependency] private readonly ILogManager _logManager = default!;
 
     private const string PagePath = "/voice";
-    private const string CodeAlphabet = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-    private const int CodeLength = 8;
     private const string ConfigPlaceholder = "/*VOICE_CONFIG*/";
 
     private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
@@ -38,7 +36,6 @@ public sealed partial class VoiceChatManager
     private readonly HashSet<NetUserId> _hearSelf = new();
     private readonly HashSet<NetUserId> _notReceiving = new();
     private readonly Dictionary<NetUserId, HashSet<string>> _mutedChannels = new();
-    private readonly Dictionary<NetUserId, HashSet<ushort>> _mutedSpeakers = new();
     private readonly Dictionary<string, (byte[] Data, string ContentType)> _files = new();
 
     private ISawmill _sawmill = default!;
@@ -47,9 +44,6 @@ public sealed partial class VoiceChatManager
     private volatile bool _enabled;
     private volatile string _webSocketUrl = string.Empty;
     private volatile int _webSocketPort;
-
-    public event Action<NetUserId, bool, bool>? PushToTalkReceived;
-    public event Action<NetUserId, bool>? MicMuteReceived;
 
     public void Initialize()
     {
@@ -62,8 +56,6 @@ public sealed partial class VoiceChatManager
         _net.RegisterNetMessage<MsgVoiceStatus>();
         _net.RegisterNetMessage<MsgVoiceSpeakerInfo>();
         _net.RegisterNetMessage<MsgVoiceSelf>();
-        _net.RegisterNetMessage<MsgVoicePushToTalk>(message => PushToTalkReceived?.Invoke(message.MsgChannel.UserId, message.Pressed, message.Radio));
-        _net.RegisterNetMessage<MsgVoiceMicMute>(message => MicMuteReceived?.Invoke(message.MsgChannel.UserId, message.Muted));
         _net.Disconnect += OnDisconnect;
 
         LoadWebFiles();
@@ -112,11 +104,6 @@ public sealed partial class VoiceChatManager
         return _mutedChannels.TryGetValue(user, out var muted) && muted.Contains(channel);
     }
 
-    public bool IsSpeakerMuted(NetUserId listener, ushort speaker)
-    {
-        return _mutedSpeakers.TryGetValue(listener, out var muted) && muted.Contains(speaker);
-    }
-
     public void SendState(NetUserId user, VoiceWebState state)
     {
         _server?.Send(user, JsonSerializer.Serialize(new
@@ -127,11 +114,9 @@ public sealed partial class VoiceChatManager
             canSpeak = state.CanSpeak,
             muted = state.Muted,
             pushToTalk = state.PushToTalk,
-            selfMuted = state.SelfMuted,
             broadcasting = state.Broadcasting,
             voiceChanger = state.VoiceChanger,
             radio = state.Radio,
-            lobby = state.Lobby,
         }, JsonOptions));
     }
 
@@ -223,38 +208,7 @@ public sealed partial class VoiceChatManager
 
     private NetUserId? ValidateToken(string token)
     {
-        return _tokens.TryGetValue(NormalizeCode(token), out var user) ? user : null;
-    }
-
-    private static string NormalizeCode(string code)
-    {
-        var builder = new StringBuilder(CodeLength);
-        foreach (var character in code)
-        {
-            if (char.IsAsciiLetterOrDigit(character))
-                builder.Append(char.ToUpperInvariant(character));
-
-            if (builder.Length > CodeLength)
-                break;
-        }
-
-        return builder.ToString();
-    }
-
-    private string CreateCode()
-    {
-        while (true)
-        {
-            var characters = new char[CodeLength];
-            for (var i = 0; i < CodeLength; i++)
-            {
-                characters[i] = CodeAlphabet[RandomNumberGenerator.GetInt32(CodeAlphabet.Length)];
-            }
-
-            var code = new string(characters);
-            if (!_tokens.ContainsKey(code))
-                return code;
-        }
+        return _tokens.TryGetValue(token, out var user) ? user : null;
     }
 
     private void OnLinkRequest(MsgVoiceLinkRequest message)
@@ -263,12 +217,16 @@ public sealed partial class VoiceChatManager
             return;
 
         var user = message.MsgChannel.UserId;
-        if (!_userTokens.TryGetValue(user, out var token))
-        {
-            token = CreateCode();
-            _tokens[token] = user;
-            _userTokens[user] = token;
-        }
+        if (_userTokens.Remove(user, out var previous))
+            _tokens.TryRemove(previous, out _);
+
+        var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(24))
+            .TrimEnd('=')
+            .Replace('+', '-')
+            .Replace('/', '_');
+
+        _tokens[token] = user;
+        _userTokens[user] = token;
 
         _net.ServerSendMessage(new MsgVoiceLink
         {
@@ -297,25 +255,14 @@ public sealed partial class VoiceChatManager
         else
             _mutedChannels[user] = new HashSet<string>(message.MutedChannels);
 
-        if (message.MutedSpeakers.Count == 0)
-            _mutedSpeakers.Remove(user);
-        else
-            _mutedSpeakers[user] = new HashSet<ushort>(message.MutedSpeakers);
-
         SendStatus(message.MsgChannel);
     }
 
     private void OnDisconnect(object? sender, NetDisconnectedArgs args)
     {
-        if (_userTokens.Remove(args.Channel.UserId, out var code))
-            _tokens.TryRemove(code, out _);
-
-        _server?.Disconnect(args.Channel.UserId);
-
         _hearSelf.Remove(args.Channel.UserId);
         _notReceiving.Remove(args.Channel.UserId);
         _mutedChannels.Remove(args.Channel.UserId);
-        _mutedSpeakers.Remove(args.Channel.UserId);
     }
 
     private string GetPublicUrl()
@@ -435,7 +382,7 @@ public sealed partial class VoiceChatManager
 
         if (path.Length == PagePath.Length)
         {
-            context.ResponseHeaders["Location"] = "voice/" + context.Url.Query;
+            context.ResponseHeaders["Location"] = "voice/";
             await context.RespondAsync(string.Empty, HttpStatusCode.MovedPermanently);
             return true;
         }

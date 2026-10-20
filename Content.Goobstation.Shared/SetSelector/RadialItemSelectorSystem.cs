@@ -6,10 +6,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.SetSelector;
 
-public sealed partial class RadialItemSelectorSystem : EntitySystem
+public sealed class RadialItemSelectorSystem : EntitySystem
 {
-    [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

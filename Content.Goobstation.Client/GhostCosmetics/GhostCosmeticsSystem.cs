@@ -5,11 +5,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.GhostCosmetics;
 
-public sealed partial class GhostCosmeticsSystem : EntitySystem
+public sealed class GhostCosmeticsSystem : EntitySystem
 {
-    [Dependency] private ParticleSystem _particles = default!;
-    [Dependency] private IPrototypeManager _prototypes = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private readonly ParticleSystem _particles = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private readonly Dictionary<EntityUid, (ProtoId<GhostCosmeticPrototype> Cosmetic, ActiveEmitter Emitter)> _emitters = new();
 

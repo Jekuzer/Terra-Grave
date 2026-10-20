@@ -16,7 +16,6 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects.Effects.Solution;
 using Content.Shared.Fluids;
 using Content.Shared.Forensics.Components;
@@ -102,14 +101,15 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
                     // bloodloss damage is based on the base value, and modified by how low your blood level is.
                     var amt = bloodstream.BloodlossDamage / (0.1f + bloodPercentage);
 
-                    // Goob start
+                    // Goobstation start
                     var multiplierEv = new GetBloodlossDamageMultiplierEvent();
                     RaiseLocalEvent(uid, multiplierEv);
                     amt *= multiplierEv.Multiplier;
-                    // Goob end
 
-                    _damageableSystem.TryChangeDamage(uid, amt, ignoreResistances: false, interruptsDoAfters: false,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.All); // Goob - shitmed edit
+                    _damageableSystem.TryChangeDamage(uid, amt,
+                        ignoreResistances: false, interruptsDoAfters: false,
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.All);
+                    // Goobstation end
 
                     // Apply dizziness as a symptom of bloodloss.
                     // The effect is applied in a way that it will never be cleared without being healthy.

@@ -4,7 +4,7 @@ using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Roles;
 using Content.Shared.Storage;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.GameTicking.Rules.Components;
 
@@ -42,6 +42,6 @@ public sealed partial class DeathMatchRuleComponent : Component
     /// <summary>
     /// The gear all players spawn with.
     /// </summary>
-    [DataField("gear"), ViewVariables(VVAccess.ReadWrite)]
-    public ProtoId<StartingGearPrototype> Gear = "DeathMatchGear";
+    [DataField("gear", customTypeSerializer: typeof(PrototypeIdSerializer<StartingGearPrototype>)), ViewVariables(VVAccess.ReadWrite)]
+    public string Gear = "DeathMatchGear";
 }

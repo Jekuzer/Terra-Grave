@@ -11,8 +11,6 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Emp;
 using Robust.Shared.Prototypes;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Damage.Components;
 
 namespace Content.Server._Shitmed.Cybernetics;
 
@@ -49,7 +47,7 @@ internal sealed class CyberneticsSystem : EntitySystem
                 {
                     var shock = new DamageSpecifier(_prototypes.Index<DamageTypePrototype>("Shock"), 30);
                     var targetPart = _body.GetTargetBodyPart(part);
-                    _damageable.ChangeDamage((part.Body.Value, damageable), shock, ignoreResistances: true, targetPart: targetPart);
+                    _damageable.TryChangeDamage(part.Body.Value, shock, ignoreResistances: true, targetPart: targetPart, damageable: damageable);
                     Dirty(cyberEnt, damageable);
                 }
             }

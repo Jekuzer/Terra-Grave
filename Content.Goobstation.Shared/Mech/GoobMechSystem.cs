@@ -6,9 +6,9 @@ using Content.Shared.NPC.Systems;
 
 namespace Content.Goobstation.Shared.Mech;
 
-public sealed partial class SharedMechSystem : EntitySystem
+public sealed class SharedMechSystem : EntitySystem
 {
-    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
 
     public override void Initialize()
     {

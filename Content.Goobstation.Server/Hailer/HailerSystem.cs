@@ -13,13 +13,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Hailer;
 
-public sealed partial class HailerSystem : EntitySystem
+public sealed class HailerSystem : EntitySystem
 {
-    [Dependency] private SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     public override void Initialize()
     {
         base.Initialize();

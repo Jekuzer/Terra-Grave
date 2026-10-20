@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract partial class SharedBlobCarrierSystem : EntitySystem
+public abstract class SharedBlobCarrierSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _gameTiming = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Update(float frameTime)
     {

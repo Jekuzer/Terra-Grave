@@ -12,9 +12,9 @@ using Robust.Shared.Prototypes;
 namespace Content.Goobstation.Server.Xenobiology.Systems;
 
 // Any Polymorphing etc needing to run serverside
-public sealed partial class XenobiologyTransformingSystem : EntitySystem
+public sealed class XenobiologyTransformingSystem : EntitySystem
 {
-    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
 
     public override void Initialize()
     {

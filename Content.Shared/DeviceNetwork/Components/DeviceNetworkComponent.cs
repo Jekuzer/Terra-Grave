@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.DeviceNetwork.Components
 {
@@ -36,8 +35,8 @@ namespace Content.Shared.DeviceNetwork.Components
         ///     frequency prototype. Used to select a default frequency to listen to on. Used when the map is
         ///     initialized.
         /// </summary>
-        [DataField("receiveFrequencyId")]
-        public ProtoId<DeviceFrequencyPrototype>? ReceiveFrequencyId;
+        [DataField("receiveFrequencyId", customTypeSerializer: typeof(PrototypeIdSerializer<DeviceFrequencyPrototype>))]
+        public string? ReceiveFrequencyId;
 
         /// <summary>
         ///     The frequency that this device going to try transmit on.
@@ -50,8 +49,8 @@ namespace Content.Shared.DeviceNetwork.Components
         ///     frequency prototype. Used to select a default frequency to transmit on. Used when the map is
         ///     initialized.
         /// </summary>
-        [DataField("transmitFrequencyId")]
-        public ProtoId<DeviceFrequencyPrototype>? TransmitFrequencyId;
+        [DataField("transmitFrequencyId", customTypeSerializer: typeof(PrototypeIdSerializer<DeviceFrequencyPrototype>))]
+        public string? TransmitFrequencyId;
 
         /// <summary>
         ///     The address of the device, either on the network it is currently connected to or whatever address it

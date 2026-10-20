@@ -13,9 +13,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.MisandryBox.Appender;
 
-public sealed partial class AccountAppenderSystem : EntitySystem
+public sealed class AccountAppenderSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
 
     FrozenDictionary<string, AccountAppendPrototype> _protoIds = default!;
 

@@ -83,5 +83,5 @@ public sealed partial class StepTriggerActiveComponent : Component
 [RegisterComponent]
 public sealed partial class StepTriggerCleanupComponent : Component
 {
-    public HashSet<EntityUid> StepTriggers = new();
+    public EntityUid StepTrigger;
 }

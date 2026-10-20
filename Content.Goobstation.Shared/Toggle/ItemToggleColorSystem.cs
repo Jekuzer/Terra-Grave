@@ -5,9 +5,9 @@ using Content.Shared.Toggleable;
 
 namespace Content.Goobstation.Shared.Toggle;
 
-public sealed partial class ItemToggleColorSystem : EntitySystem
+public sealed class ItemToggleColorSystem : EntitySystem
 {
-    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

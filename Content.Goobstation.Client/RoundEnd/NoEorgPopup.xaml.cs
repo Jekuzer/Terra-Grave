@@ -12,7 +12,7 @@ namespace Content.Goobstation.Client.RoundEnd;
 [GenerateTypedNameReferences]
 public sealed partial class NoEorgPopup : FancyWindow
 {
-    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private float _remainingTime;
 
@@ -53,14 +53,6 @@ public sealed partial class NoEorgPopup : FancyWindow
     private void OnClosePressed(BaseButton.ButtonEventArgs args)
     {
         Close();
-    }
-
-    public override void Close()
-    {
-        if (_remainingTime > 0f)
-            return;
-
-        base.Close();
     }
 
     private void UpdateCloseButtonText()

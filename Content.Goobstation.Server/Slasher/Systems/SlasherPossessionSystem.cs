@@ -8,11 +8,11 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Server.Slasher.Systems;
 
-public sealed partial class SlasherPossessionSystem : EntitySystem
+public sealed class SlasherPossessionSystem : EntitySystem
 {
-    [Dependency] private ActionsSystem _actions = default!;
-    [Dependency] private PossessionSystem _possession = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private readonly PossessionSystem _possession = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

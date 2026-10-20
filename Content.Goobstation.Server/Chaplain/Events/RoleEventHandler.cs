@@ -5,9 +5,9 @@ using Content.Goobstation.Server.Chaplain.Components;
 
 namespace Content.Goobstation.Server.Chaplain.Events;
 
-public sealed partial class RoleEventHandler : EntitySystem
+public sealed class RoleEventHandler : EntitySystem
 {
-    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
 
     public override void Initialize()
     {

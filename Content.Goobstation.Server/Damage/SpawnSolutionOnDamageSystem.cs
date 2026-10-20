@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Damage;
 
 public sealed partial class SpawnSolutionOnDamageSystem : EntitySystem
 {
-    [Dependency] private IRobustRandom _random = null!;
+    [Dependency] private readonly IRobustRandom _random = null!;
      public override void Initialize()
     {
         SubscribeLocalEvent<SpawnSolutionOnDamageComponent, BeforeDamageChangedEvent>(OnTakeDamage);

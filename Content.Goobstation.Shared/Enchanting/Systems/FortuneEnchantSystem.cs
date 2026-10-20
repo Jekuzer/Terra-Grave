@@ -9,9 +9,9 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Handles events for <see cref="FortuneEnchantComponent"/>.
 /// </summary>
-public sealed partial class FortuneEnchantSystem : EntitySystem
+public sealed class FortuneEnchantSystem : EntitySystem
 {
-    [Dependency] private EnchantingSystem _enchanting = default!;
+    [Dependency] private readonly EnchantingSystem _enchanting = default!;
 
     private EntityQuery<OreVeinComponent> _oreQuery;
 

@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Eye;
 
-public sealed partial class EyeLerpingSystem : EntitySystem // Goob
+public sealed class EyeLerpingSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -201,7 +201,7 @@ public sealed partial class EyeLerpingSystem : EntitySystem // Goob
 
             if (!NeedsLerp(mover))
             {
-                _eye.SetRotation(entity, lerpInfo.TargetRotation + GetShakeRotation(entity), eye); // Goob
+                _eye.SetRotation(entity, lerpInfo.TargetRotation, eye);
                 continue;
             }
 
@@ -209,11 +209,11 @@ public sealed partial class EyeLerpingSystem : EntitySystem // Goob
 
             if (Math.Abs(shortest.Theta) < lerpMinimum)
             {
-                _eye.SetRotation(entity, lerpInfo.TargetRotation + GetShakeRotation(entity), eye); // Goob
+                _eye.SetRotation(entity, lerpInfo.TargetRotation, eye);
                 continue;
             }
 
-            _eye.SetRotation(entity, shortest * tickFraction + lerpInfo.LastRotation + GetShakeRotation(entity), eye); // Goob
+            _eye.SetRotation(entity, shortest * tickFraction + lerpInfo.LastRotation, eye);
         }
     }
 }

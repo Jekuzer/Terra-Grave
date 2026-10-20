@@ -31,27 +31,23 @@ public sealed partial class AdminLogManager
     // TODO ADMIN LOGS cache previous {MaxRoundsCached} rounds on startup
     public void CacheNewRound()
     {
-        // Goob - Fix (thread-safe log cache)
-        lock (_roundsLogCache)
+        List<SharedAdminLog>? list = null;
+
+        _roundsLogCacheQueue.Enqueue(_currentRoundId);
+        if (_roundsLogCacheQueue.Count > MaxRoundsCached)
         {
-            List<SharedAdminLog>? list = null;
-
-            _roundsLogCacheQueue.Enqueue(_currentRoundId);
-            if (_roundsLogCacheQueue.Count > MaxRoundsCached)
+            var oldestRound = _roundsLogCacheQueue.Dequeue();
+            if (_roundsLogCache.Remove(oldestRound, out var oldestList))
             {
-                var oldestRound = _roundsLogCacheQueue.Dequeue();
-                if (_roundsLogCache.Remove(oldestRound, out var oldestList))
-                {
-                    list = oldestList;
-                    list.Clear();
-                }
+                list = oldestList;
+                list.Clear();
             }
-
-            list ??= new List<SharedAdminLog>(LogListInitialSize);
-
-            _roundsLogCache.Add(_currentRoundId, list);
-            CacheRoundCount.Set(_roundsLogCache.Count);
         }
+
+        list ??= new List<SharedAdminLog>(LogListInitialSize);
+
+        _roundsLogCache.Add(_currentRoundId, list);
+        CacheRoundCount.Set(_roundsLogCache.Count);
     }
 
     private void CacheLog(AdminLog log)
@@ -65,24 +61,16 @@ public sealed partial class AdminLogManager
     private void CacheLog(SharedAdminLog log)
     {
         // TODO ADMIN LOGS remove redundant data and don't do a dictionary lookup per log
-        // Goob - Fix (thread-safe log cache)
-        lock (_roundsLogCache)
-        {
-            var cache = _roundsLogCache[_currentRoundId];
-            cache.Add(log);
-            CacheLogCount.Set(cache.Count);
-        }
+        var cache = _roundsLogCache[_currentRoundId];
+        cache.Add(log);
+        CacheLogCount.Set(cache.Count);
     }
 
     private void CacheLogs(IEnumerable<SharedAdminLog> logs)
     {
-        // Goob - Fix (thread-safe log cache)
-        lock (_roundsLogCache)
-        {
-            var cache = _roundsLogCache[_currentRoundId];
-            cache.AddRange(logs);
-            CacheLogCount.Set(cache.Count);
-        }
+        var cache = _roundsLogCache[_currentRoundId];
+        cache.AddRange(logs);
+        CacheLogCount.Set(cache.Count);
     }
 
     private bool TryGetCache(int roundId, [NotNullWhen(true)] out List<SharedAdminLog>? cache)
@@ -92,17 +80,10 @@ public sealed partial class AdminLogManager
 
     private bool TrySearchCache(LogFilter? filter, [NotNullWhen(true)] out List<SharedAdminLog>? results)
     {
-        // Goob - Fix (search cache snapshot)
-        SharedAdminLog[] cache;
-        lock (_roundsLogCache)
+        if (filter?.Round == null || !TryGetCache(filter.Round.Value, out var cache))
         {
-            if (filter?.Round == null || !TryGetCache(filter.Round.Value, out var cached))
-            {
-                results = null;
-                return false;
-            }
-
-            cache = cached.ToArray();
+            results = null;
+            return false;
         }
 
         // TODO ADMIN LOGS a better heuristic than linq spaghetti

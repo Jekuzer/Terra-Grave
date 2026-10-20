@@ -7,9 +7,9 @@ using Content.Shared.Guardian;
 
 namespace Content.Goobstation.Server.Guardian
 {
-    public sealed partial class GoobGuardianSystem : EntitySystem
+    public sealed class GoobGuardianSystem : EntitySystem
     {
-        [Dependency] private GuardianSystem _guardian = default!;
+        [Dependency] private readonly GuardianSystem _guardian = default!;
 
         public override void Initialize()
         {

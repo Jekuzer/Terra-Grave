@@ -3,8 +3,6 @@
 using Content.Shared._Shitcode.Heretic.Components;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Standing;
@@ -106,10 +104,11 @@ public abstract class SharedRustChargeSystem : EntitySystem
         {
             _stun.KnockdownOrStun(other, ent.Comp.KnockdownTime, true);
 
-            _damageable.ChangeDamage(other,
+            _damageable.TryChangeDamage(other,
                 ent.Comp.Damage,
                 false,
                 true,
+                damageable,
                 targetPart: TargetBodyPart.Chest);
 
             return;

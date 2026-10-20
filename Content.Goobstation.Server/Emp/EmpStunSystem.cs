@@ -8,9 +8,9 @@ using Content.Shared.Stunnable;
 
 namespace Content.Goobstation.Server.Emp;
 
-public sealed partial class EmpStunSystem : EntitySystem
+public sealed class EmpStunSystem : EntitySystem
 {
-    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

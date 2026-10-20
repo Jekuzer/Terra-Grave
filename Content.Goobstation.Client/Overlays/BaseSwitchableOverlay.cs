@@ -8,10 +8,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Overlays;
 
-public sealed partial class BaseSwitchableOverlay<TComp> : Overlay where TComp : SwitchableVisionOverlayComponent
+public sealed class BaseSwitchableOverlay<TComp> : Overlay where TComp : SwitchableVisionOverlayComponent
 {
-    [Dependency] private IEyeManager _eyeManager = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IEyeManager _eyeManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

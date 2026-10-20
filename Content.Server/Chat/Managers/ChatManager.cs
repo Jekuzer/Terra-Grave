@@ -281,21 +281,20 @@ internal sealed partial class ChatManager : IChatManager
         }
         // RMC - Heavily modified for patreon.
         if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
-            _linkAccount.GetPatron(player)?.Tier != null) // Goob
+            _linkAccount.GetPatron(player)?.Tier is { } tier)
         {
-            var patronColor = colorOverride?.ToHex() ?? "#aa00ff"; // Goob - admin ooc color overrides patron color
-            if (_linkAccount.GetOocIcon(player.UserId) is { } oocIcon) // Goob
+            if (tier.Icon != null)
             {
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message",
-                    ("tierIcon", oocIcon), // Goob
-                    ("patronColor", patronColor), // Goob
+                    ("tierIcon", tier.Icon),
+                    ("patronColor", "#aa00ff"),
                     ("playerName", player.Name),
                     ("message", FormattedMessage.EscapeText(message)));
             }
             else
             {
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message-no-icon",
-                    ("patronColor", patronColor), // Goob
+                    ("patronColor", "#aa00ff"),
                     ("playerName", player.Name),
                     ("message", FormattedMessage.EscapeText(message)));
             }

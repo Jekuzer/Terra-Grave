@@ -10,13 +10,13 @@ namespace Content.Goobstation.Shared.Wraith.WraithPoints;
 /// <summary>
 /// This handles the Wraith Points.
 /// </summary>
-public sealed partial class WraithPointsSystem : EntitySystem
+public sealed class WraithPointsSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private SharedPopupSystem _popupSystem = default!;
-    [Dependency] private AlertsSystem _alerts = default!;
-    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private  readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
 
     public override void Initialize()
     {

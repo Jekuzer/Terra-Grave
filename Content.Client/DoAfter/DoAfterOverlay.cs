@@ -14,7 +14,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Client.DoAfter;
 
-public sealed partial class DoAfterOverlay : Overlay // Goob
+public sealed class DoAfterOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
 
@@ -124,11 +124,9 @@ public sealed partial class DoAfterOverlay : Overlay // Goob
                     alpha = 0.5f;
                 }
 
-                alpha = GetDoAfterAlpha(time - doAfter.StartTime, doAfter.Args.Delay, alpha); // Goob
-
                 // Use the sprite itself if we know its bounds. This means short or tall sprites don't get overlapped
                 // by the bar.
-                var yOffset = GetDoAfterYOffset(time - doAfter.StartTime, _sprite.GetLocalBounds((uid, sprite)).Height); // Goob
+                var yOffset = _sprite.GetLocalBounds((uid, sprite)).Height / 2f + 0.05f;
 
                 // Position above the entity (we've already applied the matrix transform to the entity itself)
                 // Offset by the texture size for every do_after we have.
@@ -136,7 +134,7 @@ public sealed partial class DoAfterOverlay : Overlay // Goob
                     yOffset / scale + offset / EyeManager.PixelsPerMeter * scale);
 
                 // Draw the underlying bar texture
-                handle.DrawTexture(_barTexture, position, Color.White.WithAlpha(alpha)); // Goob
+                handle.DrawTexture(_barTexture, position);
 
                 Color color;
                 float elapsedRatio;
@@ -160,7 +158,7 @@ public sealed partial class DoAfterOverlay : Overlay // Goob
                 var xProgress = (EndX - StartX) * elapsedRatio + StartX;
                 var box = new Box2(new Vector2(StartX, 3f) / EyeManager.PixelsPerMeter, new Vector2(xProgress, 4f) / EyeManager.PixelsPerMeter);
                 box = box.Translated(position);
-                handle.DrawRect(box, ApplyOverrideAlpha(doAfter.Args.ColorOverride, color)); // Goob edit
+                handle.DrawRect(box, doAfter.Args.ColorOverride ?? color); // Goob edit
                 offset += _barTexture.Height / scale;
             }
         }

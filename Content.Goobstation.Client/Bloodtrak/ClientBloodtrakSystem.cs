@@ -7,9 +7,9 @@ using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Bloodtrak;
 
-public sealed partial class ClientBloodtrakSystem : SharedBloodtrakSystem
+public sealed class ClientBloodtrakSystem : SharedBloodtrakSystem
 {
-    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private readonly IEyeManager _eyeManager = default!;
 
     public override void Update(float frameTime)
     {

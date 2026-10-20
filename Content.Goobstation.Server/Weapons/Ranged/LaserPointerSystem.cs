@@ -7,9 +7,9 @@ using Robust.Server.GameStates;
 
 namespace Content.Goobstation.Server.Weapons.Ranged;
 
-public sealed partial class LaserPointerSystem : SharedLaserPointerSystem
+public sealed class LaserPointerSystem : SharedLaserPointerSystem
 {
-    [Dependency] private PvsOverrideSystem _override = default!;
+    [Dependency] private readonly PvsOverrideSystem _override = default!;
 
     protected override void PvsOverride(EntityUid entity)
     {

@@ -35,15 +35,6 @@ public sealed partial class MegafaunaSystem
     {
         var targetingComp = CompOrNull<MegafaunaAiTargetingComponent>(boss);
 
-        if (targetingComp != null)
-        {
-            if (targetingComp.TargetEnt is { } targetEnt && TerminatingOrDeleted(targetEnt))
-                targetingComp.TargetEnt = null;
-
-            if (targetingComp.TargetCoords is { } targetCoords && TerminatingOrDeleted(targetCoords.EntityId))
-                targetingComp.TargetCoords = null;
-        }
-
         var netAction = GetNetEntity(action);
         var netTarget = HasComp<EntityTargetActionComponent>(action) ? GetNetEntity(targetingComp?.TargetEnt) : null;
         var netCoords = HasComp<WorldTargetActionComponent>(action) ? GetNetCoordinates(targetingComp?.TargetCoords) : null;

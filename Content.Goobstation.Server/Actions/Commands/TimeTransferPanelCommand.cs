@@ -8,9 +8,9 @@ using Robust.Shared.Console;
 namespace Content.Goobstation.Server.Actions.Commands;
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed partial class TimeTransferPanelCommand : LocalizedCommands
+public sealed class TimeTransferPanelCommand : LocalizedCommands
 {
-    [Dependency] private EuiManager _euis = default!;
+    [Dependency] private readonly EuiManager _euis = default!;
 
     public override string Command => "timetransferpanel";
 

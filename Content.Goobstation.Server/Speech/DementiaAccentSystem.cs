@@ -7,10 +7,10 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Speech;
 
-public sealed partial class DementiaAccentSystem : EntitySystem
+public sealed class DementiaAccentSystem : EntitySystem
 {
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private ReplacementAccentSystem _replacement = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {

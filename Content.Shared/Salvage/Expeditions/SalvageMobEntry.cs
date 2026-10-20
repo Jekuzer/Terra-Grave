@@ -2,6 +2,7 @@
 
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Salvage.Expeditions;
 
@@ -20,6 +21,6 @@ public partial record struct SalvageMobEntry() : IBudgetEntry
     [ViewVariables(VVAccess.ReadWrite), DataField("prob")]
     public float Prob { get; set; } = 1f;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("proto", required: true)]
-    public EntProtoId Proto { get; set; } = string.Empty;
+    [ViewVariables(VVAccess.ReadWrite), DataField("proto", required: true, customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+    public string Proto { get; set; } = string.Empty;
 }

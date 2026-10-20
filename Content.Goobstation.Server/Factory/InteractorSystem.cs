@@ -6,9 +6,9 @@ using Content.Shared.Timing;
 
 namespace Content.Goobstation.Server.Factory;
 
-public sealed partial class InteractorSystem : SharedInteractorSystem
+public sealed class InteractorSystem : SharedInteractorSystem
 {
-    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private EntityQuery<ConstructionComponent> _constructionQuery;
     private EntityQuery<UseDelayComponent> _useDelayQuery;

@@ -8,9 +8,7 @@ using Content.Shared.Alert;
 using Content.Shared.Body.Systems;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Drunk;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Mobs;
@@ -22,16 +20,16 @@ using System.Linq;
 
 namespace Content.Goobstation.Shared.SpecialPassives.BoostedImmunity;
 
-public abstract partial class SharedBoostedImmunitySystem : EntitySystem
+public abstract class SharedBoostedImmunitySystem : EntitySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private AlertsSystem _alerts = default!;
-    [Dependency] private BlindableSystem _blindSys = default!;
-    [Dependency] private DamageableSystem _dmg = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodSys = default!;
-    [Dependency] private SharedDrunkSystem _drunkSys = default!;
-    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly BlindableSystem _blindSys = default!;
+    [Dependency] private readonly DamageableSystem _dmg = default!;
+    [Dependency] private readonly SharedBloodstreamSystem _bloodSys = default!;
+    [Dependency] private readonly SharedDrunkSystem _drunkSys = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
@@ -163,7 +161,7 @@ public abstract partial class SharedBoostedImmunitySystem : EntitySystem
         healSpec.DamageDict.Add("Cellular", ent.Comp.CellularHeal);
 
         // heal the damage
-        _dmg.TryChangeDamage(ent.Owner, healSpec, true, false, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAllOrganic);
+        _dmg.TryChangeDamage(ent, healSpec, true, false, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAllOrganic);
         HealEyes(ent);
     }
 

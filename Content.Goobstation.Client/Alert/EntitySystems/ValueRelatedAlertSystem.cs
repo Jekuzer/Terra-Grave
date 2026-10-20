@@ -5,9 +5,9 @@ using Content.Goobstation.Shared.Alert.Events;
 using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Alert.EntitySystems;
-public sealed partial class ValueRelatedAlertSystem : EntitySystem
+public sealed class ValueRelatedAlertSystem : EntitySystem
 {
-    [Dependency] private SpriteSystem _spriteSystem = default!;
+    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
 
     public override void Initialize()
     {

@@ -23,7 +23,6 @@ using Robust.Shared.Random;
 
 // Goobstation
 using Content.Shared.Destructible;
-using Content.Shared.Random.Helpers;
 
 namespace Content.Shared.Body.Systems;
 
@@ -1109,9 +1108,7 @@ public partial class SharedBodySystem
             return attackerComp.Target;
 
         var totalWeight = targetComp.TargetOdds[attackerComp.Target].Values.Sum();
-        // i think this is the way to do predicted random
-        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(target));
-        var randomValue = random.NextFloat() * totalWeight;
+        var randomValue = _random.NextFloat() * totalWeight;
 
         foreach (var (part, weight) in targetComp.TargetOdds[attackerComp.Target])
         {
@@ -1135,10 +1132,7 @@ public partial class SharedBodySystem
             return targetPart;
 
         var totalWeight = targetComp.TargetOdds[targetPart].Values.Sum();
-
-        // i think this is the way to do predicted random
-        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(target));
-        var randomValue = random.NextFloat() * totalWeight;
+        var randomValue = _random.NextFloat() * totalWeight;
 
         foreach (var (part, weight) in targetComp.TargetOdds[targetPart])
         {
@@ -1156,10 +1150,7 @@ public partial class SharedBodySystem
         if (children.Count == 0)
             return TargetBodyPart.Chest;
 
-        // i think this is the way to do predicted random
-        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(target));
-
-        return GetTargetBodyPart(random.PickAndTake(children));
+        return GetTargetBodyPart(_random.PickAndTake(children));
     }
 
     public TargetBodyPart GetRandomBodyPart(EntityUid target,

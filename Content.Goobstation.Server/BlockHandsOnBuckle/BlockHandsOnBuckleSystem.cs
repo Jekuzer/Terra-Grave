@@ -11,12 +11,12 @@ using Content.Shared.Inventory;
 using Content.Shared.Interaction.Events;
 
 namespace Content.Goobstation.Server.BlockHandsOnBuckle;
-public sealed partial class BlockHandsOnBuckleSystem : EntitySystem
+public sealed class BlockHandsOnBuckleSystem : EntitySystem
 {
 
-    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private SharedHandsSystem _handsSystem = default!;
-    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+    [Dependency] private readonly InventorySystem _inventorySystem = default!;
     public override void Initialize()
     {
         base.Initialize();

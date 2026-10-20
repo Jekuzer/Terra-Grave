@@ -10,10 +10,10 @@ namespace Content.Goobstation.Client.Particles;
 /// <summary>
 /// Draws all live particles for every active emitter each frame.
 /// </summary>
-public sealed partial class ParticleOverlay : Overlay
+public sealed class ParticleOverlay : Overlay
 {
-    [Dependency] private IEyeManager _eye = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private readonly ParticleSystem _system;
     private readonly Dictionary<string, ShaderInstance?> _shaderCache = new();

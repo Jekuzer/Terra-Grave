@@ -13,10 +13,10 @@ namespace Content.Goobstation.Client.Xenobiology;
 /// <summary>
 /// This handles visual changes in slimes between breeds.
 /// </summary>
-public sealed partial class XenoSlimeVisualizerSystem : VisualizerSystem<SlimeComponent>
+public sealed class XenoSlimeVisualizerSystem : VisualizerSystem<SlimeComponent>
 {
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     protected override void OnAppearanceChange(EntityUid uid, SlimeComponent component, ref AppearanceChangeEvent args)
     {
@@ -35,5 +35,7 @@ public sealed partial class XenoSlimeVisualizerSystem : VisualizerSystem<SlimeCo
         if (!layerExists)
             return;
         spriteComp.LayerSetShader(layerKey, newShader);
+        spriteComp.GetScreenTexture = true;
+        spriteComp.RaiseShaderEvent = true;
     }
 }

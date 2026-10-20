@@ -11,11 +11,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Loudspeaker.Systems;
 
-public sealed partial class LoudSpeakerSystem : EntitySystem
+public sealed class LoudSpeakerSystem : EntitySystem
 {
 
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -98,7 +98,6 @@ public sealed partial class LoudSpeakerSystem : EntitySystem
             if (speechEv.SpeechSounds != null)
             {
                 args.SpeechSoundProtoId = speechEv.SpeechSounds;
-                args.Handled = true;
                 return;
             }
 

@@ -12,7 +12,7 @@ namespace Content.Goobstation.Client.TapeRecorder.UI;
 [GenerateTypedNameReferences]
 public sealed partial class TapeRecorderWindow : FancyWindow
 {
-    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     public EntityUid Owner;
     private bool _onCooldown;

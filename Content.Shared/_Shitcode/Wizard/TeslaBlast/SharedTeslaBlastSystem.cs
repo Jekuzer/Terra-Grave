@@ -136,43 +136,31 @@ public abstract class SharedTeslaBlastSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed partial class TeslaBlastDoAfterEvent : DoAfterEvent
+public sealed partial class TeslaBlastDoAfterEvent(
+    TimeSpan delay,
+    float range,
+    int boltCount,
+    int arcDepth,
+    Vector2 damage,
+    Vector2 stunTime,
+    string lightningPrototype,
+    NetEntity action) : DoAfterEvent
 {
-    public TimeSpan Delay;
+    public TimeSpan Delay = delay;
 
-    public float Range;
+    public float Range = range;
 
-    public int BoltCount;
+    public int BoltCount = boltCount;
 
-    public int ArcDepth;
+    public int ArcDepth = arcDepth;
 
-    public Vector2 MinMaxDamage;
+    public Vector2 MinMaxDamage = damage;
 
-    public Vector2 MinMaxStunTime;
+    public Vector2 MinMaxStunTime = stunTime;
 
-    public string LightningPrototype;
+    public string LightningPrototype = lightningPrototype;
 
-    public NetEntity Action;
-
-    public TeslaBlastDoAfterEvent(
-        TimeSpan delay,
-        float range,
-        int boltCount,
-        int arcDepth,
-        Vector2 damage,
-        Vector2 stunTime,
-        string lightningPrototype,
-        NetEntity action)
-    {
-        Delay = delay;
-        Range = range;
-        BoltCount = boltCount;
-        ArcDepth = arcDepth;
-        MinMaxDamage = damage;
-        MinMaxStunTime = stunTime;
-        LightningPrototype = lightningPrototype;
-        Action = action;
-    }
+    public NetEntity Action = action;
 
     public TeslaBlastDoAfterEvent() : this(TimeSpan.FromSeconds(10),
         7f,

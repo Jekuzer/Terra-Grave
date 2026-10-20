@@ -7,9 +7,9 @@ using Content.Shared.Body.Part;
 
 namespace Content.Goobstation.Shared.Traits.Assorted;
 
-public sealed partial class LegsStartParalyzedSystem : EntitySystem
+public sealed class LegsStartParalyzedSystem : EntitySystem
 {
-    [Dependency] private EntityManager _entMan = default!;
+    [Dependency] private readonly EntityManager _entMan = default!;
 
     public override void Initialize()
     {

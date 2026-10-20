@@ -774,7 +774,6 @@
     - type: MiningPointsLathe # DeltaV
     - type: MaterialStorageMagnetPickup # Frontier
     - type: OreSiloClient
-    - type: AlmanacOreCounter # Goobstation
 
 - type: entity
   parent: OreProcessor

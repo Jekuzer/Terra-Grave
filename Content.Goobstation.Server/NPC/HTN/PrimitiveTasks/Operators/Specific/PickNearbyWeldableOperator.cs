@@ -8,7 +8,6 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Repairable;
@@ -19,8 +18,8 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PickNearbyWeldableOperator : HTNOperator
 {
-    [Dependency] private IEntityManager _entManager = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     private EntityLookupSystem _lookup = default!;
     private WeldbotSystem _weldbot = default!;
     private PathfindingSystem _pathfinding = default!;

@@ -9,6 +9,7 @@
       - sprite: _Goobstation/Mobs/Xenos/drone.rsi
         state: drone
       - state: ai
+    - type: Timer
     - type: TimedSpawner
       prototypes:
       - CMMobXenoDrone

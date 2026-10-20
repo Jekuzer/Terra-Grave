@@ -8,10 +8,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Sprinting;
 
-public sealed partial class SprintingSystem : SharedSprintingSystem
+public sealed class SprintingSystem : SharedSprintingSystem
 {
-    [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private static readonly Animation InitialAnimation = new()
     {

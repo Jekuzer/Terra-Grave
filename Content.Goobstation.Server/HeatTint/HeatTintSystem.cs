@@ -6,9 +6,9 @@ using Content.Shared.Temperature.Components;
 
 namespace Content.Goobstation.Server.HeatTint;
 
-public sealed partial class HeatTintSystem : SharedHeatTintSystem
+public sealed class HeatTintSystem : SharedHeatTintSystem
 {
-    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

@@ -7,9 +7,9 @@ namespace Content.Goobstation.Shared.Wraith.Other;
 /// <summary>
 /// Disables actions for the entity
 /// </summary>
-public sealed partial class WraithWeakenedSystem : EntitySystem
+public sealed class WraithWeakenedSystem : EntitySystem
 {
-    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

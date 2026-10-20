@@ -465,34 +465,23 @@ public partial class SharedBodySystem
         return gibs;
     }
 
-    /// <summary>
-    /// [Woundmed]
-    /// Behavior for burning a part away.
-    /// If is root will destroy whole body lol
-    /// </summary>
-    public virtual EntityUid? TryBurnPart(Entity<BodyPartComponent> part,
-        bool destroyWholeIfRoot = true)
+    public virtual bool BurnPart(EntityUid partId,
+        BodyPartComponent? part = null)
     {
-        if (part.Comp.Body is not { } bodyUid)
-            return null;
+        if (!Resolve(partId, ref part, logMissing: false))
+            return false;
 
-        // TODO reminder: remember if rootpart is deleted that breaks everything rn btw
-        // so basically todo fix destroyWholeIfRoot = false
-        if (IsPartRoot(bodyUid, part) && destroyWholeIfRoot)
+        if (part.Body is { } bodyEnt)
         {
-            foreach (var item in _inventory.GetHandOrInventoryEntities(bodyUid))
-            {
-                SharedTransform.DropNextTo(item, bodyUid); // kill yourself
-            }
-            QueueDel(bodyUid);
-            return bodyUid;
+            if (IsPartRoot(bodyEnt, partId, part: part))
+                return false;
+
+            DropSlotContents((partId, part));
+            QueueDel(partId);
+            return true;
         }
-        else
-        {
-            DropSlotContents(part);
-            QueueDel(part);
-            return part;
-        }
+
+        return false;
     }
 
     private void OnProfileLoadFinished(EntityUid uid, BodyComponent component, ProfileLoadFinishedEvent args)

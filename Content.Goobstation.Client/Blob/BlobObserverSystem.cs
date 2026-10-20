@@ -13,10 +13,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
+public sealed class BlobObserverSystem : SharedBlobObserverSystem
 {
-    [Dependency] private ILightManager _lightManager = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private readonly ILightManager _lightManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -33,7 +33,8 @@ public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
         SubscribeNetworkEvent<RoundRestartCleanupEvent>(RoundRestartCleanup);
     }
 
-    private static readonly ProtoId<FactionIconPrototype> BlobFaction = "BlobFaction";
+    [ValidatePrototypeId<FactionIconPrototype>]
+    private const string BlobFaction = "BlobFaction";
 
     private void OnShowBlobIcon<T>(Entity<T> ent, ref GetStatusIconsEvent args) where T : Component
     {

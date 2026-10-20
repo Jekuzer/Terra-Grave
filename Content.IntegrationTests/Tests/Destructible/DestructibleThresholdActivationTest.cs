@@ -5,10 +5,8 @@ using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds;
 using Content.Server.Destructible.Thresholds.Behaviors;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared.Damage.Systems;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Destructible.Thresholds.Triggers;
@@ -128,7 +126,7 @@ namespace Content.IntegrationTests.Tests.Destructible
                 Assert.That(sTestThresholdListenerSystem.ThresholdsReached, Is.Empty);
 
                 // Set damage to 0
-                sDamageableSystem.ClearAllDamage((sDestructibleEntity, sDamageableComponent));
+                sDamageableSystem.SetAllDamage(sDestructibleEntity, sDamageableComponent, 0);
 
                 // Damage for 100, up to 100
                 sDamageableSystem.TryChangeDamage(sDestructibleEntity, bluntDamage * 10, true);
@@ -189,7 +187,7 @@ namespace Content.IntegrationTests.Tests.Destructible
                 sTestThresholdListenerSystem.ThresholdsReached.Clear();
 
                 // Heal all damage
-                sDamageableSystem.ClearAllDamage((sDestructibleEntity, sDamageableComponent));
+                sDamageableSystem.SetAllDamage(sDestructibleEntity, sDamageableComponent, 0);
 
                 // Damage up to 50
                 sDamageableSystem.TryChangeDamage(sDestructibleEntity, bluntDamage * 5, true);
@@ -251,7 +249,7 @@ namespace Content.IntegrationTests.Tests.Destructible
                 sTestThresholdListenerSystem.ThresholdsReached.Clear();
 
                 // Heal the entity completely
-                sDamageableSystem.ClearAllDamage((sDestructibleEntity, sDamageableComponent));
+                sDamageableSystem.SetAllDamage(sDestructibleEntity, sDamageableComponent, 0);
 
                 // Check that the entity has 0 damage
                 Assert.That(sDamageableComponent.TotalDamage, Is.EqualTo(FixedPoint2.Zero));

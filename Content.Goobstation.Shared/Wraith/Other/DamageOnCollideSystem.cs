@@ -1,16 +1,15 @@
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Goobstation.Shared.Wraith.Other;
 
-public sealed partial class DamageOnCollideSystem : EntitySystem
+public sealed class DamageOnCollideSystem : EntitySystem
 {
-    [Dependency] private DamageableSystem _damageable  = default!;
-    [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private readonly DamageableSystem _damageable  = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

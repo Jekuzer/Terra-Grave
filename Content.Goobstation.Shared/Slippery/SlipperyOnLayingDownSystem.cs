@@ -11,10 +11,10 @@ namespace Content.Goobstation.Shared.Slippery;
 /// Slippery and StepTrigger when they're laying down.
 /// </summary>
 
-public sealed partial class SlipperyOnLayingDownSystem : EntitySystem
+public sealed class SlipperyOnLayingDownSystem : EntitySystem
 {
 
-    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     public override void Initialize()
     {
         base.Initialize();

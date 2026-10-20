@@ -5,9 +5,9 @@ using Content.Shared.Eye;
 
 namespace Content.Goobstation.Server.Chaplain;
 
-public sealed partial class SeeHereticFixturesSystem : EntitySystem
+public sealed class SeeHereticFixturesSystem : EntitySystem
 {
-    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
 
     private const int ChaplainVisFlags = (int) VisibilityFlags.EldritchInfluence;
 

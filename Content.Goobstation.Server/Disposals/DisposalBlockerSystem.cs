@@ -9,9 +9,9 @@ namespace Content.Goobstation.Server.Disposals;
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed partial class DisposalBlockerSystem : EntitySystem
+public sealed class DisposalBlockerSystem : EntitySystem
 {
-    [Dependency] private DisposalTubeSystem _disposalSystem = default!;
+    [Dependency] private readonly DisposalTubeSystem _disposalSystem = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

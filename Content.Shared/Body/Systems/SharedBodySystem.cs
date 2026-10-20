@@ -1,17 +1,6 @@
-
-// TRAVELERS BEWARE:
-// They are lying.
-// They are lying.
-// They are lying.
-// They are lying. 
-// They are lying.
-// They are lying.
-// They are lying.
-// They are lying.
-// too much of this is goob. who knows how much???
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Robust.Shared.Containers;
@@ -21,6 +10,7 @@ using Robust.Shared.Timing;
 // Shitmed Change
 using Content.Goobstation.Common.Body;
 using Content.Shared.Inventory;
+using Robust.Shared.Random;
 
 namespace Content.Shared.Body.Systems;
 
@@ -54,6 +44,7 @@ public abstract partial class SharedBodySystem : EntitySystem
     [Dependency] protected readonly StandingStateSystem Standing = default!;
     // <Shitmed>
     [Dependency] private readonly CommonInsideBodyPartSystem _insideBodyPart = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     // </Shitmed>
 

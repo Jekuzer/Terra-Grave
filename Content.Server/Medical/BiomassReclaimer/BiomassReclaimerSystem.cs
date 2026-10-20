@@ -179,7 +179,7 @@ namespace Content.Server.Medical.BiomassReclaimer
 
             if (storage != null)
                 foreach (var (item, _location) in storage.StoredItems)
-                    if (CanGib(reclaimer, item) && TryComp<PhysicsComponent>(item, out var itemPhysics))
+                    if (CanGib(reclaimer, item) && TryComp<PhysicsComponent>(args.Used, out var itemPhysics))
                         massToInsert += itemPhysics.FixturesMass;
 
             var delay = reclaimer.Comp.BaseInsertionDelay * massToInsert;
@@ -279,8 +279,7 @@ namespace Content.Server.Medical.BiomassReclaimer
             var component = ent.Comp;
 
             if (TryComp<BloodstreamComponent>(toProcess, out var stream) &&
-                _solution.ResolveSolution(toProcess, stream.BloodSolutionName, ref stream.BloodSolution, out var solution) &&
-                solution.Volume > 0)
+                _solution.ResolveSolution(toProcess, stream.BloodSolutionName, ref stream.BloodSolution, out var solution))
             {
                 component.BloodReagents = solution.Clone();
                 component.BloodReagents.ScaleSolution(50 / component.BloodReagents.Volume);

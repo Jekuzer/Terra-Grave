@@ -284,13 +284,12 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         if (TryComp<TemperatureComponent>(target, out var temp))
             bodyTemperature = temp.CurrentTemperature;
 
-        var bloodAmount = float.NaN; // Goobstation
+        var bloodAmount = _bloodstreamSystem.GetBloodLevel(target); // Goobstation
         var unrevivable = false;
         var bloodLow = false; // Goobstation
 
         if (TryComp<BloodstreamComponent>(target, out var bloodstream)) // Goobstation - Don't resolve twice
         {
-            bloodAmount = _bloodstreamSystem.GetBloodLevel((target, bloodstream)); // Goob - Fix (bloodless targets)
             bloodLow = bloodAmount < bloodstream.BloodlossThreshold; // Goobstation
         }
 
@@ -303,7 +302,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
 
             string msg = Loc.GetString(analyzerComp.SpeakerMessage,
                 ("damage", damageableComp.TotalDamage.ToString()),
-                ("bloodLevel", float.IsNaN(bloodAmount) ? "0" : $"{bloodAmount * 100:F1}") // Goob - Fix (bloodless targets)
+                ("bloodLevel", $"{bloodAmount * 100:F1}")
             );
 
             _chat.TrySendInGameICMessage(healthAnalyzer, msg, InGameICChatType.Speak, hideChat: true);
@@ -391,8 +390,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         {
             traumas.Add(GetNetEntity(woundable), FetchTraumaData(woundable, component));
             pain.Add(GetNetEntity(woundable), FetchPainData(woundable, component));
-            var part = _bodySystem.GetTargetBodyPart(woundable);
-            bleeding[part] = bleeding.GetValueOrDefault(part) || component.Bleeds > 0;
+            bleeding.Add(_bodySystem.GetTargetBodyPart(woundable), component.Bleeds > 0);
         }
     }
 
@@ -404,10 +402,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             return bleeding;
 
         foreach (var (woundable, component) in _woundSystem.GetAllWoundableChildren(rootPart))
-        {
-            var part = _bodySystem.GetTargetBodyPart(woundable);
-            bleeding[part] = bleeding.GetValueOrDefault(part) || component.Bleeds > 0;
-        }
+            bleeding.Add(_bodySystem.GetTargetBodyPart(woundable), component.Bleeds > 0);
 
         return bleeding;
     }

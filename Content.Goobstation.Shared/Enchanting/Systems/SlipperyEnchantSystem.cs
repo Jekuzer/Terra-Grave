@@ -6,9 +6,9 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Controls <see cref="SlipperyComponent"/> values with the enchant level.
 /// </summary>
-public sealed partial class SlipperyEnchantSystem : EntitySystem
+public sealed class SlipperyEnchantSystem : EntitySystem
 {
-    [Dependency] private EnchantingSystem _enchanting = default!;
+    [Dependency] private readonly EnchantingSystem _enchanting = default!;
 
     public override void Initialize()
     {

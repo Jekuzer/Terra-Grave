@@ -16,12 +16,12 @@ namespace Content.Goobstation.Server.Shadowling.Systems;
 /// <summary>
 /// This handles Thralls antag briefing and abilities
 /// </summary>
-public sealed partial class ShadowlingThrallSystem : EntitySystem
+public sealed class ShadowlingThrallSystem : EntitySystem
 {
-    [Dependency] private AntagSelectionSystem _antag = default!;
-    [Dependency] private MindSystem _mind = default!;
-    [Dependency] private RoleSystem _roles = default!;
-    [Dependency] private ShadowlingSystem _shadowling = default!;
+    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly RoleSystem _roles = default!;
+    [Dependency] private readonly ShadowlingSystem _shadowling = default!;
     public override void Initialize()
     {
         base.Initialize();

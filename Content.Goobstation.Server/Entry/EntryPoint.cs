@@ -11,7 +11,6 @@ namespace Content.Goobstation.Server.Entry;
 public sealed class EntryPoint : GameServer
 {
     private VoiceChatManager _voiceManager = default!;
-    private VoiceLogManager _voiceLogs = default!;
     private ICommonCurrencyManager _curr = default!;
     private IJoinQueueManager _joinQueue = default!;
 
@@ -25,9 +24,6 @@ public sealed class EntryPoint : GameServer
 
         _voiceManager = IoCManager.Resolve<VoiceChatManager>();
         _voiceManager.Initialize();
-
-        _voiceLogs = IoCManager.Resolve<VoiceLogManager>();
-        _voiceLogs.Initialize();
 
         _joinQueue = IoCManager.Resolve<IJoinQueueManager>();
         _joinQueue.Initialize();
@@ -54,6 +50,5 @@ public sealed class EntryPoint : GameServer
 
         _curr.Shutdown();
         _voiceManager.Shutdown();
-        _voiceLogs.Shutdown();
     }
 }

@@ -29,7 +29,6 @@ using Robust.Shared.Utility;
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
-    [Category("MapTests")]
     public sealed class PostMapInitTest
     {
         private const bool SkipTestMaps = true;
@@ -345,7 +344,7 @@ namespace Content.IntegrationTests.Tests
                 foreach (var yamlEntity in (YamlSequenceNode) yamlEntities)
                 {
                     var protoId = yamlEntity["proto"].AsString();
-                    protoManager.TryIndex(protoId, out var proto);
+                    protoManager.TryIndex(protoId, out var proto, false);
                     if (proto is null || proto.EditorSuffix is null)
                         continue;
                     if (proto.Categories.Contains(dnmCategory) && !DoNotMapWhitelist.Contains(map.ToString()))
@@ -474,7 +473,7 @@ namespace Content.IntegrationTests.Tests
             });
             var server = pair.Server;
 
-            var mapManager = server.System<SharedMapSystem>();
+            var mapManager = server.ResolveDependency<IMapManager>();
             var entManager = server.ResolveDependency<IEntityManager>();
             var mapLoader = entManager.System<MapLoaderSystem>();
             var mapSystem = entManager.System<SharedMapSystem>();

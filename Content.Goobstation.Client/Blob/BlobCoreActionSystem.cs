@@ -7,9 +7,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed partial class BlobCoreActionSystem : SharedBlobCoreActionSystem
+public sealed class BlobCoreActionSystem : SharedBlobCoreActionSystem
 {
-    [Dependency] private MeleeWeaponSystem _meleeWeaponSystem = default!;
+    [Dependency] private readonly MeleeWeaponSystem _meleeWeaponSystem = default!;
 
     public override void Initialize()
     {
@@ -18,7 +18,8 @@ public sealed partial class BlobCoreActionSystem : SharedBlobCoreActionSystem
         SubscribeNetworkEvent<BlobAttackEvent>(OnBlobAttack);
     }
 
-    private static readonly EntProtoId Animation = "WeaponArcPunch";
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string Animation = "WeaponArcPunch";
 
     private void OnBlobAttack(BlobAttackEvent ev)
     {

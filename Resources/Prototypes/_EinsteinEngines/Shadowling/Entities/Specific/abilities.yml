@@ -69,7 +69,6 @@
   - type: LightEaterUser
   - type: ShadowlingPlaneShift
   - type: Reflect
-    examinable: false
   - type: PressureImmunity
 
 - type: entity

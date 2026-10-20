@@ -9,6 +9,7 @@ using Content.Server.Hands.Systems;
 using Content.Server.Kitchen.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
@@ -41,12 +42,13 @@ using Robust.Shared.Timing;
 using Content.Shared.Stacks;
 using Content.Server.Construction.Components;
 using Content.Shared.Chat;
-using Content.Shared.Damage.Components;
+using Content.Shared.Damage;
 using Content.Shared.Temperature.Components;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
-    public sealed partial class MicrowaveSystem : EntitySystem // Goob
+    public sealed class MicrowaveSystem : EntitySystem
     {
         [Dependency] private readonly BodySystem _bodySystem = default!;
         [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
@@ -199,7 +201,7 @@ namespace Content.Server.Kitchen.EntitySystems
         {
             // TODO Turn recipe.IngredientsReagents into a ReagentQuantity[]
 
-            var totalReagentsToRemove = recipe.IngredientsReagents.ToDictionary(x => x.Key.Id, x => x.Value);
+            var totalReagentsToRemove = new Dictionary<string, FixedPoint2>(recipe.IngredientsReagents);
 
             // this is spaghetti ngl
             foreach (var item in component.Storage.ContainedEntities)
@@ -591,7 +593,6 @@ namespace Content.Server.Kitchen.EntitySystems
             activeComp.CookTimeRemaining = component.CurrentCookTimerTime * component.CookTimeMultiplier;
             activeComp.TotalTime = component.CurrentCookTimerTime; //this doesn't scale so that we can have the "actual" time
             activeComp.PortionedRecipe = portionedRecipe;
-            GoobRememberCook(uid, user); // Goob
             //Scale tiems with cook times
             component.CurrentCookTimeEnd = _gameTiming.CurTime + TimeSpan.FromSeconds(component.CurrentCookTimerTime * component.CookTimeMultiplier);
             if (malfunctioning)
@@ -679,8 +680,6 @@ namespace Content.Server.Kitchen.EntitySystems
                         SubtractContents(microwave, active.PortionedRecipe.Item1);
                         Spawn(active.PortionedRecipe.Item1.Result, coords);
                     }
-
-                    GoobRaiseCooked(uid, active.PortionedRecipe.Item2); // Goob
                 }
 
                 _container.EmptyContainer(microwave.Storage);

@@ -10,10 +10,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.SlaughterDemon;
 
-public sealed partial class BloodCrawlSystem : SharedBloodCrawlSystem
+public sealed class BloodCrawlSystem : SharedBloodCrawlSystem
 {
-    [Dependency] private PolymorphSystem _polymorph = default!;
-    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private readonly PolymorphSystem _polymorph = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
 
     private EntityQuery<PolymorphedEntityComponent> _polymorphedQuery;
 

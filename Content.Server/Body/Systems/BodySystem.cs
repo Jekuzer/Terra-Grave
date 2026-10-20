@@ -180,14 +180,14 @@ public sealed partial class BodySystem : SharedBodySystem // Shitmed change: mad
         return gibs;
     }
 
-    public override EntityUid? TryBurnPart(Entity<BodyPartComponent> part,
-        bool destroyWholeIfRoot = true)
+    public override bool BurnPart(EntityUid partId, BodyPartComponent? part = null)
     {
-        if (TerminatingOrDeleted(part)
-            || EntityManager.IsQueuedForDeletion(part))
-            return null;
+        if (!Resolve(partId, ref part, logMissing: false)
+            || TerminatingOrDeleted(partId)
+            || EntityManager.IsQueuedForDeletion(partId))
+            return false;
 
-        return base.TryBurnPart(part, destroyWholeIfRoot);
+        return base.BurnPart(partId, part);
     }
 
     protected override void ApplyPartMarkings(EntityUid target, BodyPartAppearanceComponent component)

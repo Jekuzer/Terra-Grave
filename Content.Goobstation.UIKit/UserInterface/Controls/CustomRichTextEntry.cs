@@ -405,14 +405,9 @@ public struct CustomRichTextEntry
 
         var boxPadding = (BoxPadding * uiScale);
 
-        var left = drawBox.Left + (margin - boxPadding) - sPixelWidth;
-        var right = drawBox.Right - (margin - boxPadding) - sPixelWidth;
-        var top = baseLineBase.Y - boxPadding;
-        var bottom = baseLine.Y - GetLineHeight(defaultFont, uiScale, lineHeightScale) + boxPadding;
-
         return new UIBox2(
-                new Vector2(MathF.Min(left, right), MathF.Min(top, bottom)),
-                new Vector2(MathF.Max(left, right), MathF.Max(top, bottom)));
+                new Vector2(drawBox.Left + (margin - boxPadding) - sPixelWidth, baseLineBase.Y - boxPadding),
+                new Vector2(drawBox.Right - (margin - boxPadding) - sPixelWidth, baseLine.Y - GetLineHeight(defaultFont, uiScale, lineHeightScale) + boxPadding));
     }
 
     private readonly string ProcessNode(MarkupTagManager tagManager, MarkupNode node, MarkupDrawingContext context)

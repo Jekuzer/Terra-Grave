@@ -46,12 +46,12 @@ public sealed class ToggleableGhostRoleSystem : EntitySystem
     // Goobstation
     private void OnActivateInWorld(EntityUid uid, ToggleableGhostRoleComponent component, ActivateInWorldEvent args)
     {
-        if (args.Handled || !args.Complex) // Goob - check complex
+        if (args.Handled)
             return;
 
         args.Handled = true;
 
-        TryActivate(uid, component, args.User); // Goob - TryActivate instead of ActivateGhostRole
+        ActivateGhostRole((uid, component));
     }
 
     public void ActivateGhostRole(Entity<ToggleableGhostRoleComponent?> ent)
@@ -110,7 +110,7 @@ public sealed class ToggleableGhostRoleSystem : EntitySystem
 
     private void AddWipeVerb(EntityUid uid, ToggleableGhostRoleComponent component, GetVerbsEvent<ActivationVerb> args)
     {
-        if (!args.CanAccess || !args.CanComplexInteract || !component.CanBeWiped) // Goobstation - replace hands check with CanComplexInteract, add wipe prevention
+        if (!args.CanAccess || !args.CanComplexInteract) // Goobstation - replace hands check with CanComplexInteract
             return;
 
         if (TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind)

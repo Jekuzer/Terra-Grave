@@ -39,9 +39,6 @@ public abstract partial class SharedGravitySystem
         if (!Resolve(uid, ref gravity, false))
             return;
 
-        if (TryScreenshakeGrid(uid)) // Goob
-            return;
-
         if (!TryComp<GravityShakeComponent>(uid, out var shake))
         {
             shake = AddComp<GravityShakeComponent>(uid);

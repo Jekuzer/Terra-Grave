@@ -117,9 +117,7 @@
     - Science
   - type: ZombieImmune
   - type: Repairable
-    damageValue: -10 # 10 seconds to repair from crit
-    doAfterDelay: 1
-    fuelCost: 0.5
+    doAfterDelay: 10
     # allowSelfRepair: false # Goobstation
   - type: BorgChassis
   - type: LockingWhitelist
@@ -241,7 +239,7 @@
       isLooped: true
   - type: PointLight
     enabled: false
-    lightMask: ConeSingle
+    mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
     radius: 4
     netsync: false
@@ -560,7 +558,7 @@
     - Xenoborg
     - Binary
   - type: Repairable
-    doAfterDelay: 10 # goob - reduced to fit new values
+    doAfterDelay: 13 # 25% more HP, so 30% more time to heal
   - type: BorgChassis
     maxModules: 0
     hasMindState: robot_e

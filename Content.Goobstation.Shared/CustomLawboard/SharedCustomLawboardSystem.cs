@@ -7,10 +7,10 @@ using System.Linq;
 
 namespace Content.Goobstation.Shared.CustomLawboard;
 
-public abstract partial class SharedCustomLawboardSystem : EntitySystem
+public abstract class SharedCustomLawboardSystem : EntitySystem
 {
-    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public static readonly int MaxLaws = 15;
     public static readonly int MaxLawLength = 512; // These 2 are random arbitrary numbers (These don't seem like they're worth making cvars for)

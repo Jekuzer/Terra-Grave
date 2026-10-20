@@ -7,10 +7,10 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Goobstation.Server.Wraith;
 
-public sealed partial class StatusEffectOnCollideGhostSystem : SharedStatusEffectOnCollideGhostSystem
+public sealed class StatusEffectOnCollideGhostSystem : SharedStatusEffectOnCollideGhostSystem
 {
-    [Dependency] private FixtureSystem _fixtures = default!;
-    [Dependency] private CollisionWakeSystem _collisionWake = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

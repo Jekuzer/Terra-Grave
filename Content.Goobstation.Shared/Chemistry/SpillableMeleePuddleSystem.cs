@@ -11,13 +11,14 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Chemistry;
 
-public sealed partial class SpillableMeleePuddleSystem : EntitySystem
+public sealed class SpillableMeleePuddleSystem : EntitySystem
 {
+    [Dependency] private readonly IMapManager _mapMan = default!;
 
-    [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private SharedPuddleSystem _puddle = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
 
     public override void Initialize()
     {
@@ -55,7 +56,7 @@ public sealed partial class SpillableMeleePuddleSystem : EntitySystem
 
         var splitSolution = _solution.SplitSolution(soln.Value, args.Amount);
 
-        if (!_map.TryFindGridAt(coords, out var gridUid, out var mapGrid))
+        if (!_mapMan.TryFindGridAt(coords, out var gridUid, out var mapGrid))
             return;
 
         var tileRef = _map.GetTileRef(gridUid, mapGrid, coords);

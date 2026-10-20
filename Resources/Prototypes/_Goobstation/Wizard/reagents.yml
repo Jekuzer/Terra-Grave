@@ -62,13 +62,14 @@
           - type: Wizard
           - type: Apprentice
           guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
-      - !type:EvenHealthChange
+      - !type:HealthChange
         damage:
-          Burn: -5
-          Toxin: -5
-          Airloss: -5
-          Brute: -5
-          Genetic: -5
+          groups:
+            Burn: -5
+            Toxin: -5
+            Airloss: -5
+            Brute: -5
+            Genetic: -5
         conditions:
         - !type:HasComponentCondition
           components:

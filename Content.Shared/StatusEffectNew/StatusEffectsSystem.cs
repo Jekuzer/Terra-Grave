@@ -78,16 +78,13 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
     private void ReloadStatusEffectsCache()
     {
-        // Goobstation
-        var prototypes = new HashSet<string>();
+        StatusEffectPrototypes.Clear();
 
         foreach (var ent in _proto.EnumeratePrototypes<EntityPrototype>())
         {
             if (ent.TryGetComponent<StatusEffectComponent>(out _, _factory))
-                prototypes.Add(ent.ID);
+                StatusEffectPrototypes.Add(ent.ID);
         }
-
-        StatusEffectPrototypes = prototypes;
     }
 
     private void OnStatusContainerInit(Entity<StatusEffectContainerComponent> ent, ref ComponentInit args)

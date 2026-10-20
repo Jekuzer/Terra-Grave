@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.MomentumSteering;
 
-public sealed partial class MomentumSteeringSystem : CommonMomentumSteeringSystem
+public sealed class MomentumSteeringSystem : CommonMomentumSteeringSystem
 {
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedJitteringSystem _jittering = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedJitteringSystem _jittering = default!;
 
     private EntityQuery<JetpackUserComponent> _jetpackUserQuery;
 

@@ -6,9 +6,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Slasher.Systems;
 
-public sealed partial class SpringlockVisualizerSystem : VisualizerSystem<SpringlockClothingComponent>
+public sealed class SpringlockVisualizerSystem : VisualizerSystem<SpringlockClothingComponent>
 {
-    [Dependency] private SharedItemSystem _itemSystem = default!;
+    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
 
     public override void Initialize()
     {

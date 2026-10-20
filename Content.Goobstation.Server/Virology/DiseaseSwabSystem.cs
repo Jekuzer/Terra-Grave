@@ -8,11 +8,11 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Virology;
 
-public sealed partial class DiseaseSwabSystem : EntitySystem
+public sealed class DiseaseSwabSystem : EntitySystem
 {
-    [Dependency] private SharedDiseaseSystem _disease = default!;
-    [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private readonly SharedDiseaseSystem _disease = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {

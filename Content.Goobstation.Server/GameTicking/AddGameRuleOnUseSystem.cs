@@ -10,10 +10,10 @@ namespace Content.Goobstation.Server.GameTicking;
 /// <summary>
 /// This system adds a gamerule once an entity uses an item.
 /// </summary>
-public sealed partial class AddGameRuleOnUseSystem : EntitySystem
+public sealed class AddGameRuleOnUseSystem : EntitySystem
 {
-    [Dependency] private GameTicker _gameTicker = default!;
-    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

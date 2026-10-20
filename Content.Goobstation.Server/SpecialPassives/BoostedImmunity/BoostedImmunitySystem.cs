@@ -10,11 +10,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.SpecialPassives.BoostedImmunity;
 
-public sealed partial class BoostedImmunitySystem : SharedBoostedImmunitySystem
+public sealed class BoostedImmunitySystem : SharedBoostedImmunitySystem
 {
-    [Dependency] private IPrototypeManager _protoManager = default!;
-    [Dependency] private BodySystem _body = default!;
-    [Dependency] private SharedDiseaseSystem _disease = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly SharedDiseaseSystem _disease = default!;
 
     private EntityQuery<XenomorphInfectionComponent> _xenoInfectQuery;
 

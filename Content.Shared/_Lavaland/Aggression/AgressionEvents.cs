@@ -7,6 +7,7 @@ namespace Content.Shared._Lavaland.Aggression;
 /// </summary>
 public sealed class AggressorAddedEvent(EntityUid aggressor) : EntityEventArgs
 {
+    [DataField]
     public EntityUid Aggressor = aggressor;
 }
 
@@ -15,6 +16,7 @@ public sealed class AggressorAddedEvent(EntityUid aggressor) : EntityEventArgs
 /// </summary>
 public sealed class AggressorRemovedEvent(EntityUid aggressor) : EntityEventArgs
 {
+    [DataField]
     public EntityUid Aggressor = aggressor;
 }
 
@@ -23,6 +25,7 @@ public sealed class AggressorRemovedEvent(EntityUid aggressor) : EntityEventArgs
 /// </summary>
 public sealed class AggressiveAddedEvent(EntityUid aggressive) : EntityEventArgs
 {
+    [DataField]
     public EntityUid Aggressive = aggressive;
 }
 
@@ -31,13 +34,6 @@ public sealed class AggressiveAddedEvent(EntityUid aggressive) : EntityEventArgs
 /// </summary>
 public sealed class AggressiveRemovedEvent(EntityUid aggressive) : EntityEventArgs
 {
+    [DataField]
     public EntityUid Aggressive = aggressive;
-}
-
-/// <summary>
-/// Raised on the entity with AggressiveComponent when it dies, before its aggressors are cleared.
-/// </summary>
-public sealed class AggressiveKilledEvent(List<EntityUid> aggressors) : EntityEventArgs
-{
-    public readonly List<EntityUid> Aggressors = aggressors;
 }

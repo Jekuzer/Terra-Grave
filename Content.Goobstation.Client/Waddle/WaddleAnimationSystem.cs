@@ -9,9 +9,9 @@ using Robust.Shared.Animations;
 
 namespace Content.Goobstation.Client.Waddle;
 
-public sealed partial class WaddleAnimationSystem : SharedWaddleAnimationSystem
+public sealed class WaddleAnimationSystem : SharedWaddleAnimationSystem
 {
-    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
 
     public override void Initialize()
     {

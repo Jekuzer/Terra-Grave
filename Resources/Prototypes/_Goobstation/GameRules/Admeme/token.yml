@@ -335,7 +335,7 @@
       - type: SlasherStaggerArea
       - type: SlasherRelentlessGrab
       - type: SlasherRegenerate
-      - type: SlasherFear
+      - type: SlasherBloodTrail
       - type: SlasherIncorporeal
       - type: SlasherSoulSteal
       - type: SlasherSummonMeatSpike

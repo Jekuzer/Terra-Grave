@@ -27,7 +27,7 @@ using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Content.Server.Database
 {
-    public partial interface IServerDbManager // Goob
+    public interface IServerDbManager
     {
         void Init();
 
@@ -321,9 +321,15 @@ namespace Content.Server.Database
         // Goob start
         Task SetGhostCosmetics(Guid player, string? particles, string? hat, string? mask);
 
-        Task SetOocIcon(Guid player, string? icon);
+        Task<List<RMCPatronTier>> GetPatronTiers();
 
-        Task SyncPatronTiers(List<RMCPatronTier> tiers);
+        Task<int> AddPatronTier(RMCPatronTier tier);
+
+        Task<bool> UpdatePatronTier(RMCPatronTier tier);
+
+        Task<int> CountPatronsInTier(int tierId);
+
+        Task<bool> DeletePatronTier(int tierId);
 
         Task<bool> SetPatron(Guid player, int? tierId);
         // Goob end
@@ -332,9 +338,9 @@ namespace Content.Server.Database
 
         Task SetNTShoutout(Guid player, string name);
 
-        Task<List<(string Message, string User, int TierId)>> GetLobbyMessages(); // Goob - tier perks from prototypes
+        Task<List<(string, string)>> GetLobbyMessages();
 
-        Task<List<(string Name, int TierId)>> GetShoutouts(); // Goob - tier perks from prototypes
+        Task<List<string>> GetShoutouts();
 
         #endregion
 
@@ -412,7 +418,7 @@ namespace Content.Server.Database
         public string? Payload { get; set; }
     }
 
-    public sealed partial class ServerDbManager : IServerDbManager // Goob
+    public sealed class ServerDbManager : IServerDbManager
     {
         public static readonly Counter DbReadOpsMetric = Metrics.CreateCounter(
             "db_read_ops",
@@ -1084,16 +1090,34 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.SetGhostCosmetics(player, particles, hat, mask));
         }
 
-        public Task SetOocIcon(Guid player, string? icon)
+        public Task<List<RMCPatronTier>> GetPatronTiers()
         {
-            DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.SetOocIcon(player, icon));
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPatronTiers());
         }
 
-        public Task SyncPatronTiers(List<RMCPatronTier> tiers)
+        public Task<int> AddPatronTier(RMCPatronTier tier)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.SyncPatronTiers(tiers));
+            return RunDbCommand(() => _db.AddPatronTier(tier));
+        }
+
+        public Task<bool> UpdatePatronTier(RMCPatronTier tier)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdatePatronTier(tier));
+        }
+
+        public Task<int> CountPatronsInTier(int tierId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.CountPatronsInTier(tierId));
+        }
+
+        public Task<bool> DeletePatronTier(int tierId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeletePatronTier(tierId));
         }
 
         public Task<bool> SetPatron(Guid player, int? tierId)
@@ -1115,13 +1139,13 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.SetNTShoutout(player, name));
         }
 
-        public Task<List<(string Message, string User, int TierId)>> GetLobbyMessages() // Goob - tier perks from prototypes
+        public Task<List<(string, string)>> GetLobbyMessages()
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetLobbyMessages());
         }
 
-        public Task<List<(string Name, int TierId)>> GetShoutouts() // Goob - tier perks from prototypes
+        public Task<List<string>> GetShoutouts()
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetShoutouts());

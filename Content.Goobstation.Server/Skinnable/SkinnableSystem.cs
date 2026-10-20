@@ -5,7 +5,6 @@ using Content.Server.DoAfter;
 using Content.Server.Kitchen.Components;
 using Content.Server.Popups;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
@@ -17,10 +16,10 @@ namespace Content.Goobstation.Server.Skinnable;
 
 public sealed partial class SkinnableSystem : SharedSkinnableSystem
 {
-    [Dependency] private DoAfterSystem _doAfter = null!;
-    [Dependency] private DamageableSystem _damageable = null!;
-    [Dependency] private PopupSystem _popups = null!;
-    [Dependency] private AudioSystem _audio = null!;
+    [Dependency] private readonly DoAfterSystem _doAfter = null!;
+    [Dependency] private readonly DamageableSystem _damageable = null!;
+    [Dependency] private readonly PopupSystem _popups = null!;
+    [Dependency] private readonly AudioSystem _audio = null!;
     public override void Initialize()
     {
         base.Initialize();
@@ -87,7 +86,7 @@ public sealed partial class SkinnableSystem : SharedSkinnableSystem
         target.Comp.Skinned = true;
         ChangeVisuals(target);
 
-        _damageable.TryChangeDamage(target.Owner, target.Comp.DamageOnSkinned);
+        _damageable.TryChangeDamage(target, target.Comp.DamageOnSkinned);
     }
 
 }

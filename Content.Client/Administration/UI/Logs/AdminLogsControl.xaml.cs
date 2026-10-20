@@ -481,7 +481,6 @@ public sealed partial class AdminLogsControl : Control
             }
 
             LogsContainer.AddChild(label);
-            GoobAddLogControls(label); // Goob
             LogsContainer.AddChild(separator);
         }
 

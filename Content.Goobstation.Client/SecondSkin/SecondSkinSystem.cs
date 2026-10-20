@@ -6,10 +6,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Client.SecondSkin;
 
-public sealed partial class SecondSkinSystem : SharedSecondSkinSystem
+public sealed class SecondSkinSystem : SharedSecondSkinSystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
-    [Dependency] private HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
 
     public override void Initialize()
     {

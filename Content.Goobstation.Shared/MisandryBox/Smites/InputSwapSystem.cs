@@ -7,9 +7,9 @@ using Robust.Shared.IoC;
 
 namespace Content.Goobstation.Shared.MisandryBox.Smites;
 
-public sealed partial class InputSwapSystem : ToggleableSmiteSystem<InputSwapComponent>
+public sealed class InputSwapSystem : ToggleableSmiteSystem<InputSwapComponent>
 {
-    [Dependency] private MovementSpeedModifierSystem _move = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _move = default!;
 
     public override void Set(EntityUid ent)
     {

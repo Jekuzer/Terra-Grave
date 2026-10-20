@@ -3,11 +3,11 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.ContributorName;
 
-public sealed partial class ContributorNameSystem : EntitySystem
+public sealed class ContributorNameSystem : EntitySystem
 {
-    [Dependency] private IResourceManager _resourceManager = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private readonly IResourceManager _resourceManager = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
 
     private string[] _names = default!;
 

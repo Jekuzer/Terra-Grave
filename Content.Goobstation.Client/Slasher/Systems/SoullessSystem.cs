@@ -7,9 +7,9 @@ namespace Content.Goobstation.Client.Slasher.Systems;
 /// <summary>
 /// Adds a faction icon for soulless entities.
 /// </summary>
-public sealed partial class SoullessSystem : EntitySystem
+public sealed class SoullessSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

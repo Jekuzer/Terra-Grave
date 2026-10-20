@@ -4,9 +4,9 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Devour.Systems;
 
-public sealed partial class PreventSelfRevivalSystem : EntitySystem
+public sealed class PreventSelfRevivalSystem : EntitySystem
 {
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

@@ -4,10 +4,10 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Client.Projectiles;
 
-public sealed partial class SpeedLinesEffectSystem : EntitySystem
+public sealed class SpeedLinesEffectSystem : EntitySystem
 {
-    [Dependency] private IOverlayManager _overlayMan = default!;
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private SpeedLinesOverlay _overlay = default!;
 

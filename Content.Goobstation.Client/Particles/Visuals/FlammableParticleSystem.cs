@@ -11,18 +11,18 @@ namespace Content.Goobstation.Client.Particles.Visuals;
 /// <summary>
 /// Particles when entities are on fire.
 /// </summary>
-public sealed partial class FlammableParticleSystem : EntitySystem
+public sealed class FlammableParticleSystem : EntitySystem
 {
-    [Dependency] private ParticleSystem _particles = default!;
-    [Dependency] private AppearanceSystem _appearance = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ParticleSystem _particles = default!;
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<ParticleEffectPrototype> FireEffect = "SfFireContinuous";
     private static readonly ProtoId<ParticleEffectPrototype> SmokeEffect = "SfFireSmoke";
 
     private const float MaxStacks = 10f;
 
-    private sealed partial class FireState
+    private sealed class FireState
     {
         public ActiveEmitter? FireEmitter;
         public ActiveEmitter? SmokeEmitter;

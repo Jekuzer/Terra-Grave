@@ -14,7 +14,6 @@ using Robust.Shared.Utility;
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
-    [Category("MapTests")]
     public sealed class SaveLoadMapTest
     {
         [Test]
@@ -24,7 +23,7 @@ namespace Content.IntegrationTests.Tests
 
             await using var pair = await PoolManager.GetServerClient();
             var server = pair.Server;
-            var mapManager = server.System<SharedMapSystem>();
+            var mapManager = server.ResolveDependency<IMapManager>();
             var sEntities = server.ResolveDependency<IEntityManager>();
             var mapLoader = sEntities.System<MapLoaderSystem>();
             var mapSystem = sEntities.System<SharedMapSystem>();

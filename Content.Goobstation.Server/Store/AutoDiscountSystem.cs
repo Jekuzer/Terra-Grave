@@ -5,9 +5,9 @@ using Content.Shared.Store.Components;
 
 namespace Content.Goobstation.Server.Store;
 
-public sealed partial class AutoDiscountSystem : EntitySystem
+public sealed class AutoDiscountSystem : EntitySystem
 {
-    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private readonly StoreSystem _store = default!;
 
     public override void Initialize()
     {

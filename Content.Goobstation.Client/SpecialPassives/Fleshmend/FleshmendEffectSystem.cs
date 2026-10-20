@@ -6,9 +6,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.SpecialPassives.Fleshmend;
 
-public sealed partial class FleshmendEffectSystem : EntitySystem
+public sealed class FleshmendEffectSystem : EntitySystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

@@ -1,13 +1,12 @@
 using Content.Goobstation.Shared.BerserkerImplant;
 using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 
 namespace Content.Goobstation.Server.BerserkerImplant;
 
-public sealed partial class BerserkerImplantSystem : SharedBerserkerImplantSystem
+public sealed class BerserkerImplantSystem : SharedBerserkerImplantSystem
 {
-    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

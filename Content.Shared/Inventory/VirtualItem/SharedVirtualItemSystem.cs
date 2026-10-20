@@ -11,7 +11,6 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing; // Goob edit
 
 namespace Content.Shared.Inventory.VirtualItem;
 
@@ -33,7 +32,6 @@ public abstract class SharedVirtualItemSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!; // Goob edit
 
     private static readonly EntProtoId VirtualItem = "VirtualItem";
 
@@ -263,8 +261,7 @@ public abstract class SharedVirtualItemSystem : EntitySystem
             return;
 
         // Goob edit start
-        // Never delete immediately while applying server state (e.g. PVS detach), the client would really delete a networked entity.
-        if (queueDel || _timing.ApplyingState)
+        if (queueDel)
             PredictedQueueDel(item.Owner);
         else
             PredictedDel(item.Owner);

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Goobstation.Common.Patrons;
 using Content.Shared.StatusIcon;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
@@ -9,9 +9,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.UserInterface;
 
-public sealed partial class IconTag : IMarkupTag
+public sealed class IconTag : IMarkupTag
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+    private SpriteSystem? _spriteSystem;
 
     public string Name => "icon";
 
@@ -23,22 +25,19 @@ public sealed partial class IconTag : IMarkupTag
             return false;
         }
 
-        SpriteSpecifier? sprite = null;
-        if (_prototype.TryIndex<OocIconPrototype>(id.StringValue, out var oocIcon))
-            sprite = oocIcon.Icon;
-        else if (_prototype.TryIndex<JobIconPrototype>(id.StringValue, out var iconPrototype))
-            sprite = iconPrototype.Icon;
+        _spriteSystem ??= _entitySystem.GetEntitySystem<SpriteSystem>();
+        var texture = _prototype.TryIndex<JobIconPrototype>(id.StringValue, out var iconPrototype)
+            ? _spriteSystem.Frame0(iconPrototype.Icon)
+            : null;
 
-        var icon = new AnimatedTextureRect
+        var icon = new TextureRect
         {
+            Texture = texture,
             SetWidth = 20,
             SetHeight = 20,
+            Stretch = TextureRect.StretchMode.Scale,
             MouseFilter = Control.MouseFilterMode.Stop,
         };
-        icon.DisplayRect.Stretch = TextureRect.StretchMode.Scale;
-
-        if (sprite != null)
-            icon.SetFromSpriteSpecifier(sprite);
 
         if (node.Attributes.TryGetValue("tooltip", out var tooltip) && tooltip.StringValue != null)
             icon.ToolTip = tooltip.StringValue;

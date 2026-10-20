@@ -5,9 +5,9 @@ using Robust.Shared.Network;
 
 namespace Content.Goobstation.Shared.Redial;
 
-public abstract partial class SharedRedialManager : IPostInjectInit
+public abstract class SharedRedialManager : IPostInjectInit
 {
-    [Dependency] protected INetManager _netManager = default!;
+    [Dependency] protected readonly INetManager _netManager = default!;
 
     public void PostInject()
     {

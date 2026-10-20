@@ -2,6 +2,7 @@
 
 using Content.Shared.Physics;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Lightning.Components;
 /// <summary>
@@ -28,8 +29,8 @@ public abstract partial class SharedLightningComponent : Component
     /// The prototype ID used for arcing bolts. Usually will be the same name as the main proto but it could be flexible.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("lightningPrototype")]
-    public EntProtoId LightningPrototype = "Lightning";
+    [DataField("lightningPrototype", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+    public string LightningPrototype = "Lightning";
 
     /// <summary>
     /// The target that the lightning will Arc to.

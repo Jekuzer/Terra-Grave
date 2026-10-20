@@ -8,12 +8,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Changeling;
 
-public sealed partial class ChangelingEggSystem : EntitySystem
+public sealed class ChangelingEggSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private BodySystem _bodySystem = default!;
-    [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private ChangelingSystem _changeling = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly BodySystem _bodySystem = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ChangelingSystem _changeling = default!;
 
     public override void Update(float frameTime)
     {
@@ -53,12 +53,6 @@ public sealed partial class ChangelingEggSystem : EntitySystem
         EnsureComp<ChangelingIdentityComponent>(newUid);
 
         EntityManager.AddComponent(newUid, comp.lingStore);
-
-        foreach (var listing in comp.lingStore.FullListingsCatalog)
-        {
-            if (listing is { PurchaseAmount: > 0, RaiseProductEventOnUser: true, ProductEvent: { } productEvent })
-                RaiseLocalEvent(newUid, productEvent);
-        }
 
         _bodySystem.GibBody(uid);
     }

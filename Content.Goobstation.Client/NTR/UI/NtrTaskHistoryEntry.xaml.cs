@@ -12,7 +12,7 @@ namespace Content.Goobstation.Client.NTR.UI;
 [GenerateTypedNameReferences]
 public sealed partial class NtrTaskHistoryEntry : BoxContainer
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public NtrTaskHistoryEntry(NtrTaskHistoryData task)
     {

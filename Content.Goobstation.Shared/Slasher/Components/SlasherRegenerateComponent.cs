@@ -48,10 +48,6 @@ public sealed partial class SlasherRegenerateComponent : Component
     /// </summary>
     [DataField]
     public EntProtoId RegenerateEffect = "SlasherRegenerateEffect";
-
-    /// <summary>
-    /// Range for the regenerate overlay.
-    /// </summary>
-    [DataField]
-    public float RegenerateEffectRange = 10f;
 }
+
+

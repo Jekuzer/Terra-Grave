@@ -29,7 +29,7 @@
     energy: 2
     offset: "0, 0"
     color: "#ECFFFF"
-    lightMask: ConeQuad
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
   - type: Destructible
     thresholds:
     - trigger:
@@ -88,7 +88,7 @@
     netsync: false
     offset: "0,0.5"
     color: "#ECFFFF"
-    lightMask: ConeQuad
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
   - type: Destructible
     thresholds:
     - trigger:

@@ -9,9 +9,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
-public sealed partial class TextureTag : BaseTextureTag, IMarkupTagHandler
+public sealed class TextureTag : BaseTextureTag, IMarkupTagHandler
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public string Name => "tex";
 

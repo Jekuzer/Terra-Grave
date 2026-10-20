@@ -4,17 +4,15 @@ using Content.Goobstation.Client.VoiceChat;
 using Content.Goobstation.Client.JoinQueue;
 using Content.Goobstation.Common.ServerCurrency;
 using Robust.Shared.ContentPack;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Entry;
 
-public sealed partial class EntryPoint : GameClient
+public sealed class EntryPoint : GameClient
 {
-    [Dependency] private VoiceChatManager _voiceManager = default!;
-    [Dependency] private JoinQueueManager _joinQueue = default!;
-    [Dependency] private PollManager _pollManager = default!;
-    [Dependency] private ICommonCurrencyManager _currMan = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly VoiceChatManager _voiceManager = default!;
+    [Dependency] private readonly JoinQueueManager _joinQueue = default!;
+    [Dependency] private readonly PollManager _pollManager = default!;
+    [Dependency] private readonly ICommonCurrencyManager _currMan = default!;
 
     public override void Init()
     {
@@ -22,8 +20,6 @@ public sealed partial class EntryPoint : GameClient
 
         IoCManager.BuildGraph();
         IoCManager.InjectDependencies(this);
-
-        _prototypeManager.RegisterIgnore("achievement");
     }
 
     public override void PostInit()

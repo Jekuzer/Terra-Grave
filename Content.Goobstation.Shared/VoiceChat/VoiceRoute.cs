@@ -9,6 +9,4 @@ public enum VoiceRoute : byte
     Broadcast,
     Radio,
     RadioSpeaker,
-    Lobby,
-    God,
 }

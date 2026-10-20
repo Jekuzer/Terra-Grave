@@ -14,12 +14,12 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Provides API for enchanting with <see cref="EnchantComponent"/> and <see cref="EnchantedComponent"/>.
 /// </summary>
-public sealed partial class EnchantingSystem : EntitySystem
+public sealed class EnchantingSystem : EntitySystem
 {
-    [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private EntityQuery<EnchantComponent> _query;
     private EntityQuery<EnchantedComponent> _enchantedQuery;

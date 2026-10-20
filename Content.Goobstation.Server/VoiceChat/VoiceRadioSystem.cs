@@ -3,7 +3,6 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.VoiceChat;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.Chat;
-using Content.Shared.Inventory;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Whitelist;
@@ -15,15 +14,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.VoiceChat;
 
-public sealed partial class VoiceRadioSystem : EntitySystem
+public sealed class VoiceRadioSystem : EntitySystem
 {
-    [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
-    [Dependency] private RadioSystem _radio = default!;
-    [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private static readonly TimeSpan RefreshInterval = TimeSpan.FromSeconds(1);
 
@@ -59,34 +57,15 @@ public sealed partial class VoiceRadioSystem : EntitySystem
 
     public bool TryGetTransmission(EntityUid speaker, out RadioChannelPrototype channel, out EntityUid radioSource)
     {
-        return TryGetTransmission(speaker, false, out channel, out radioSource);
-    }
-
-    public bool TryGetTransmission(EntityUid speaker, bool force, out RadioChannelPrototype channel, out EntityUid radioSource)
-    {
         channel = default!;
         radioSource = default;
 
         if (!_enabled ||
             !TryComp<VoiceRadioComponent>(speaker, out var voiceRadio) ||
-            (voiceRadio.Active ?? (force && voiceRadio.Channels.Count > 0 ? (ProtoId<RadioChannelPrototype>?) voiceRadio.Channels[0] : null)) is not { } active ||
+            voiceRadio.Active is not { } active ||
             !_common && active == SharedChatSystem.CommonChannel ||
             !_prototype.TryIndex(active, out var prototype) ||
             !CanTransmit(speaker, prototype, out radioSource))
-        {
-            return false;
-        }
-
-        channel = prototype;
-        return true;
-    }
-
-    public bool TryGetMicrophoneChannel(ProtoId<RadioChannelPrototype> id, out RadioChannelPrototype channel)
-    {
-        channel = default!;
-        if (!_enabled ||
-            !_common && id == SharedChatSystem.CommonChannel ||
-            !_prototype.TryIndex(id, out var prototype))
         {
             return false;
         }
@@ -195,33 +174,13 @@ public sealed partial class VoiceRadioSystem : EntitySystem
         if (TryComp<WearingHeadsetComponent>(uid, out var wearing) &&
             TryComp<ActiveRadioComponent>(wearing.Headset, out var headsetRadio))
         {
-            AddReceive(uid, headsetRadio);
+            AddReceive(uid, headsetRadio.Channels);
         }
 
         if (TryComp<ActiveRadioComponent>(uid, out var intrinsic))
-            AddReceive(uid, intrinsic);
-
-        foreach (var item in _inventory.GetHandOrInventoryEntities(uid))
-        {
-            if (TryComp<RadioSpeakerComponent>(item, out var speaker) && speaker.Enabled)
-                AddReceive(uid, speaker.Channels);
-        }
+            AddReceive(uid, intrinsic.Channels);
 
         _receive.Sort((a, b) => string.CompareOrdinal(a.Id, b.Id));
-    }
-
-    private void AddReceive(EntityUid uid, ActiveRadioComponent radio)
-    {
-        if (!radio.ReceiveAllChannels)
-        {
-            AddReceive(uid, radio.Channels);
-            return;
-        }
-
-        foreach (var channel in _prototype.EnumeratePrototypes<RadioChannelPrototype>())
-        {
-            AddReceive(uid, new[] { new ProtoId<RadioChannelPrototype>(channel.ID) });
-        }
     }
 
     private void AddReceive(EntityUid uid, IEnumerable<ProtoId<RadioChannelPrototype>> channels)

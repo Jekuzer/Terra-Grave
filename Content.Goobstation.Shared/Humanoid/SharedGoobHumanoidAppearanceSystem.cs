@@ -1,17 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Humanoid;
-using Content.Shared.IdentityManagement;
 using Robust.Shared.Enums;
-using Robust.Shared.GameObjects.Components.Localization;
 
 namespace Content.Goobstation.Shared.Humanoid;
 
-public sealed partial class SharedGoobHumanoidAppearanceSystem : EntitySystem
+public sealed class SharedGoobHumanoidAppearanceSystem : EntitySystem
 {
-    [Dependency] private SharedHumanoidAppearanceSystem _humanoidAppearanceSystem = default!;
-    [Dependency] private GrammarSystem _grammar = default!;
-    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearanceSystem = default!;
 
     public void SwapSex(EntityUid uid, HumanoidAppearanceComponent? humanoid = null)
     {
@@ -30,10 +26,5 @@ public sealed partial class SharedGoobHumanoidAppearanceSystem : EntitySystem
 
         _humanoidAppearanceSystem.SetSex(uid, newSex);
         _humanoidAppearanceSystem.SetGender(uid, newGender);
-
-        if (TryComp<GrammarComponent>(uid, out var grammar))
-            _grammar.SetGender((uid, grammar), newGender);
-
-        _identity.QueueIdentityUpdate(uid);
     }
 }

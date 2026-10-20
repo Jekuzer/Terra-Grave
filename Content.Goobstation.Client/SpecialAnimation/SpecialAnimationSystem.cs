@@ -10,11 +10,11 @@ using Robust.Shared.Player;
 namespace Content.Goobstation.Client.SpecialAnimation;
 
 
-public sealed partial class SpecialAnimationSystem : SharedSpecialAnimationSystem
+public sealed class SpecialAnimationSystem : SharedSpecialAnimationSystem
 {
-    [Dependency] private IOverlayManager _overlayMan = default!;
-    [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private SpecialAnimationOverlay _overlay = default!;
 

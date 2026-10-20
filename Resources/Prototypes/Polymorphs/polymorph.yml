@@ -144,7 +144,6 @@
   id: TreeMorph
   configuration:
     entity: FloraTree
-    allowMovement: false # Goobstation
     forced: true
     transferName: true
     revertOnDeath: true

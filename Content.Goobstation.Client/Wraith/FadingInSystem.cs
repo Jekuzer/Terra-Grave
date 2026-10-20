@@ -3,9 +3,9 @@ using Content.Goobstation.Shared.Wraith.Components;
 
 namespace Content.Goobstation.Client.Wraith;
 
-public sealed partial class FadingInSystem : EntitySystem
+public sealed class FadingInSystem : EntitySystem
 {
-    [Dependency] private SpriteSystem _sprites = default!;
+    [Dependency] private readonly SpriteSystem _sprites = default!;
 
     public override void Initialize()
     {

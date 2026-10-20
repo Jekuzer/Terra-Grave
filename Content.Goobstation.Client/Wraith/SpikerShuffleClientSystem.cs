@@ -6,10 +6,10 @@ namespace Content.Goobstation.Client.Wraith;
 /// <summary>
 /// This handles appearance for shuffling
 /// </summary>
-public sealed partial class SpikerShuffleClientSystem : EntitySystem
+public sealed class SpikerShuffleClientSystem : EntitySystem
 {
-    [Dependency] private AppearanceSystem _appearance = default!;
-    [Dependency] private SpriteSystem _spriteSystem = default!;
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

@@ -9,10 +9,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Server.Trigger;
 
-public sealed partial class TriggerOnSolutionInsertSystem : EntitySystem
+public sealed class TriggerOnSolutionInsertSystem : EntitySystem
 {
-    [Dependency] private SharedSolutionContainerSystem _solutionContainers = default!;
-    [Dependency] private TriggerSystem _triggersystem = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
+    [Dependency] private readonly TriggerSystem _triggersystem = default!;
 
     public override void Initialize()
     {

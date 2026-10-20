@@ -10,9 +10,9 @@ namespace Content.Goobstation.Client.Disease;
 /// <summary>
 /// Shows icons on infected mobs.
 /// </summary>
-public sealed partial class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDiseaseIconsComponent>
+public sealed class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDiseaseIconsComponent>
 {
-    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private float? LowThreshold, MediumThreshold, HighThreshold;
 

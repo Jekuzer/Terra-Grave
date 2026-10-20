@@ -7,9 +7,9 @@ using Content.Shared.Eye.Blinding.Components;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;
 
-public abstract partial class SharedChangelingSystem : EntitySystem
+public abstract class SharedChangelingSystem : EntitySystem
 {
-    [Dependency] protected SharedBodySystem Body = default!;
+    [Dependency] protected readonly SharedBodySystem Body = default!;
 
     public override void Initialize()
     {

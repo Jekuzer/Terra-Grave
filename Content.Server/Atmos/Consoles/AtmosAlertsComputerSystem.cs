@@ -299,9 +299,10 @@ public sealed class AtmosAlertsComputerSystem : SharedAtmosAlertsComputerSystem
 
     private AtmosAlertsFocusDeviceData? GetFocusAlarmData(EntityUid uid, EntityUid? focusDevice, EntityUid gridUid)
     {
-        if (focusDevice == null || !TryComp(focusDevice.Value, out TransformComponent? focusDeviceXform)) // Goob - Fix (deleted focus device)
+        if (focusDevice == null)
             return null;
 
+        var focusDeviceXform = Transform(focusDevice.Value);
 
         if (!focusDeviceXform.Anchored ||
             focusDeviceXform.GridUid != gridUid ||

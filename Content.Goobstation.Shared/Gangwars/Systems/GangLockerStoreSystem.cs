@@ -15,13 +15,13 @@ namespace Content.Goobstation.Shared.Gangwars.Systems;
 /// <summary>
 /// The store balance is loaded from and saved to the members GangMemberComponent.
 /// </summary>
-public sealed partial class GangLockerStoreSystem : EntitySystem
+public sealed class GangLockerStoreSystem : EntitySystem
 {
-    [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private INetManager _netManager = default!;
-    [Dependency] private GangHiddenStructureSystem _hidden = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly GangHiddenStructureSystem _hidden = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public static readonly ProtoId<CurrencyPrototype> GangPointCurrency = "GangPoint";
 

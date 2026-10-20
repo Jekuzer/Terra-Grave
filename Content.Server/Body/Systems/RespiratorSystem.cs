@@ -1,11 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Body;
+using Content.Goobstation.Common.Body.Components;
+using Content.Goobstation.Common.Grab;
+using Content.Goobstation.Common.MartialArts;
+using Content.Goobstation.Shared.Body; // goob
+using Content.Goobstation.Shared.GrabIntent;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Chat.Systems;
 using Content.Shared.Body.Systems;
+using Content.Shared.EntityEffects.EffectConditions;
 using Content.Shared.EntityEffects.Effects;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Alert;
@@ -14,28 +19,35 @@ using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chat;
+using Content.Shared.Chat; // Einstein Engines - Language
 using Content.Shared.Chemistry.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.Damage.Systems;
+using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityConditions.Conditions.Body;
 using Content.Shared.EntityEffects;
+using Content.Shared.EntityEffects.Effects;
 using Content.Shared.EntityEffects.Effects.Body;
-using Content.Shared.EntityEffects.Effects.Damage;
+using Content.Server.EntityEffects;
 using Content.Shared.Mobs.Systems;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared._DV.CosmicCult.Components; // DeltaV
+
+// Shitmed Change
 using Content.Shared._Shitmed.Targeting;
+using Content.Shared._Shitmed.Body.Components;
 using Content.Shared._Shitmed.Body.Organ;
+using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
 using Content.Shared._Shitmed.Medical.Surgery.Consciousness.Systems;
 
 namespace Content.Server.Body.Systems;
 
 [UsedImplicitly]
-public sealed partial class RespiratorSystem : EntitySystem // Goob - made partial
+public sealed class RespiratorSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -70,6 +82,25 @@ public sealed partial class RespiratorSystem : EntitySystem // Goob - made parti
         SubscribeLocalEvent<BodyComponent, StopSuffocatingEvent>(OnStopSuffocating);
     }
 
+    // Goobstation start
+    // Can breathe check for grab or if they need air
+    public bool CanBreathe(EntityUid uid, RespiratorComponent respirator)
+    {
+        var airEv = new CheckNeedsAirEvent();
+        RaiseLocalEvent(uid, ref airEv);
+
+        if (airEv.Cancelled)
+            return true;
+
+        if (respirator.Saturation < respirator.SuffocationThreshold)
+            return false;
+        if (TryComp<GrabbableComponent>(uid, out var grabbable)
+            && grabbable.GrabStage == GrabStage.Suffocate)
+            return false;
+
+        return !HasComp<KravMagaBlockedBreathingComponent>(uid);
+    }
+    // Goobstation end
     private void OnMapInit(Entity<RespiratorComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.AdjustedUpdateInterval;
@@ -87,13 +118,20 @@ public sealed partial class RespiratorSystem : EntitySystem // Goob - made parti
 
             respirator.NextUpdate += respirator.AdjustedUpdateInterval;
 
-            if (_mobState.IsDead(uid) || GoobHasBreathingImmunity(uid)) // Goob - Shitmed breathing immunity
+            if (_mobState.IsDead(uid) || HasComp<BreathingImmunityComponent>(uid) || HasComp<SpecialBreathingImmunityComponent>(uid)) // Shitmed: BreathingImmunity
                 continue;
 
-            var multiplier = ShitmedGetSaturationLossMultiplier((uid, respirator));
-            UpdateSaturation(uid, multiplier * (float) respirator.UpdateInterval.TotalSeconds, respirator); // Goob - use multiplier instead of just negating. from deltaV
+            // Begin DeltaV Code: Addition:
+            var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((uid, body));
+            var multiplier = -1f;
+            foreach (var (_, lung, _) in organs)
+            {
+                multiplier *= lung.SaturationLoss * respirator.SaturationLoss; // Goob Edit - In a DeltaV Edit :o
+            }
+            // End DeltaV Code
+            UpdateSaturation(uid,  multiplier * (float) respirator.UpdateInterval.TotalSeconds, respirator); // DeltaV: use multiplier instead of negating
 
-            if (!_mobState.IsIncapacitated(uid) && !HasComp<DebrainedComponent>(uid)) // Goob - Cannot breathe when no brain. shitmed
+            if (!_mobState.IsIncapacitated(uid) && !HasComp<DebrainedComponent>(uid)) // Shitmed Change - Cannot breathe in crit or when no brain.
             {
                 switch (respirator.Status)
                 {
@@ -108,8 +146,15 @@ public sealed partial class RespiratorSystem : EntitySystem // Goob - made parti
                 }
             }
 
-            if (!GoobCanBreathe(uid, respirator)) // Goob edit
+            if (!CanBreathe(uid, respirator)) // Goobstation edit
             {
+                // DeltaV: Cosmic Cult - One line change but a refactor would be better. this is kinda cringe.
+                // Makes cultists gasp and respirate but not asphyxiate in space.
+                if (TryComp<CosmicCultComponent>(uid, out var cultComponent)
+                    && !cultComponent.Respiration
+                    && !_mobState.IsIncapacitated(uid))
+                    return;
+
                 if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
                 {
                     respirator.LastGaspEmoteTime = _gameTiming.CurTime;
@@ -377,11 +422,31 @@ public sealed partial class RespiratorSystem : EntitySystem // Goob - made parti
         if (ent.Comp.SuffocationCycles == 2)
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} started suffocating");
 
-        ShitmedTakeSuffocationConsciousnessModifier(ent); // Goob - shitmed slop
+        // Shitmed Change Start
+        if (_consciousness.TryGetNerveSystem(ent, out var nerveSys))
+        {
+            if (!_consciousness.TryGetConsciousnessModifier(ent, nerveSys.Value, out var modifier, "Suffocation"))
+            {
+                _consciousness.AddConsciousnessModifier(
+                    ent,
+                    nerveSys.Value,
+                    -ent.Comp.Damage.GetTotal(),
+                    identifier: "Suffocation",
+                    type: ConsciousnessModType.Pain);
+            }
+            else
+            {
+                _consciousness.SetConsciousnessModifier(
+                    ent,
+                    nerveSys.Value,
+                    modifier.Value.Change - ent.Comp.Damage.GetTotal(),
+                    identifier: "Suffocation",
+                    type: ConsciousnessModType.Pain);
+            }
+        }
 
-        var asphyxDamage = HasComp<DebrainedComponent>(ent) ? ent.Comp.Damage * 4.5 : ent.Comp.Damage; // Goob - shitmed
-
-        _damageableSys.ChangeDamage(ent.Owner, asphyxDamage, interruptsDoAfters: false, targetPart: TargetBodyPart.All); // Goob - asphyxDamage instead of ent.Comp.Damage for debrained damage, add shitmed targeting
+        // Shitmed Change End
+        _damageableSys.TryChangeDamage(ent, HasComp<DebrainedComponent>(ent) ? ent.Comp.Damage * 4.5f : ent.Comp.Damage, targetPart: TargetBodyPart.All, interruptsDoAfters: false); // Shitmed Change
 
         if (ent.Comp.SuffocationCycles < ent.Comp.SuffocationCycleThreshold)
             return;
@@ -395,7 +460,7 @@ public sealed partial class RespiratorSystem : EntitySystem // Goob - made parti
         if (ent.Comp.SuffocationCycles >= 2)
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} stopped suffocating");
 
-        _damageableSys.ChangeDamage(ent.Owner, ent.Comp.DamageRecovery);
+        _damageableSys.TryChangeDamage(ent, ent.Comp.DamageRecovery);
 
         var ev = new StopSuffocatingEvent();
         RaiseLocalEvent(ent, ref ev);
@@ -420,7 +485,30 @@ public sealed partial class RespiratorSystem : EntitySystem // Goob - made parti
             _alertsSystem.ClearAlert(ent.Owner, entity.Comp1.Alert);
         }
 
-        ShitmedStopSuffocationConsciousnessModifier(ent); // Goob - shitmed slop
+        if (!TryComp<RespiratorComponent>(ent.Owner, out var respirator))
+            return;
+
+        // Shitmed Change Start
+        if (_consciousness.TryGetNerveSystem(ent, out var nerveSys)
+            && _consciousness.TryGetConsciousnessModifier(ent, nerveSys.Value, out var modifier, "Suffocation"))
+        {
+            if (modifier.Value.Change < respirator.DamageRecovery.GetTotal())
+            {
+                _consciousness.RemoveConsciousnessModifier(ent, nerveSys.Value, "Suffocation");
+            }
+            else
+            {
+                _consciousness.SetConsciousnessModifier(
+                    ent,
+                    nerveSys.Value,
+                    modifier.Value.Change + respirator.DamageRecovery.GetTotal(),
+                    identifier: "Suffocation",
+                    type: ConsciousnessModType.Pain);
+            }
+        }
+
+        _damageableSys.TryChangeDamage(ent, respirator.DamageRecovery, targetPart: TargetBodyPart.All, ignoreBlockers: true);
+        // Shitmed Change End
     }
 
     public void UpdateSaturation(EntityUid uid, float amount, RespiratorComponent? respirator = null)

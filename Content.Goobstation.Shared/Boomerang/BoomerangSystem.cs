@@ -6,10 +6,10 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Boomerang;
 
-public sealed partial class BoomerangSystem : EntitySystem
+public sealed class BoomerangSystem : EntitySystem
 {
-    [Dependency] private ThrowingSystem _throwingSystem = default!;
-    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
 
     private List<(EntityUid, EntityCoordinates, float, EntityUid?)> _toThrow = new();
 

@@ -29,7 +29,6 @@ namespace Content.IntegrationTests.Tests;
 ///     spawn it into a new empty map and seeing what the map yml looks like.
 /// </remarks>
 [TestFixture]
-[Category("PrototypeSweepTests")]
 public sealed class PrototypeSaveTest
 {
     [Test]
@@ -76,7 +75,7 @@ public sealed class PrototypeSaveTest
             prototypes.Add(prototype);
         }
 
-        var context = new TestEntityUidContext(seriMan);
+        var context = new TestEntityUidContext();
 
         await server.WaitAssertion(() =>
         {
@@ -171,9 +170,9 @@ public sealed class PrototypeSaveTest
         public string WritingComponent = string.Empty;
         public EntityPrototype? Prototype;
 
-        public TestEntityUidContext(ISerializationManager ser)
+        public TestEntityUidContext()
         {
-            SerializerProvider = new(ser);
+            SerializerProvider = new();
             SerializerProvider.RegisterSerializer(this);
         }
 

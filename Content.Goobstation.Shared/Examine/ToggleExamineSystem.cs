@@ -3,9 +3,9 @@ using Content.Shared.Item.ItemToggle;
 
 namespace Content.Goobstation.Shared.Examine;
 
-public sealed partial class ToggleExamineSystem : EntitySystem
+public sealed class ToggleExamineSystem : EntitySystem
 {
-    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
 
     public override void Initialize()
     {

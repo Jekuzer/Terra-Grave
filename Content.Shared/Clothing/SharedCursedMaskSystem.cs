@@ -2,7 +2,6 @@
 
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Systems;

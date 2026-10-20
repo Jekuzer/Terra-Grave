@@ -29,7 +29,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Database
 {
-    public abstract partial class ServerDbBase // Goob
+    public abstract class ServerDbBase
     {
         private readonly ISawmill _opsLog;
         public event Action<DatabaseNotification>? OnNotificationReceived;
@@ -1773,42 +1773,57 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task SetOocIcon(Guid player, string? icon)
+        public async Task<List<RMCPatronTier>> GetPatronTiers()
         {
             await using var db = await GetDb();
-            var patron = await db.DbContext.RMCPatrons.FirstOrDefaultAsync(p => p.PlayerId == player);
-            if (patron == null)
-                return;
-
-            patron.OocIcon = icon;
-            await db.DbContext.SaveChangesAsync();
+            return await db.DbContext.RMCPatronTiers.ToListAsync();
         }
 
-        public async Task SyncPatronTiers(List<RMCPatronTier> tiers)
+        public async Task<int> AddPatronTier(RMCPatronTier tier)
         {
             await using var db = await GetDb();
-            var existing = await db.DbContext.RMCPatronTiers.ToDictionaryAsync(t => t.Id);
-
-            foreach (var tier in tiers)
-            {
-                if (!existing.TryGetValue(tier.Id, out var row))
-                {
-                    db.DbContext.RMCPatronTiers.Add(tier);
-                    continue;
-                }
-
-                row.Name = tier.Name;
-                row.DiscordRole = tier.DiscordRole;
-                row.Priority = tier.Priority;
-                row.ShowOnCredits = tier.ShowOnCredits;
-                row.GhostColor = tier.GhostColor;
-                row.GhostCosmetics = tier.GhostCosmetics;
-                row.GhostParticles = tier.GhostParticles;
-                row.LobbyMessage = tier.LobbyMessage;
-                row.RoundEndShoutout = tier.RoundEndShoutout;
-            }
-
+            db.DbContext.RMCPatronTiers.Add(tier);
             await db.DbContext.SaveChangesAsync();
+            return tier.Id;
+        }
+
+        public async Task<bool> UpdatePatronTier(RMCPatronTier tier)
+        {
+            await using var db = await GetDb();
+            var existing = await db.DbContext.RMCPatronTiers.FirstOrDefaultAsync(t => t.Id == tier.Id);
+            if (existing == null)
+                return false;
+
+            existing.Name = tier.Name;
+            existing.Icon = tier.Icon;
+            existing.DiscordRole = tier.DiscordRole;
+            existing.Priority = tier.Priority;
+            existing.ShowOnCredits = tier.ShowOnCredits;
+            existing.GhostColor = tier.GhostColor;
+            existing.GhostCosmetics = tier.GhostCosmetics;
+            existing.GhostParticles = tier.GhostParticles;
+            existing.LobbyMessage = tier.LobbyMessage;
+            existing.RoundEndShoutout = tier.RoundEndShoutout;
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<int> CountPatronsInTier(int tierId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPatrons.CountAsync(p => p.TierId == tierId);
+        }
+
+        public async Task<bool> DeletePatronTier(int tierId)
+        {
+            await using var db = await GetDb();
+            var tier = await db.DbContext.RMCPatronTiers.FirstOrDefaultAsync(t => t.Id == tierId);
+            if (tier == null)
+                return false;
+
+            db.DbContext.RMCPatronTiers.Remove(tier);
+            await db.DbContext.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> SetPatron(Guid player, int? tierId)
@@ -1877,32 +1892,33 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        // Goob start - tier perks from prototypes
-        public async Task<List<(string Message, string User, int TierId)>> GetLobbyMessages()
+        public async Task<List<(string Message, string User)>> GetLobbyMessages()
         {
             await using var db = await GetDb();
             var messages = await db.DbContext.RMCPatronLobbyMessages
                 .Include(p => p.Patron)
                 .ThenInclude(p => p.Player)
+                .Where(p => p.Patron.Tier.LobbyMessage)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Message))
-                .Select(p => new { p.Message, p.Patron.Player.LastSeenUserName, p.Patron.TierId })
+                .Select(p => new { p.Message, p.Patron.Player.LastSeenUserName })
+                .Select(p => new ValueTuple<string, string>(p.Message, p.LastSeenUserName))
                 .ToListAsync();
 
-            return messages.Select(p => (p.Message, p.LastSeenUserName, p.TierId)).ToList();
+            return messages;
         }
 
-        public async Task<List<(string Name, int TierId)>> GetShoutouts()
+        public async Task<List<string>> GetShoutouts()
         {
             await using var db = await GetDb();
             var ntNames = await db.DbContext.RMCPatronRoundEndNTShoutouts
                 .Include(p => p.Patron)
+                .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
-                .Select(p => new { p.Name, p.Patron.TierId })
+                .Select(p => p.Name)
                 .ToListAsync();
 
-            return ntNames.Select(p => (p.Name, p.TierId)).ToList();
+            return ntNames;
         }
-        // Goob end
 
         #endregion
 

@@ -24,6 +24,7 @@ namespace Content.Client._Mono.FireControl.UI;
 
 public sealed class FireControlNavControl : BaseShuttleControl
 {
+    [Dependency] private readonly IMapManager _mapManager = default!;
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
     private readonly IEntitySystemManager _sysManager = default!;
@@ -234,7 +235,7 @@ public sealed class FireControlNavControl : BaseShuttleControl
 
         _grids.Clear();
         var maxRange = new Vector2(WorldRange, WorldRange);
-        Maps.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - maxRange, mapPos.Position + maxRange), ref _grids, approx: true, includeMap: false);
+        _mapManager.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - maxRange, mapPos.Position + maxRange), ref _grids, approx: true, includeMap: false);
 
         foreach (var grid in _grids)
         {

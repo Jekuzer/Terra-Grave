@@ -6,10 +6,10 @@ using Content.Shared.Salvage.Fulton;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Salvage.Fulton;
-public sealed partial class EmaggedFultonSystem : EntitySystem
+public sealed class EmaggedFultonSystem : EntitySystem
 {
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     public override void Initialize()
     {
         base.Initialize();

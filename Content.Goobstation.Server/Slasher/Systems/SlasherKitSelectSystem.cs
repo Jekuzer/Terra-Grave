@@ -11,13 +11,13 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Slasher.Systems;
 
-public sealed partial class SlasherKitSelectSystem : EntitySystem
+public sealed class SlasherKitSelectSystem : EntitySystem
 {
-    [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private SharedStationSpawningSystem _stationSpawning = default!;
-    [Dependency] private MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private SlasherIncorporealSystem _incorporeal = default!;
-    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedStationSpawningSystem _stationSpawning = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private readonly SlasherIncorporealSystem _incorporeal = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
@@ -98,24 +98,19 @@ public sealed partial class SlasherKitSelectSystem : EntitySystem
                 summonComp.MachetePrototype = macheteProto;
         }
 
-        if (TryComp<SlasherFearComponent>(ent.Owner, out var fearComp))
+        if (TryComp<SlasherBloodTrailComponent>(ent.Owner, out var bloodTrail))
         {
-            if (selectedKit.GrantedToVictimOnSight.Count > 0)
-                fearComp.GrantedToVictimOnSight = selectedKit.GrantedToVictimOnSight;
-
             if (selectedKit.BloodTrailMusic is { } bloodMusic)
-                fearComp.BloodTrailMusic = bloodMusic;
+                bloodTrail.BloodTrailMusic = bloodMusic;
 
             if (selectedKit.JumpscareSound is { } jumpscareSound)
-                fearComp.JumpscareSounds = new()
+                bloodTrail.JumpscareSounds = new()
                 {
                     jumpscareSound
                 };
 
             if (selectedKit.BloodTrailReagent is { } bloodReagent)
-                fearComp.BloodTrailReagent = bloodReagent;
-
-            Dirty(ent.Owner, fearComp);
+                bloodTrail.BloodTrailReagent = bloodReagent;
         }
 
         if (TryComp<SlasherSummonMeatSpikeComponent>(ent.Owner, out var meatSpikeComp))

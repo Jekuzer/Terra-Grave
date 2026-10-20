@@ -11,13 +11,13 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Mimery;
 
-public abstract partial class SharedAdvancedMimerySystem : EntitySystem
+public abstract class SharedAdvancedMimerySystem : EntitySystem
 {
-    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly IMapManager _mapMan = default!;
 
-    [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private SharedMagicSystem _magic = default!;
-    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedMagicSystem _magic = default!;
+    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {
@@ -71,7 +71,7 @@ public abstract partial class SharedAdvancedMimerySystem : EntitySystem
         foreach (var position in _magic.GetInstantSpawnPositions(transform, new TargetInFront()))
         {
             args.Handled = true;
-            PredictedSpawnAttachedTo(ent.Comp.WallPrototype, position.SnapToGrid(EntityManager));
+            PredictedSpawnAttachedTo(ent.Comp.WallPrototype, position.SnapToGrid(EntityManager, _mapMan));
         }
 
         if (!args.Handled)

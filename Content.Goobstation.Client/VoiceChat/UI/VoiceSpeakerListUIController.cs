@@ -1,6 +1,4 @@
 using Content.Client.Gameplay;
-using Content.Client.Lobby;
-using Content.Client.Lobby.UI;
 using Content.Client.UserInterface.Controls;
 using Content.Goobstation.Common.CCVar;
 using Robust.Client.UserInterface;
@@ -11,19 +9,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.VoiceChat.UI;
 
-public sealed partial class VoiceSpeakerListUIController : UIController,
-    IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>,
-    IOnStateEntered<LobbyState>, IOnStateExited<LobbyState>
+public sealed class VoiceSpeakerListUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
-    private const float Margin = 10f;
-    private const float GameplayBottom = 110f;
-
-    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [UISystemDependency] private readonly VoiceChatSystem? _voice = default;
 
     private VoiceSpeakerList? _list;
     private UIScreen? _attachedScreen;
-    private bool _active;
+    private bool _inGameplay;
     private bool _enabled;
 
     public override void Initialize()
@@ -35,23 +28,12 @@ public sealed partial class VoiceSpeakerListUIController : UIController,
 
     public void OnStateEntered(GameplayState state)
     {
-        _active = true;
+        _inGameplay = true;
     }
 
     public void OnStateExited(GameplayState state)
     {
-        _active = false;
-        Detach();
-    }
-
-    public void OnStateEntered(LobbyState state)
-    {
-        _active = true;
-    }
-
-    public void OnStateExited(LobbyState state)
-    {
-        _active = false;
+        _inGameplay = false;
         Detach();
     }
 
@@ -59,21 +41,13 @@ public sealed partial class VoiceSpeakerListUIController : UIController,
     {
         base.FrameUpdate(args);
 
-        if (!_active || !_enabled || _voice == null)
+        if (!_inGameplay || !_enabled || _voice == null)
             return;
 
         if (UIManager.ActiveScreen != _attachedScreen || _list?.Parent == null)
             Attach(UIManager.ActiveScreen);
 
-        if (_list == null)
-            return;
-
-        if (_attachedScreen is LobbyGui lobby)
-            _list.SetInset(lobby.RightSide.Width + Margin, Margin);
-        else
-            _list.SetInset(Margin, GameplayBottom);
-
-        _list.Update(args.DeltaSeconds, _voice);
+        _list?.Update(args.DeltaSeconds, _voice);
     }
 
     private void OnEnabledChanged(bool enabled)

@@ -453,7 +453,6 @@
   whitelist:
     tags:
     - ReptilianEmotes # Goob - restrict wehs to the OG lizz
-    - HarpyEmotes # Goob - harpy can also weh
   blacklist:
     tags:
     - SiliconEmotes
@@ -507,7 +506,6 @@
     - Explosive
     tags:
     - SiliconEmotes
-    - HarpyEmotes # Goob - more harpy emotes
   chatTriggers:
     - beep
     - beeps
@@ -525,7 +523,6 @@
     - Silicon
     tags:
     - SiliconEmotes
-    - HarpyEmotes # Goob - more harpy emotes
   chatTriggers:
     - chime
     - chimes
@@ -543,7 +540,6 @@
     - Silicon
     tags:
     - SiliconEmotes
-    - HarpyEmotes # Goob - more harpy emotes
   chatTriggers:
     - buzztwice
     - buzzstwice
@@ -567,7 +563,6 @@
     - Silicon
     tags:
     - SiliconEmotes
-    - HarpyEmotes # Goob - more harpy emotes
   chatTriggers:
     - ping
     - pings

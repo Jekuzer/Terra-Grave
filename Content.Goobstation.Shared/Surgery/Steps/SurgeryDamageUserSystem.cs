@@ -1,14 +1,13 @@
 using Content.Shared._Shitmed.Medical.Surgery;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Surgery.Steps;
 
-public sealed partial class SurgeryDamageUserSystem : EntitySystem
+public sealed class SurgeryDamageUserSystem : EntitySystem
 {
-    [Dependency] private DamageableSystem _damage = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

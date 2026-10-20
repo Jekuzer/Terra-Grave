@@ -37,7 +37,7 @@
     castShadows: false
     radius: 2
     energy: 1.5
-    lightMask: ConeSingle
+    mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
   - type: LitOnPowered
   - type: ApcPowerReceiver
@@ -216,7 +216,7 @@
     castShadows: false
     radius: 2
     energy: 1.5
-    lightMask: ConeSingle
+    mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
   - type: LitOnPowered
   - type: ApcPowerReceiver
@@ -333,7 +333,7 @@
     castShadows: false
     radius: 2
     energy: 1.5
-    lightMask: ConeSingle
+    mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
   - type: LitOnPowered
   - type: ApcPowerReceiver

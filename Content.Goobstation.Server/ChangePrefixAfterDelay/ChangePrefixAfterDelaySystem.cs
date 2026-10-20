@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.ChangePrefixAfterDelay;
 
-public sealed partial class ChangePrefixAfterDelaySystem : EntitySystem
+public sealed class ChangePrefixAfterDelaySystem : EntitySystem
 {
-    [Dependency] private ClothingSystem _clothing = default!;
-    [Dependency] private SharedItemSystem _item = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {

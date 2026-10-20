@@ -16,8 +16,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.UnitTesting.Pool;
-using System.IO;
 
 namespace Content.Benchmarks;
 
@@ -71,7 +69,7 @@ public class DeltaPressureBenchmark
     {
         ProgramShared.PathOffset = "../../../../";
         PoolManager.Startup();
-        _pair = await PoolManager.GetServerClient(testContext: new ExternalTestContext("Benchmark", StreamWriter.Null));
+        _pair = await PoolManager.GetServerClient();
         var server = _pair.Server;
 
         var mapdata = await _pair.CreateTestMap();

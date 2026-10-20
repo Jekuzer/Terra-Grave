@@ -11,11 +11,6 @@
     jumpsuit: ClothingUniformJumpsuitHawaiBlue
 
 - type: loadout
-  id: JumpsuitHawaiGreen
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitHawaiGreen
-
-- type: loadout
   id: JumpsuitHawaiRed
   equipment:
     jumpsuit: ClothingUniformJumpsuitHawaiRed

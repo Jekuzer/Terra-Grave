@@ -4,9 +4,9 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
-public sealed partial class BloodCrayonSystem : EntitySystem
+public sealed class BloodCrayonSystem : EntitySystem
 {
-    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
 
     public override void Initialize()
     {

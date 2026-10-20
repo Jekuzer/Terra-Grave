@@ -3,9 +3,9 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Goobstation.Shared.Augments;
 
-public sealed partial class AugmentStrengthSystem : EntitySystem
+public sealed class AugmentStrengthSystem : EntitySystem
 {
-    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
 
     public override void Initialize()
     {

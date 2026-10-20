@@ -6,7 +6,6 @@ using Content.Goobstation.Common.DoAfter; // Goobstation
 using Content.Shared._Shitmed.DoAfter; // Shitmed
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Tag;

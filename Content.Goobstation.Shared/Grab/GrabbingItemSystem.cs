@@ -17,10 +17,10 @@ using Robust.Shared.Physics.Components;
 
 namespace Content.Goobstation.Shared.Grab;
 
-public sealed partial class GrabbingItemSystem : EntitySystem
+public sealed class GrabbingItemSystem : EntitySystem
 {
-    [Dependency] private PullingSystem _pulling = default!;
-    [Dependency] private GrabIntentSystem _grabbing = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly GrabIntentSystem _grabbing = default!;
 
     public override void Initialize()
     {

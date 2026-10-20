@@ -26,7 +26,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 using Content.Shared.HealthExaminable;
 using Robust.Shared.Prototypes;
-using Content.Shared.Damage.Components;
 
 namespace Content.Server._Shitmed.PartStatus;
 

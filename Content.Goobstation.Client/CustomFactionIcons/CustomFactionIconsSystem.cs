@@ -4,9 +4,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.CustomFactionIcons;
 
-public sealed partial class CustomFactionIconsSystem : EntitySystem
+public sealed class CustomFactionIconsSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

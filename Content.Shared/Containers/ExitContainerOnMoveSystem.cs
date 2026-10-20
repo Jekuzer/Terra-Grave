@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.Containers;
 
-public sealed partial class ExitContainerOnMoveSystem : EntitySystem // Goob - partial
+public sealed class ExitContainerOnMoveSystem : EntitySystem
 {
     [Dependency] private readonly ClimbSystem _climb = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -21,9 +21,6 @@ public sealed partial class ExitContainerOnMoveSystem : EntitySystem // Goob - p
     private void OnContainerRelay(Entity<ExitContainerOnMoveComponent> ent, ref ContainerRelayMovementEntityEvent args)
     {
         var (_, comp) = ent;
-        if (!CanExit(args.Entity)) // Goob
-            return;
-
         if (!TryComp<ContainerManagerComponent>(ent, out var containerManager))
             return;
 

@@ -154,7 +154,6 @@
         components:
         - HelpProgressCondition
         - KeepAliveCondition
-    - !type:ConflictingTargetMindFilter # Goob
 
 - type: entity
   parent: [BaseTraitorSocialObjective, BaseHelpProgressObjective]
@@ -184,7 +183,6 @@
         components:
         - HelpProgressCondition
         - KeepAliveCondition
-    - !type:ConflictingTargetMindFilter # Goob
 
 # steal
 

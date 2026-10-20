@@ -2,9 +2,9 @@ using Content.Goobstation.Shared.CustomLawboard;
 
 namespace Content.Goobstation.Client.CustomLawboard;
 
-public sealed partial class CustomLawboardSystem : SharedCustomLawboardSystem
+public sealed class CustomLawboardSystem : SharedCustomLawboardSystem
 {
-    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     protected override void DirtyUI(EntityUid uid, CustomLawboardComponent? customLawboard, UserInterfaceComponent? ui = null)
     {

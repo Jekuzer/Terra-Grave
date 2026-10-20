@@ -7,10 +7,10 @@ using Content.Shared.Chat;
 
 namespace Content.Goobstation.Server.Mimery;
 
-public sealed partial class AdvancedMimerySystem : SharedAdvancedMimerySystem
+public sealed class AdvancedMimerySystem : SharedAdvancedMimerySystem
 {
-    [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
 
     protected override bool ShootFingerGuns(Entity<MimePowersComponent> ent, ref FingerGunsActionEvent args)
     {

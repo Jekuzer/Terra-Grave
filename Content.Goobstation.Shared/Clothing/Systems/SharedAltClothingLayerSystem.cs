@@ -11,9 +11,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
-public sealed partial class SharedAltClothingLayerSystem : EntitySystem
+public sealed class SharedAltClothingLayerSystem : EntitySystem
 {
-    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
 
     public override void Initialize()
     {

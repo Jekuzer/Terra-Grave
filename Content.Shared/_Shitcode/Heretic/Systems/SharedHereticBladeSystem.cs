@@ -34,7 +34,6 @@ using Robust.Shared.Physics.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.Damage.Components;
 
 namespace Content.Shared._Shitcode.Heretic.Systems;
 

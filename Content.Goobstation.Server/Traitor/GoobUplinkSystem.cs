@@ -19,14 +19,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Traitor;
 
-public sealed partial class GoobUplinkSystem : GoobCommonUplinkSystem
+public sealed class GoobUplinkSystem : GoobCommonUplinkSystem
 {
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private IServerPreferencesManager _prefs = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IServerPreferencesManager _prefs = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     private static readonly ProtoId<RoleLoadoutPrototype> AntagTraitorLoadout = "AntagTraitor";
     private static readonly ProtoId<LoadoutGroupPrototype> TraitorUplinkGroup = "TraitorUplink";

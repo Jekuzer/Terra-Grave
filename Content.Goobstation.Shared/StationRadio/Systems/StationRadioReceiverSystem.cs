@@ -7,10 +7,10 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.StationRadio.Systems;
 
-public sealed partial class StationRadioReceiverSystem : EntitySystem
+public sealed class StationRadioReceiverSystem : EntitySystem
 {
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -22,7 +22,6 @@ public sealed partial class StationRadioReceiverSystem : EntitySystem
 
     private void OnPowerChanged(EntityUid uid, StationRadioReceiverComponent comp, PowerChangedEvent args)
     {
-        ClearStaleSound(comp);
         if(comp.SoundEntity != null && args.Powered)
             _audio.SetGain(comp.SoundEntity, comp.Active ? comp.DefaultParams.Volume : 0f);
         else if(comp.SoundEntity != null)
@@ -32,15 +31,8 @@ public sealed partial class StationRadioReceiverSystem : EntitySystem
     private void OnRadioToggle(EntityUid uid, StationRadioReceiverComponent comp, ActivateInWorldEvent args)
     {
         comp.Active = !comp.Active;
-        ClearStaleSound(comp);
         if (comp.SoundEntity != null && _power.IsPowered(uid))
             _audio.SetGain(comp.SoundEntity, comp.Active ? comp.DefaultParams.Volume : 0f);
-    }
-
-    private void ClearStaleSound(StationRadioReceiverComponent comp)
-    {
-        if (comp.SoundEntity is { } sound && TerminatingOrDeleted(sound))
-            comp.SoundEntity = null;
     }
 
     private void OnMediaPlayed(EntityUid uid, StationRadioReceiverComponent comp, StationRadioMediaPlayedEvent args)
@@ -57,7 +49,6 @@ public sealed partial class StationRadioReceiverSystem : EntitySystem
 
     private void OnMediaStopped(EntityUid uid, StationRadioReceiverComponent comp, StationRadioMediaStoppedEvent args)
     {
-        ClearStaleSound(comp);
         if (comp.SoundEntity == null)
             return;
 

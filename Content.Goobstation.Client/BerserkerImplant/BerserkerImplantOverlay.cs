@@ -4,9 +4,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.BerserkerImplant;
 
-public sealed partial class BerserkerImplantOverlay : Overlay
+public sealed class BerserkerImplantOverlay : Overlay
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

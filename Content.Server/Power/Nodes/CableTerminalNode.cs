@@ -20,7 +20,7 @@ namespace Content.Server.Power.Nodes
             if (!xform.Anchored || grid == null)
                 yield break;
 
-            var gridIndex = entMan.System<SharedMapSystem>().TileIndicesFor(grid.Owner, grid, xform.Coordinates);
+            var gridIndex = grid.TileIndicesFor(xform.Coordinates);
 
             var dir = xform.LocalRotation.GetDir();
             var targetIdx = gridIndex.Offset(dir);

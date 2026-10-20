@@ -1,9 +1,10 @@
-using Content.Shared._Shitmed.Targeting;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Timing;
-
-namespace Content.Shared.Damage.Systems;
+using Content.Shared._Shitmed.Targeting; // Shitmed Change
+namespace Content.Shared.Damage;
 
 public sealed class PassiveDamageSystem : EntitySystem
 {
@@ -45,16 +46,14 @@ public sealed class PassiveDamageSystem : EntitySystem
             // Goobstation
             if (comp.AllowedStates == null || !TryComp<MobStateComponent>(uid, out var mobState))
             {
-                _damageable.TryChangeDamage(uid, comp.Damage, true, false);
+                _damageable.TryChangeDamage(uid, comp.Damage, true, false, damage);
                 return;
             }
 
             // Damage them
             foreach (var allowedState in comp.AllowedStates)
-            {
-                if(allowedState == mobState.CurrentState)
-                    _damageable.ChangeDamage((uid, damage), comp.Damage, true, false, targetPart: TargetBodyPart.All, splitDamage: comp.SplitBehavior); // Goob - Shitmed Change
-            }
+                if (allowedState == mobState.CurrentState)
+                    _damageable.TryChangeDamage(uid, comp.Damage, true, false, damage, targetPart: TargetBodyPart.All, splitDamage: comp.SplitBehavior); // Shitmed Change
         }
     }
 }

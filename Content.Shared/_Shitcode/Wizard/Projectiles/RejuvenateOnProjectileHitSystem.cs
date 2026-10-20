@@ -2,7 +2,6 @@
 
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
@@ -49,7 +48,7 @@ public sealed class RejuvenateOnProjectileHitSystem : EntitySystem
 
         if (!_mobState.IsDead(target))
         {
-            _damageable.ChangeDamage(target,
+            _damageable.TryChangeDamage(target,
                 comp.Damage,
                 true,
                 targetPart: TargetBodyPart.Chest);

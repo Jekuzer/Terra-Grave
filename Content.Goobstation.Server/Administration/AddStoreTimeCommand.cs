@@ -11,10 +11,10 @@ using Content.Server.Administration;
 namespace Content.Goobstation.Server.Administration
 {
     [AdminCommand(AdminFlags.Admin)]
-    public sealed partial class AddStoreTimeCommand : IConsoleCommand
+    public sealed class AddStoreTimeCommand : IConsoleCommand
     {
-        [Dependency] private IAdminManager _adminManager = default!;
-        [Dependency] private IEntityManager _entities = default!;
+        [Dependency] private readonly IAdminManager _adminManager = default!;
+        [Dependency] private readonly IEntityManager _entities = default!;
 
         public string Command => "addstoretime";
         public string Description => "Reduces store listing restock time by specified seconds, DEBUG";

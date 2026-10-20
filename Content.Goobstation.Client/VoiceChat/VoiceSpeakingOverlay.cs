@@ -3,7 +3,6 @@ using Content.Goobstation.Shared.VoiceChat;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.VoiceChat;
 
@@ -17,8 +16,7 @@ public sealed class VoiceSpeakingOverlay : Overlay
     private readonly IEntityManager _entityManager;
     private readonly IPlayerManager _player;
     private readonly VoiceChatSystem _voice;
-    private readonly VoiceCanadianSystem _canadian;
-    private readonly TransformSystem _transform;
+    private readonly SharedTransformSystem _transform;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -27,8 +25,7 @@ public sealed class VoiceSpeakingOverlay : Overlay
         _entityManager = entityManager;
         _player = IoCManager.Resolve<IPlayerManager>();
         _voice = voice;
-        _transform = entityManager.System<TransformSystem>();
-        _canadian = entityManager.System<VoiceCanadianSystem>();
+        _transform = entityManager.System<SharedTransformSystem>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -38,9 +35,7 @@ public sealed class VoiceSpeakingOverlay : Overlay
 
         var self = _voice.Self;
         if (self.Activity > 0f &&
-            _player.LocalEntity is { } local &&
-            !_canadian.ReplacesIndicator(local) &&
-            _entityManager.TryGetComponent<TransformComponent>(local, out var selfXform) &&
+            _entityManager.TryGetComponent<TransformComponent>(_player.LocalEntity, out var selfXform) &&
             selfXform.MapID == args.MapId)
         {
             var position = _transform.GetWorldPosition(selfXform);
@@ -56,7 +51,6 @@ public sealed class VoiceSpeakingOverlay : Overlay
             var visibility = stream.Global ? 1f : stream.Audibility;
             if (visibility < MinVisibility ||
                 !_entityManager.TryGetEntity(stream.Source, out var uid) ||
-                stream.Route == VoiceRoute.Direct && _canadian.ReplacesIndicator(uid.Value) ||
                 !_entityManager.TryGetComponent<TransformComponent>(uid, out var xform) ||
                 xform.MapID != args.MapId)
             {

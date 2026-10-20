@@ -17,11 +17,11 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Damage.Systems;
 
-public sealed partial class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem // Goob
+public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly GunSystem _guns = default!;
-    [Dependency] private readonly Shared.Damage.Systems.DamageableSystem _damageable = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
 
@@ -37,23 +37,20 @@ public sealed partial class DamageOtherOnHitSystem : SharedDamageOtherOnHitSyste
         if (TerminatingOrDeleted(args.Target))
             return;
 
-        // Goob start - Mjolnir and other boomerang shit
-        if (args.Target == args.Component.Thrower)
+        if(args.Target == args.Component.Thrower) // Goobstation - Mjolnir
             return;
-        // Goob end
 
-        var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
+        var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
 
-        // Goob start - For stuff that cares about it being attacked. GOOBSTATION!!!
+        // For stuff that cares about it being attacked. GOOBSTATION!!!
         var attackedEvent = new AttackedEvent(args.Thrown, uid, args.Target.ToCoordinates());
         RaiseLocalEvent(args.Target, attackedEvent);
-        // Goob end
 
         // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
-        if (HasComp<MobStateComponent>(args.Target))
+        if (dmg != null && HasComp<MobStateComponent>(args.Target))
             _adminLogger.Add(LogType.ThrowHit, $"{ToPrettyString(args.Target):target} received {dmg.GetTotal():damage} damage from collision");
 
-        if (!dmg.Empty)
+        if (dmg is { Empty: false })
         {
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
         }
@@ -62,8 +59,7 @@ public sealed partial class DamageOtherOnHitSystem : SharedDamageOtherOnHitSyste
         if (TryComp<PhysicsComponent>(uid, out var body) && body.LinearVelocity.LengthSquared() > 0f)
         {
             var direction = body.LinearVelocity.Normalized();
-            _sharedCameraRecoil.KickCamera(args.Target, direction * 0.1f); // Goob
-            _shake.Screenshake(args.Target, HitShake, null); // Goob
+            _sharedCameraRecoil.KickCamera(args.Target, direction);
         }
     }
 }

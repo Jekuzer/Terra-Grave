@@ -280,7 +280,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
                 return false;
         }
 
-        var changeEv = new ConsumeStoredMaterialsEvent((entity, entity.Comp), new(materials), localOnly); // Goob
+        var changeEv = new ConsumeStoredMaterialsEvent((entity, entity.Comp), materials, localOnly);
         RaiseLocalEvent(entity, ref changeEv);
 
         foreach (var (material, remaining) in changeEv.Materials)

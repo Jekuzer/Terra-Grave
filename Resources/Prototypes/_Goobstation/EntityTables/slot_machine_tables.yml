@@ -105,9 +105,6 @@
     - id: PlushiePasha
     - id: PlushieLeoMalone
     - id: PlushieRedstonewolf
-    - id: PlushieDoremyZerg
-    - id: PlushieSanyati
-    - id: PlushieHarel
 
 - type: entityTable
   id: PlushiesEvil
@@ -128,6 +125,3 @@
     - id: EvilPlushieTwofish
     - id: EvilPlushieLeoMalone
     - id: EvilPlushieRedstonewolf
-    - id: EvilPlushieDoremyZerg
-    - id: EvilPlushieSanyati
-    - id: EvilPlushieHarel

@@ -68,10 +68,3 @@
     Plasma: 250
     Uranium: 250
     BSCrystal: 50
-
-- type: latheRecipe
-  id: PaintCan
-  result: PaintCan
-  completetime: 2
-  materials:
-    Steel: 300
